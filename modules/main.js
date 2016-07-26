@@ -1,6 +1,11 @@
 var canvas;
+<<<<<<< HEAD
 var MONEY = 50;
 var MPS = 0;
+=======
+var FANS = 100;
+var FPS = 0;
+>>>>>>> origin/master
 var FRAMER8 = 30;
 
 var shackSprite;
@@ -8,6 +13,13 @@ var mouseSprite;
 var shack = new Shack(1);
 var overlay;
 var overlayed = "student";
+
+/*
+var w;
+if (typeof(w) == "undefined") {
+    w = new Worker("webWorker.js");
+    console.log("GO");
+}*/
 
 
 var buildings = getBuildings();
@@ -27,10 +39,15 @@ function setup(){
 	shackSprite = createSprite(buildingWidth(width)/2, upgradeHeight(height)/2, 50, 50);
 	shackSprite.shapeColor = 255;
 
+	//buy mode buttons
+
+
 	//init all buildings
 	//console.log(buildings);
 	drawBuilding();
 	overlay = overlayUpdate();
+
+
 }
 
 function draw(){
@@ -48,10 +65,12 @@ function draw(){
 
 
 	//every second
+	
 	if(frameCount%FRAMER8 === 0){
 		MONEY += MPS;
 		window.document.title = MONEY + " money";
 	}
+
 
 	//diving lines
 	line(0, upgradeHeight(height), buildingWidth(width), upgradeHeight(height));
@@ -100,5 +119,9 @@ function mousePressed(){
 			}
 		}
 	}
+<<<<<<< HEAD
 
 }
+=======
+}
+>>>>>>> origin/master

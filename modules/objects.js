@@ -1,23 +1,23 @@
-var Shack = function(fps) {
-	this.fansPerClick = fps;
+var Shack = function(Mps) {
+	this.MoneyPerClick = Mps;
 
-	this.onClick = function(fans) {
-		return fans += this.fansPerClick;
+	this.onClick = function(Money) {
+		return Money += this.MoneyPerClick;
 	}
 }
-var Building = function(name, cost, description, baseFps){
-	this.baseFps = baseFps;
+var Building = function(name, cost, description, baseMps){
+	this.baseMPS = baseMPS;
 	this.initCost = cost;
 	this.description = description;
 	this.name = name;
 	this.amount = 0;
 	this.modifier = 1;
-	this.totalFansMade = 0;
+	this.totalMoneyMade = 0;
 	this.cost = cost;
 	this.producing = 0;
 
-	this.getFps = function(){
-		return this.baseFps * this.modifier * this.amount;
+	this.getMps = function(){
+		return this.baseMps * this.modifier * this.amount;
 	}
 	this.applyModifier = function(mod){
 		this.modifier += mod;
@@ -26,8 +26,8 @@ var Building = function(name, cost, description, baseFps){
 		this.amount += 1;
 		//incramentally getting more expensive the more the player buys
 		this.cost = Math.round(this.initCost * Math.pow(1.15, this.amount));
-		this.producing += this.baseFps * this.modifier;
-		return this.baseFps * this.modifier;
+		this.producing += this.baseMps * this.modifier;
+		return this.baseMps * this.modifier;
 	}
 	this.getCost = function(){
 		return Math.round(this.initCost * Math.pow(1.15, this.amount));

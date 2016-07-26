@@ -22,10 +22,10 @@ var getBuildings = function(){
 		var name = Object.keys(obj[0].buildings)[i];
 		var cost = obj[0].buildings[name].cost;
 		var description = obj[0].buildings[name].description;
-		var FPS = obj[0].buildings[name].BFPS;
+		var MPS = obj[0].buildings[name].BMPS;
 
 		//putting them into the buildings dict
-		buildings[Object.keys(obj[0].buildings)[i]] = new Building(name, cost, description, FPS);
+		buildings[Object.keys(obj[0].buildings)[i]] = new Building(name, cost, description, MPS);
 	}
 
 	//console.log(buildings);
