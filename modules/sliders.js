@@ -46,4 +46,5 @@ var drawBuilding = function(){
 		offset += offsetDiff;
 		buildingSprites[tmp].shapeColor = 0;
 	}
+
 }
