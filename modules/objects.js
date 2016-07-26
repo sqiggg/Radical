@@ -11,9 +11,10 @@ var Building = function(name, cost, description, baseFps){
 	this.description = description;
 	this.name = name;
 	this.amount = 0;
-	this.modifier = 0;
+	this.modifier = 1;
 	this.totalFansMade = 0;
-	this.cost;
+	this.cost = cost;
+	this.producing = 0;
 
 	this.getFps = function(){
 		return this.baseFps * this.modifier * this.amount;
@@ -21,8 +22,15 @@ var Building = function(name, cost, description, baseFps){
 	this.applyModifier = function(mod){
 		this.modifier += mod;
 	}
-	this.buy = function(amount){
-		this.amount += amount
+	this.buy = function(){
+		this.amount += 1;
+		//incramentally getting more expensive the more the player buys
+		this.cost = Math.round(this.initCost * Math.pow(1.15, this.amount));
+		this.producing += this.baseFps * this.modifier;
+		return this.baseFps * this.modifier;
+	}
+	this.getCost = function(){
+		return Math.round(this.initCost * Math.pow(1.15, this.amount));
 	}
 }
 

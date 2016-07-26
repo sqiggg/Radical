@@ -1,5 +1,5 @@
 var canvas;
-var FANS = 0;
+var FANS = 50;
 var FPS = 0;
 var FRAMER8 = 30;
 
@@ -35,7 +35,6 @@ function setup(){
 
 function draw(){
 	background(100);
-
 	//setting the mouse sprite to the position of the mouse
 	mouseSprite.position.x = mouseX;
 	mouseSprite.position.y = mouseY;
@@ -51,6 +50,7 @@ function draw(){
 	//every second
 	if(frameCount%FRAMER8 === 0){
 		FANS += FPS;
+		window.document.title = FANS + " fans";
 	}
 
 	//diving lines
@@ -64,17 +64,22 @@ function draw(){
 	//drawing all the sprites
 	drawSprites();
 
-
 	//showing overlay and displaying text
 	overlay.visible = false;
 	for(var i = 0; i< Object.keys(buildingSprites).length; i++){
 		if(mouseSprite.overlap(buildingSprites[Object.keys(buildingSprites)[i]])){
 			overlayed = Object.keys(buildingSprites)[i];
-			var text_to_display = buildings[overlayed].baseFps;
-			text(text_to_display, overlay.position.x, overlay.position.y);
+			var text_to_display = buildings[overlayed].amount +" -- " +buildings[overlayed].name + "\n\n Each " + buildings[overlayed].name + " produces " + buildings[overlayed].baseFps + " fps\n" + "total producing: " + buildings[overlayed].producing + "\nCost: " + buildings[overlayed].cost;
+			text(text_to_display, overlay.position.x-overlay.width/2, overlay.position.y-overlay.height/2, overlay.position.x-overlay.width/2, overlay.position.y + overlay.width/2);
 			overlay.visible = true;
 		}
 	}
+	fill(255);
+	for(var i = 0; i < Object.keys(buildings).length; i++){
+		var tmp = Object.keys(buildings)[i];
+		text(buildings[tmp].name + " -- " + buildings[tmp].cost, buildingSprites[tmp].position.x - buildingSprites[tmp].width/6, buildingSprites[tmp].position.y + buildingSprites[tmp].height/6);
+	}
+	fill(0);
 }
 
 function mousePressed(){
@@ -86,7 +91,13 @@ function mousePressed(){
 	for(var i = 0; i< Object.keys(buildingSprites).length; i++){
 		if(mouseSprite.overlap(buildingSprites[Object.keys(buildingSprites)[i]])){
 			console.log(Object.keys(buildingSprites)[i]);
-			overlayed = Object.keys(buildingSprites)[i];
+			pressed = Object.keys(buildingSprites)[i];
+			
+			//buying the buildings
+			if(FANS >= buildings[pressed].getCost()){
+				FANS -= buildings[pressed].cost;
+				FPS += buildings[pressed].buy();
+			}
 		}
 	}
 }

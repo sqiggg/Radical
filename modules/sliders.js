@@ -28,21 +28,23 @@ var getBuildings = function(){
 		buildings[Object.keys(obj[0].buildings)[i]] = new Building(name, cost, description, FPS);
 	}
 
-	console.log(buildings);
+	//console.log(buildings);
 	return buildings;
 }
 
 var drawBuilding = function(){
 	fill(0);
 
-	var offset = 10;
-	var offsetDiff = 10;
+	var offset = 50;
+	var offsetDiff = 0;
+	offset += offsetDiff;
 
 	//drawing the building icons
 	var heightNew = height - (buildingHeightDiv() * (offsetDiff+1));
 	for(var i = 0; i < Object.keys(buildings).length; i++){
 		var tmp = Object.keys(buildings)[i];
 		buildingSprites[tmp] = createSprite(buildingWidth(width) + buildingWidth(width)/4, heightNew * i/buildingHeightDiv() + offset + (heightNew * 1/buildingHeightDiv())/2, buildingWidth(width)/2, heightNew * 1/buildingHeightDiv());
+
 		offset += offsetDiff;
 		buildingSprites[tmp].shapeColor = 0;
 	}
