@@ -73,7 +73,8 @@ function draw(){
 
 	//drawing MPS and MONEY
 	textSize(20);
-	text("Money: " + MONEY + "\n" + "Monies per second: " + MPS, buildingWidth(width)/2, upgradeHeight(height)/2 * 1/4);
+	MONEY = Math.round(MONEY)
+	text("Money: " + MONEY + "\n" + "Monies per second: " + Math.round(MPS * 10) / 10, buildingWidth(width)/2, upgradeHeight(height)/2 * 1/4);
 
 	//drawing all the sprites
 	drawSprites();
@@ -114,13 +115,4 @@ function mousePressed(){
 			}
 		}
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
-
 }
-=======
-}
->>>>>>> origin/master
-=======
-}
->>>>>>> origin/master
