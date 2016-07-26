@@ -6,6 +6,8 @@ var FRAMER8 = 30;
 var shackSprite;
 var mouseSprite;
 var shack = new Shack(1);
+var overlay;
+var overlayed = "student";
 
 
 var buildings = getBuildings();
@@ -28,7 +30,7 @@ function setup(){
 	//init all buildings
 	//console.log(buildings);
 	drawBuilding();
-
+	overlay = overlayUpdate();
 }
 
 function draw(){
@@ -37,6 +39,14 @@ function draw(){
 	//setting the mouse sprite to the position of the mouse
 	mouseSprite.position.x = mouseX;
 	mouseSprite.position.y = mouseY;
+
+	overlay.position.y = mouseY;
+	if (overlay.position.y - overlay.height/2< 0){
+		overlay.position.y = overlay.height/2;
+	} else if(overlay.position.y + overlay.height/2 > height){
+		overlay.position.y = height-overlay.height/2;
+	}
+
 
 	//every second
 	if(frameCount%FRAMER8 === 0){
@@ -53,6 +63,19 @@ function draw(){
 
 	//drawing all the sprites
 	drawSprites();
+
+
+	//showing overlay and displaying text
+	for(var i = 0; i< Object.keys(buildingSprites).length; i++){
+		if(mouseSprite.overlap(buildingSprites[Object.keys(buildingSprites)[i]])){
+			overlay.visible = true;
+			overlayed = Object.keys(buildingSprites)[i];
+			var text_to_display = buildings[overlayed].baseFps;
+			text(text_to_display, overlay.position.x, overlay.position.y);
+		} else{
+			overlay.visible = false;
+		}
+	}	
 }
 
 function mousePressed(){
@@ -60,9 +83,11 @@ function mousePressed(){
 	if(shackSprite.overlap(mouseSprite)){
 		FANS = shack.onClick(FANS);
 	}
+	//click check for buying
 	for(var i = 0; i< Object.keys(buildingSprites).length; i++){
 		if(mouseSprite.overlap(buildingSprites[Object.keys(buildingSprites)[i]])){
 			console.log(Object.keys(buildingSprites)[i]);
+			overlayed = Object.keys(buildingSprites)[i];
 		}
 	}
 }

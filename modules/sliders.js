@@ -46,5 +46,12 @@ var drawBuilding = function(){
 		offset += offsetDiff;
 		buildingSprites[tmp].shapeColor = 0;
 	}
+}
 
+var overlayUpdate = function(){
+
+	var overlay = createSprite(buildingWidth(width)-buildingWidth(width)/4, mouseY, buildingWidth(width)/2, height*2/buildingHeightDiv());
+	overlay.shapeColor = 255;
+
+	return overlay;
 }
