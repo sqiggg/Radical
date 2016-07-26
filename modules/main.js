@@ -31,7 +31,7 @@ function setup(){
 
     shackSprite = createSprite(buildingWidth(width)/2, upgradeHeight(height)/2, 75, 75);
     shackSprite.addImage(img);
-    shackSprite.scale = 5;
+
 
 	//buy mode buttons
 	//TODO
