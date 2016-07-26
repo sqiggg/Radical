@@ -10,6 +10,7 @@ var overlay;
 var overlayed;
 
 
+
 var buildings = getBuildings();
 var buildingSprites = {};
 
@@ -123,12 +124,21 @@ function draw(){
 		text(displayedText, buildingSprites[tmp].position.x - buildingSprites[tmp].width/6, buildingSprites[tmp].position.y + buildingSprites[tmp].height/6);
 	}
 	fill(0);
+
+
+
 }
 
 function mousePressed(){
 	//pressed shack
 	if(shackSprite.overlap(mouseSprite)){
 		MONEY = shack.onClick(MONEY);
+
+		//surfbaords coming off
+		var surfboard = createSprite(mouseX, mouseY, 10, 10);
+		surfboard.shapeColor = 0;
+		surfboard.velocity = createVector(random(-0.5, 0.5), random(-1.5, -1));
+		surfboard.velocity.mult(5);
 	}
 	//click check for buying
 	for(var i = 0; i< Object.keys(buildingSprites).length; i++){
