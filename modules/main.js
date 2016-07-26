@@ -38,7 +38,7 @@ function setup(){
 	//TODO
 
 	//init all buildings
-	//console.log(buildings);
+	console.log(buildings);
 	drawBuilding();
 	overlay = overlayUpdate();
 }
@@ -123,9 +123,6 @@ function draw(){
 		text(displayedText, buildingSprites[tmp].position.x - buildingSprites[tmp].width/6, buildingSprites[tmp].position.y + buildingSprites[tmp].height/6);
 	}
 	fill(0);
-
-
-
 }
 
 function mousePressed(){
@@ -138,18 +135,17 @@ function mousePressed(){
 		surfboard.shapeColor = 0;
 		surfboard.velocity = createVector(random(-0.5, 0.5), random(-1.5, -1));
 		surfboard.velocity.mult(5);
-		
+
 		shackSprite.scale = 0.9;
 		setTimeout(function() {		
 			shackSprite.scale = 1;
 		}, 100);
 	}
 
-	}
 	//click check for buying
 	for(var i = 0; i< Object.keys(buildingSprites).length; i++){
 		if(mouseSprite.overlap(buildingSprites[Object.keys(buildingSprites)[i]])){
-			//console.log(Object.keys(buildingSprites)[i]);
+			console.log(Object.keys(buildingSprites)[i]);
 			pressed = Object.keys(buildingSprites)[i];
 			
 			//buying the buildings
@@ -159,5 +155,5 @@ function mousePressed(){
 			}
 		}
 	}
-
+}
 
