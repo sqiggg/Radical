@@ -1,1 +1,1 @@
-data='[{"buildings":{"student":{"name":"student","cost":"100","description":"Students are working","BFPS":"1"}, "Farm":{"name":"Farm","cost":"1100","description":"It\'s a farm","BFPS":"8"}}}]'
+data='[{"buildings":{"Student":{"name":"Student","cost":"15","description":"A Student","BMPS":"0.1"},"Design Team":{"cost":"1100","description":"A professional design team","BMPS":"8"}, "Tree Farm":{"cost":"100","description":"Production of trees","BMPS":"1"}}}]'

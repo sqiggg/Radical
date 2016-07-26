@@ -1,6 +1,6 @@
 function go(form) {
     var name2 = form.name.value;
-    var FPS2 = form.FPS.value;
+    var FPS2 = form.MPS.value;
     var Cost2 = form.cost.value;
     var Description2 = form.description.value;
 
@@ -11,9 +11,10 @@ function go(form) {
 
 		//Fetching all of the data from the json 
 		var name = Object.keys(obj[0].buildings)[i];
+		console.log(name);
 		var cost = obj[0].buildings[name].cost;
 		var description = obj[0].buildings[name].description;
-		var FPS = obj[0].buildings[name].BFPS;
+		var FPS = obj[0].buildings[name].MFPS;
 
 		//putting them into the buildings dict
 		buildings["buildings"] = {};
@@ -22,16 +23,15 @@ function go(form) {
 		
 		buildings["buildings"][name]["cost"] = cost;
 		buildings["buildings"][name]["description"] = description;
-		buildings["buildings"][name]["BFPS"] = FPS;
-
-
+		buildings["buildings"][name]["BMPS"] = FPS;
+		
 	}
 
 	buildings.buildings[name2] = {};
 	buildings.buildings[name2]["name"] = escape;
 	buildings.buildings[name2]["cost"] = Cost2;
 	buildings.buildings[name2]["description"] = Description2.replace("\\'");
-	buildings.buildings[name2]["BFPS"] = FPS2;
+	buildings.buildings[name2]["BMPS"] = FPS2;
 
     alert("data='[" + JSON.stringify(buildings).replace("\\'") + "]'");
 }

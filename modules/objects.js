@@ -6,7 +6,7 @@ var Shack = function(Mps) {
 	}
 }
 var Building = function(name, cost, description, baseMps){
-	this.baseMPS = baseMPS;
+	this.baseMps = baseMps;
 	this.initCost = cost;
 	this.description = description;
 	this.name = name;

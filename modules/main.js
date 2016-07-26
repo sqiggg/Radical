@@ -35,7 +35,7 @@ function setup(){
 	shackSprite.shapeColor = 255;
 
 	//buy mode buttons
-
+	//TODO
 
 	//init all buildings
 	//console.log(buildings);
