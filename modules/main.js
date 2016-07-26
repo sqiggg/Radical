@@ -28,9 +28,9 @@ function setup(){
 	mouseSprite.visible = false;
 
 	//shack sprite 
-
     shackSprite = createSprite(buildingWidth(width)/2, upgradeHeight(height)/2, 75, 75);
     shackSprite.addImage(img);
+
 
 
 	//buy mode buttons
@@ -54,7 +54,6 @@ function draw(){
 	} else if(overlay.position.y + overlay.height/2 > height){
 		overlay.position.y = height-overlay.height/2;
 	}
-
 
 	//every second
 	if(frameCount%FRAMER8 === 0){
@@ -129,6 +128,12 @@ function mousePressed(){
 	//pressed shack
 	if(shackSprite.overlap(mouseSprite)){
 		MONEY = shack.onClick(MONEY);
+		shackSprite.scale = 0.9;
+		setTimeout(function() {		
+			shackSprite.scale = 1;
+		}, 100);
+	}
+
 	}
 	//click check for buying
 	for(var i = 0; i< Object.keys(buildingSprites).length; i++){
@@ -143,6 +148,5 @@ function mousePressed(){
 			}
 		}
 	}
-}
 
 
