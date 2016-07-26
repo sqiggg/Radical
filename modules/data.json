@@ -1,1 +1,1 @@
-data = '[{"buildings": {"student":{"BFPS":"1","cost":"1100","name":"student","description":"Students are working"}}}]'
+data='[{"buildings":{"student":{"name":"student","cost":"1100","description":"Students are working","BFPS":"1"}, "Farm":{"name":"Farm","cost":"1100","description":"It\'s a farm","BFPS":"8"}}}]'

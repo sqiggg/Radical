@@ -28,10 +28,10 @@ function go(form) {
 	}
 
 	buildings.buildings[name2] = {};
-	buildings.buildings[name2]["name"] = name2;
+	buildings.buildings[name2]["name"] = escape;
 	buildings.buildings[name2]["cost"] = Cost2;
-	buildings.buildings[name2]["description"] = Description2;
+	buildings.buildings[name2]["description"] = Description2.replace("\\'");
 	buildings.buildings[name2]["BFPS"] = FPS2;
 
-    alert("data='[" + JSON.stringify(buildings) + "]'");
+    alert("data='[" + JSON.stringify(buildings).replace("\\'") + "]'");
 }

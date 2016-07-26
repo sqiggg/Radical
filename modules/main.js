@@ -60,9 +60,9 @@ function mousePressed(){
 	if(shackSprite.overlap(mouseSprite)){
 		FANS = shack.onClick(FANS);
 	}
-	if(mouseSprite.overlap(buildingSprites.student))
-	{
-		console.log("student");
+	for(var i = 0; i< Object.keys(buildingSprites).length; i++){
+		if(mouseSprite.overlap(buildingSprites[Object.keys(buildingSprites)[i]])){
+			console.log(Object.keys(buildingSprites)[i]);
+		}
 	}
-
 }

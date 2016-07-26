@@ -13,7 +13,7 @@ var buildingHeightDiv = function(){
 var getBuildings = function(){
 
 	var obj = JSON.parse(data);
-	console.log(obj);
+	//console.log(obj);
 	var buildings = {};
 
 	for(var i = 0; i < Object.keys(obj[0].buildings).length; i++){
@@ -25,9 +25,10 @@ var getBuildings = function(){
 		var FPS = obj[0].buildings[name].BFPS;
 
 		//putting them into the buildings dict
-		buildings[Object.keys(obj[0].buildings)[0]] = new Building(name, cost, description, FPS);
+		buildings[Object.keys(obj[0].buildings)[i]] = new Building(name, cost, description, FPS);
 	}
 
+	console.log(buildings);
 	return buildings;
 }
 
