@@ -19,10 +19,11 @@ var getBuildings = function(){
 	for(var i = 0; i < Object.keys(obj[0].buildings).length; i++){
 
 		//Fetching all of the data from the json 
-		var name = Object.keys(obj[0].buildings)[i];
-		var cost = obj[0].buildings[name].cost;
-		var description = obj[0].buildings[name].description;
-		var MPS = obj[0].buildings[name].BMPS;
+		var id = Object.keys(obj[0].buildings)[i];
+		var name = obj[0].buildings[id].name;
+		var cost = obj[0].buildings[id].cost;
+		var description = obj[0].buildings[id].description;
+		var MPS = obj[0].buildings[id].BMPS;
 
 		//putting them into the buildings dict
 		buildings[Object.keys(obj[0].buildings)[i]] = new Building(name, cost, description, MPS);
@@ -43,6 +44,7 @@ var drawBuilding = function(){
 	var heightNew = height - (buildingHeightDiv() * (offsetDiff+1));
 	for(var i = 0; i < Object.keys(buildings).length; i++){
 		var tmp = Object.keys(buildings)[i];
+
 		buildingSprites[tmp] = createSprite(buildingWidth(width) + buildingWidth(width)/4, heightNew * i/buildingHeightDiv() + offset + (heightNew * 1/buildingHeightDiv())/2, buildingWidth(width)/2, heightNew * 1/buildingHeightDiv());
 
 		offset += offsetDiff;

@@ -60,10 +60,10 @@ function draw(){
 
 
 	//every second
-	
 	if(frameCount%FRAMER8 === 0){
 		MONEY += MPS;
-		window.document.title = MONEY + " money";
+		//set title of page to amount of money
+		window.document.title = round(MONEY*10)/10 + " Money";
 	}
 
 
@@ -73,8 +73,7 @@ function draw(){
 
 	//drawing MPS and MONEY
 	textSize(20);
-	MONEY = Math.round(MONEY)
-	text("Money: " + MONEY + "\n" + "Monies per second: " + Math.round(MPS * 10) / 10, buildingWidth(width)/2, upgradeHeight(height)/2 * 1/4);
+	text("Money: " + Math.round(MONEY) + "\n" + "Monies per second: " + Math.round(MPS * 10) / 10, buildingWidth(width)/2, upgradeHeight(height)/2 * 1/4);
 
 	//drawing all the sprites
 	drawSprites();
@@ -84,12 +83,14 @@ function draw(){
 	for(var i = 0; i< Object.keys(buildingSprites).length; i++){
 		if(mouseSprite.overlap(buildingSprites[Object.keys(buildingSprites)[i]])){
 			overlayed = Object.keys(buildingSprites)[i];
-			var text_to_display = buildings[overlayed].amount +" -- " +buildings[overlayed].name + "\n\n Each " + buildings[overlayed].name + " produces " + buildings[overlayed].baseMps + " mps\n" + "total producing: " + buildings[overlayed].producing + "\nCost: " + buildings[overlayed].cost;
+			var text_to_display = buildings[overlayed].amount +" -- " +buildings[overlayed].name + "\n\n Each " + buildings[overlayed].name + " produces " + Math.round(buildings[overlayed].baseMps*10)/10 + " mps\n" + "total producing: " + Math.round(buildings[overlayed].producing*10)/10 + "\nCost: " + buildings[overlayed].cost;
 			text(text_to_display, overlay.position.x-overlay.width/2, overlay.position.y-overlay.height/2, overlay.position.x-overlay.width/2, overlay.position.y + overlay.width/2);
 			overlay.visible = true;
 		}
 	}
+
 	fill(255);
+	//money and 
 	for(var i = 0; i < Object.keys(buildings).length; i++){
 		var tmp = Object.keys(buildings)[i];
 		text(buildings[tmp].name + " -- " + buildings[tmp].cost, buildingSprites[tmp].position.x - buildingSprites[tmp].width/6, buildingSprites[tmp].position.y + buildingSprites[tmp].height/6);

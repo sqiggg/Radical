@@ -1,1 +1,1 @@
-data='[{"buildings":{"Student":{"name":"Student","cost":"15","description":"A Student","BMPS":"0.1"},"Design Team":{"cost":"1100","description":"A professional design team","BMPS":"8"}, "Tree Farm":{"cost":"100","description":"Production of trees","BMPS":"1"}}}]'
+data='[{"buildings":{"100":{"name":"Design Team", "cost":"100","description":"A professional design team","BMPS":"8"}, "15":{"name":"Student","cost":"15","description":"A Student","BMPS":"0.1"}, "1100":{"name":"Tree Farm", "cost":"1100","description":"Production of trees","BMPS":"1"}}}]'
