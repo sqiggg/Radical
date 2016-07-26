@@ -1,18 +1,18 @@
-var shack = function() {
-	this.fansPerClick;
+var Shack = function(fps) {
+	this.fansPerClick = fps;
 
 	this.onClick = function(fans) {
 		return fans += this.fansPerClick;
 	}
 }
-var Building = function(){
-	this.baseFps;
-	this.initCost;
-	this.description;
-	this.name;
-	this.amount;
-	this.modifier;
-	this.totalFansMade;
+var Building = function(name, cost, description, baseFps){
+	this.baseFps = baseFps;
+	this.initCost = cost;
+	this.description = description;
+	this.name = name;
+	this.amount = 0;
+	this.modifier = 0;
+	this.totalFansMade = 0;
 	this.cost;
 
 	this.getFps = function(){
@@ -36,6 +36,6 @@ var Upgrade = function(){
 
 	this.buy = function(){
 		this.bought = true;
-		Building.[this.affectedBuilding].applyModifier(this.modifier);
+		Building[this.affectedBuilding].applyModifier(this.modifier);
 	}
 }
