@@ -5,17 +5,9 @@ var FRAMER8 = 30;
 
 var shackSprite;
 var mouseSprite;
-var shack = new Shack(1);
+var shack = new Shack(5);
 var overlay;
 var overlayed;
-
-
-/*
-var w;
-if (typeof(w) == "undefined") {
-    w = new Worker("webWorker.js");
-    console.log("GO");
-}*/
 
 
 var buildings = getBuildings();
@@ -106,6 +98,7 @@ function draw(){
 	for(var i = 0; i < Object.keys(buildings).length; i++){
 		var tmp = Object.keys(buildings)[i];
 		var displayingText = "Not Displayed";
+		buildings[Object.keys(buildings)[0]].unlocked = true;
 
 		if (Math.round(MONEY) >= buildings[tmp].cost){
 			buildings[tmp].unlocked = true;
