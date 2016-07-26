@@ -8,15 +8,12 @@ var mouseSprite;
 var shack = new Shack(5);
 var overlay;
 var overlayed;
-var img;
 
 
 var buildings = getBuildings();
 var buildingSprites = {};
 
-function preload() {
   img = loadImage("assets/shack.png");
-}
 
 function setup(){
 	createCanvas(1000, 500);
@@ -24,14 +21,14 @@ function setup(){
 	textAlign(CENTER);
 
 
-
 	//making invisible mouse sprite for collision between other sprites
 	mouseSprite = createSprite(mouseX, mouseY, 1, 1);
 	mouseSprite.visible = false;
 
 	//shack sprite 
-	shackSprite = image(img, buildingWidth(width)/2, upgradeHeight(height)/2, 50, 50)
-
+	img = loadImage("assets/shack.png");
+    shackSprite = createSprite(buildingWidth(width)/2, upgradeHeight(height)/2, 75, 75);
+    shackSprite.addImage(img);
 	//buy mode buttons
 	//TODO
 
