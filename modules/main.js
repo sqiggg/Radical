@@ -13,7 +13,9 @@ var overlayed;
 var buildings = getBuildings();
 var buildingSprites = {};
 
-  img = loadImage("assets/shack.png");
+function preload(){
+	img = loadImage("assets/shack.png");
+}
 
 function setup(){
 	createCanvas(1000, 500);
@@ -26,9 +28,11 @@ function setup(){
 	mouseSprite.visible = false;
 
 	//shack sprite 
-	img = loadImage("assets/shack.png");
+
     shackSprite = createSprite(buildingWidth(width)/2, upgradeHeight(height)/2, 75, 75);
     shackSprite.addImage(img);
+    shackSprite.scale = 5;
+
 	//buy mode buttons
 	//TODO
 
@@ -36,8 +40,6 @@ function setup(){
 	//console.log(buildings);
 	drawBuilding();
 	overlay = overlayUpdate();
-
-
 }
 
 function draw(){
