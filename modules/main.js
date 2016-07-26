@@ -66,16 +66,15 @@ function draw(){
 
 
 	//showing overlay and displaying text
+	overlay.visible = false;
 	for(var i = 0; i< Object.keys(buildingSprites).length; i++){
 		if(mouseSprite.overlap(buildingSprites[Object.keys(buildingSprites)[i]])){
-			overlay.visible = true;
 			overlayed = Object.keys(buildingSprites)[i];
 			var text_to_display = buildings[overlayed].baseFps;
 			text(text_to_display, overlay.position.x, overlay.position.y);
-		} else{
-			overlay.visible = false;
+			overlay.visible = true;
 		}
-	}	
+	}
 }
 
 function mousePressed(){
