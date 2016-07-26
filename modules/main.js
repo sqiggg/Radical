@@ -1,6 +1,6 @@
 var canvas;
-var FANS = 50;
-var FPS = 0;
+var MONEY = 50;
+var MPS = 0;
 var FRAMER8 = 30;
 
 var shackSprite;
@@ -49,17 +49,17 @@ function draw(){
 
 	//every second
 	if(frameCount%FRAMER8 === 0){
-		FANS += FPS;
-		window.document.title = FANS + " fans";
+		MONEY += MPS;
+		window.document.title = MONEY + " money";
 	}
 
 	//diving lines
 	line(0, upgradeHeight(height), buildingWidth(width), upgradeHeight(height));
 	line(buildingWidth(width), 0, buildingWidth(width), height);
 
-	//drawing FPS and FANS
+	//drawing MPS and MONEY
 	textSize(20);
-	text("Fans: " + FANS + "\n" + "Fans per second: " + FPS, buildingWidth(width)/2, upgradeHeight(height)/2 * 1/4);
+	text("Money: " + MONEY + "\n" + "Monies per second: " + MPS, buildingWidth(width)/2, upgradeHeight(height)/2 * 1/4);
 
 	//drawing all the sprites
 	drawSprites();
@@ -69,7 +69,7 @@ function draw(){
 	for(var i = 0; i< Object.keys(buildingSprites).length; i++){
 		if(mouseSprite.overlap(buildingSprites[Object.keys(buildingSprites)[i]])){
 			overlayed = Object.keys(buildingSprites)[i];
-			var text_to_display = buildings[overlayed].amount +" -- " +buildings[overlayed].name + "\n\n Each " + buildings[overlayed].name + " produces " + buildings[overlayed].baseFps + " fps\n" + "total producing: " + buildings[overlayed].producing + "\nCost: " + buildings[overlayed].cost;
+			var text_to_display = buildings[overlayed].amount +" -- " +buildings[overlayed].name + "\n\n Each " + buildings[overlayed].name + " produces " + buildings[overlayed].baseMps + " mps\n" + "total producing: " + buildings[overlayed].producing + "\nCost: " + buildings[overlayed].cost;
 			text(text_to_display, overlay.position.x-overlay.width/2, overlay.position.y-overlay.height/2, overlay.position.x-overlay.width/2, overlay.position.y + overlay.width/2);
 			overlay.visible = true;
 		}
@@ -85,7 +85,7 @@ function draw(){
 function mousePressed(){
 	//pressed shack
 	if(shackSprite.overlap(mouseSprite)){
-		FANS = shack.onClick(FANS);
+		MONEY = shack.onClick(MONEY);
 	}
 	//click check for buying
 	for(var i = 0; i< Object.keys(buildingSprites).length; i++){
@@ -94,10 +94,11 @@ function mousePressed(){
 			pressed = Object.keys(buildingSprites)[i];
 			
 			//buying the buildings
-			if(FANS >= buildings[pressed].getCost()){
-				FANS -= buildings[pressed].cost;
-				FPS += buildings[pressed].buy();
+			if(MONEY >= buildings[pressed].getCost()){
+				MONEY -= buildings[pressed].cost;
+				MPS += buildings[pressed].buy();
 			}
 		}
 	}
+
 }
