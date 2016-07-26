@@ -7,7 +7,8 @@ var shackSprite;
 var mouseSprite;
 var shack = new Shack(1);
 var overlay;
-var overlayed = "student";
+var overlayed;
+
 
 /*
 var w;
@@ -63,7 +64,7 @@ function draw(){
 	if(frameCount%FRAMER8 === 0){
 		MONEY += MPS;
 		//set title of page to amount of money
-		window.document.title = round(MONEY*10)/10 + " Money";
+		window.document.title = round(MONEY) + " Money";
 	}
 
 
@@ -81,19 +82,42 @@ function draw(){
 	//showing overlay and displaying text
 	overlay.visible = false;
 	for(var i = 0; i< Object.keys(buildingSprites).length; i++){
-		if(mouseSprite.overlap(buildingSprites[Object.keys(buildingSprites)[i]])){
+		if(mouseSprite.overlap(buildingSprites[Object.keys(buildingSprites)[i]]) && buildingSprites[Object.keys(buildingSprites)[i]].visible === true){
 			overlayed = Object.keys(buildingSprites)[i];
-			var text_to_display = buildings[overlayed].amount +" -- " +buildings[overlayed].name + "\n\n Each " + buildings[overlayed].name + " produces " + Math.round(buildings[overlayed].baseMps*10)/10 + " mps\n" + "total producing: " + Math.round(buildings[overlayed].producing*10)/10 + "\nCost: " + buildings[overlayed].cost;
+
+			if(overlayed)
+			var text_to_display = buildings[overlayed].amount +" -- " +buildings[overlayed].name + "\n\n Each " + buildings[overlayed].name + " produces " + Math.round(buildings[overlayed].baseMps*10)/10 + " mps\n" + "total producing: " + Math.round(buildings[overlayed].producing*10)/10 + "\nCost: " + buildings[overlayed].cost + " -> " + buildings[overlayed].unlocked;
 			text(text_to_display, overlay.position.x-overlay.width/2, overlay.position.y-overlay.height/2, overlay.position.x-overlay.width/2, overlay.position.y + overlay.width/2);
 			overlay.visible = true;
 		}
 	}
 
+
+
+
 	fill(255);
-	//money and 
+	//money and unlocking
 	for(var i = 0; i < Object.keys(buildings).length; i++){
 		var tmp = Object.keys(buildings)[i];
-		text(buildings[tmp].name + " -- " + buildings[tmp].cost, buildingSprites[tmp].position.x - buildingSprites[tmp].width/6, buildingSprites[tmp].position.y + buildingSprites[tmp].height/6);
+		var displayingText = "Not Displayed";
+
+		if (Math.round(MONEY) >= buildings[tmp].cost){
+			buildings[tmp].unlocked = true;
+		}
+
+		if (buildings[tmp].unlocked){
+			displayedText = buildings[tmp].name + " -- " + buildings[tmp].cost;
+
+		} else if(i > 0 && buildings[Object.keys(buildings)[i-1]].unlocked === true){
+			//limited information
+			displayedText = "LOCKED";
+			buildingSprites[tmp].visible = true;
+		} else{
+			buildingSprites[tmp].visible = false;
+			displayedText = '';
+		}
+
+		text(displayedText, buildingSprites[tmp].position.x - buildingSprites[tmp].width/6, buildingSprites[tmp].position.y + buildingSprites[tmp].height/6);
 	}
 	fill(0);
 }
@@ -110,7 +134,7 @@ function mousePressed(){
 			pressed = Object.keys(buildingSprites)[i];
 			
 			//buying the buildings
-			if(MONEY >= buildings[pressed].getCost()){
+			if(MONEY >= buildings[pressed].getCost() && buildings[pressed].unlocked){
 				MONEY -= buildings[pressed].cost;
 				MPS += buildings[pressed].buy();
 			}
