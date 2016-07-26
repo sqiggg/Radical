@@ -83,10 +83,16 @@ function draw(){
 	overlay.visible = false;
 	for(var i = 0; i< Object.keys(buildingSprites).length; i++){
 		if(mouseSprite.overlap(buildingSprites[Object.keys(buildingSprites)[i]]) && buildingSprites[Object.keys(buildingSprites)[i]].visible === true){
+			var text_to_display;
+
 			overlayed = Object.keys(buildingSprites)[i];
 
-			if(overlayed)
-			var text_to_display = buildings[overlayed].amount +" -- " +buildings[overlayed].name + "\n\n Each " + buildings[overlayed].name + " produces " + Math.round(buildings[overlayed].baseMps*10)/10 + " mps\n" + "total producing: " + Math.round(buildings[overlayed].producing*10)/10 + "\nCost: " + buildings[overlayed].cost + " -> " + buildings[overlayed].unlocked;
+			if(buildings[overlayed].unlocked === true){
+				 text_to_display = buildings[overlayed].amount +" -- " +buildings[overlayed].name + "\n\n Each " + buildings[overlayed].name + " produces " + Math.round(buildings[overlayed].baseMps*10)/10 + " mps\n" + "total producing: " + Math.round(buildings[overlayed].producing*10)/10 + "\nCost: " + buildings[overlayed].cost + " -> " + buildings[overlayed].unlocked;
+			} else{
+				text_to_display = "???" + "\n\n\nCost: " + buildings[overlayed].cost;
+			}
+
 			text(text_to_display, overlay.position.x-overlay.width/2, overlay.position.y-overlay.height/2, overlay.position.x-overlay.width/2, overlay.position.y + overlay.width/2);
 			overlay.visible = true;
 		}
@@ -110,7 +116,7 @@ function draw(){
 
 		} else if(i > 0 && buildings[Object.keys(buildings)[i-1]].unlocked === true){
 			//limited information
-			displayedText = "LOCKED";
+			displayedText = "??? -- " + buildings[tmp].cost;
 			buildingSprites[tmp].visible = true;
 		} else{
 			buildingSprites[tmp].visible = false;
@@ -130,7 +136,7 @@ function mousePressed(){
 	//click check for buying
 	for(var i = 0; i< Object.keys(buildingSprites).length; i++){
 		if(mouseSprite.overlap(buildingSprites[Object.keys(buildingSprites)[i]])){
-			console.log(Object.keys(buildingSprites)[i]);
+			//console.log(Object.keys(buildingSprites)[i]);
 			pressed = Object.keys(buildingSprites)[i];
 			
 			//buying the buildings
