@@ -1,11 +1,6 @@
 var canvas;
-<<<<<<< HEAD
 var MONEY = 50;
 var MPS = 0;
-=======
-var FANS = 100;
-var FPS = 0;
->>>>>>> origin/master
 var FRAMER8 = 30;
 
 var shackSprite;
@@ -120,8 +115,12 @@ function mousePressed(){
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 }
+=======
+}
+>>>>>>> origin/master
 =======
 }
 >>>>>>> origin/master
