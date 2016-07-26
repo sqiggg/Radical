@@ -12,13 +12,21 @@ var buildingHeightDiv = function(){
 
 var getBuildings = function(){
 
-	var student = new Building('student', 100, 'a student', 1);
-	var treeFarm = new Building('treeFarm', 1100, 'a farm', 8);
+	var obj = JSON.parse(data);
+	console.log(obj);
+	var buildings = {};
 
-	var buildings = {
-		'student':student,
-		'treeFarm':treeFarm
-	};
+	for(var i = 0; i < Object.keys(obj[0].buildings).length; i++){
+
+		//Fetching all of the data from the json 
+		var name = Object.keys(obj[0].buildings)[i];
+		var cost = obj[0].buildings[name].cost;
+		var description = obj[0].buildings[name].description;
+		var FPS = obj[0].buildings[name].BFPS;
+
+		//putting them into the buildings dict
+		buildings[Object.keys(obj[0].buildings)[0]] = new Building(name, cost, description, FPS);
+	}
 
 	return buildings;
 }
