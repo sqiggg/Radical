@@ -16,7 +16,7 @@ var buildingSprites = {};
 
 function preload(){
 	img = loadImage("assets/shack.png");
-	img1 = loadImage("assets/surfboard1.png");
+	img1 = loadImage("assets/surfboardb10.png");
 }
 
 function setup(){
