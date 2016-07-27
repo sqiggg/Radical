@@ -19,6 +19,8 @@ var buildingsImg = []
 var buildings = getBuildings();
 var buildingSprites = {};
 var buildingMode = true;
+var upgrades = getUpgrades();
+var upgradesSprites = {};
 
 function preload(){
 	img = loadImage("assets/shack.png");
@@ -59,6 +61,7 @@ function setup(){
 	//init all buildings
 	overlay = overlayUpdate();
 	drawBuilding();	
+	drawUpgrades();
 	buildingScene();
 
 }
@@ -195,7 +198,7 @@ function mousePressed(){
 		}
 	}
 
-	if(buyButton.overlap(mouseSprite) && buyButton.visible ===true){
+	if(buyButton.overlap(mouseSprite) && buyButton.visible === true){
 		if (buyButtonMode === 100){
 			buyButtonMode = 1;
 		} else if (buyButtonMode === 10){

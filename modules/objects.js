@@ -21,31 +21,34 @@ var Building = function(name, cost, description, baseMps){
 		return this.baseMps * this.modifier * this.amount;
 	}
 	this.applyModifier = function(mod){
-		this.modifier += mod;
+		this.modifier *= mod;
+		this.baseMps *= this.modifier;
+		this.producing *= this.modifier;
 	}
 	this.buy = function(){
 		this.amount += 1;
+
 		//incramentally getting more expensive the more the player buys
 		this.cost = Math.round(this.initCost * Math.pow(1.15, this.amount));
-		this.producing += this.baseMps * this.modifier;
-		return this.baseMps * this.modifier;
+		
+		console.log(this.baseMps);
+		this.producing += this.baseMps;
+		return this.baseMps;
 	}
 	this.getCost = function(n){
-		//console.log(Math.round(this.initCost * Math.pow(1.15, this.amount)));
 		return (this.initCost * (Math.pow(1.15, this.amount+n) - Math.pow(1.15, this.amount)))/0.15;
 	}
 }
 
-var Upgrade = function(){
-	this.modifier;
-	this.name;
-	this.quote;
-	this.description;
-	this.affectedBuilding;
+var Upgrade = function(mod, name, description, affectedBuilding){
+	this.modifier = mod;
+	this.name = name;
+	this.description = description;
+	this.affectedBuilding = affectedBuilding;
 	this.bought = false;
 
 	this.buy = function(){
 		this.bought = true;
-		Building[this.affectedBuilding].applyModifier(this.modifier);
+		buildings[this.affectedBuilding].applyModifier(parseInt(this.modifier));
 	}
 }

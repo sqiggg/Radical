@@ -32,6 +32,27 @@ var getBuildings = function(){
 	//console.log(buildings);
 	return buildings;
 }
+var getUpgrades = function(){
+	var obj = JSON.parse(data);
+	//console.log(obj);
+	var upgrades = {};
+
+	for(var i = 0; i < Object.keys(obj[0].upgrades).length; i++){
+
+		//Fetching all of the data from the json 
+		var id = Object.keys(obj[0].upgrades)[i];
+		var name = obj[0].upgrades[id].name;
+		var cost = obj[0].upgrades[id].cost;
+		var description = obj[0].upgrades[id].description;
+		var effected = obj[0].upgrades[id].effected;
+		var mult = obj[0].upgrades[id].mult;
+
+		//putting them into the buildings dict
+		upgrades[Object.keys(obj[0].upgrades)[i]] = new Upgrade(mult, name, description, effected);
+	}
+	console.log(upgrades);
+	return upgrades
+}
 
 var drawBuilding = function(){
 	fill(0);
@@ -60,6 +81,33 @@ var drawBuilding = function(){
 
 		offset += offsetDiff;
 		buildingSprites[tmp].shapeColor = 0;
+	}
+}
+var drawUpgrades = function(){
+	fill(0);
+
+	var offset = 50;
+	var offsetDiff = 0;
+	offset += offsetDiff;
+	//drawing the building icons
+	var heightNew = height - (buildingHeightDiv() * (offsetDiff+1));
+	
+	upgradesSprites["back"] = createSprite(buildingWidth(width)+250, height/2, height, 700);
+	upgradesSprites.back.shapeColor = 0;
+
+	for(var i = 0; i < Object.keys(upgrades).length; i++){
+		var tmp = Object.keys(upgrades)[i];
+
+		/*
+		var scale = (buildingWidth(width)/3)/buildingsImg[0].width;
+		var buildingHeight = buildingsImg[0].height*scale;*/
+		var buildingHeight = 60;
+		offsetDiff = buildingHeight/5;
+
+		upgradesSprites[tmp] = createSprite(buildingWidth(width) + buildingWidth(width)/6, heightNew * i/buildingHeightDiv() + offset + (heightNew * 1/buildingHeightDiv())/2, buildingWidth(width)/4, buildingHeight);
+		upgradesSprites[tmp].visible = false;
+		offset += offsetDiff;
+		upgradesSprites[tmp].shapeColor = 255;
 	}
 }
 
@@ -96,7 +144,8 @@ var niceNumbers = function(num, floats){
 }
 
 var bigNumbers = function(num){
-	stringedNum = num.toString()
+	num = Math.round(num*10)/10;
+	stringedNum = num.toString();
 	var numbers = ["Thousand", "Million", "Billion", "Trillion", "Quadrillion"];
 
 
@@ -113,17 +162,20 @@ var bigNumbers = function(num){
 	return niceNumbers(num, 1);
 }
 
-var buildingScene = function(){
-	buildingMode = true;
-	for(var i = 0; i< Object.keys(buildingSprites).length; i++){
-		pressed = Object.keys(buildingSprites)[i];
-		buildingSprites[pressed].visible = true;
+var changeVisible = function(spriteGroup, state){
+	for(var i = 0; i< Object.keys(spriteGroup).length; i++){
+		pressed = Object.keys(spriteGroup)[i];
+		spriteGroup[pressed].visible = state;
 	}
 }
+
+var buildingScene = function(){
+	changeVisible(buildingSprites, true);
+	changeVisible(upgradesSprites, false);
+	buildingMode = true;
+}
 var upgradeScene = function(){
+	changeVisible(buildingSprites, false);
+	changeVisible(upgradesSprites, true);
 	buildingMode = false;
-	for(var i = 0; i< Object.keys(buildingSprites).length; i++){
-		pressed = Object.keys(buildingSprites)[i];
-		buildingSprites[pressed].visible = false;
-	}
 }
