@@ -23,13 +23,13 @@ var buildingMode = true;
 function preload(){
 	img = loadImage("assets/shack.png");
 
-	surfboards = [loadImage("assets/surfboard1.png"), loadImage("assets/surfboard2.png"), loadImage("assets/surfboard3.png")];
+	surfboards = [loadImage("assets/surfboard1.png")];
 
 	//shack sprite
 	shackSprite = createSprite(buildingWidth(w)/2, upgradeHeight(h)/2, 75, 75);
 	shackSprite.addImage(img);
 
-	buildingsImg = [loadImage("assets/button1.png"), loadImage("assets/button2.png")];
+	buildingsImg = [loadImage("assets/buttonb1.png"), loadImage("assets/buttonb2.png")];
 
 
 }
@@ -164,14 +164,13 @@ function mousePressed(){
 
 		//surfbaords coming off
 		var surfboard = createSprite(mouseX, mouseY, 10, 10);
-		surfboard.addImage(surfboards[Math.round(Math.random() * 2)]);
+		surfboard.addImage(surfboards[Math.round(Math.random() * (surfboards.length-1))]);
 		surfboard.shapeColor = 0;
-		text("+5", surfboard.position.x, surfboard.position.y);
+		//text("+5", surfboard.position.x, surfboard.position.y);
 
 		surfboard.velocity = createVector(random(-0.5, 0.5), random(-1.5, -1));
 		surfboard.velocity.mult(5);
 
-		//text coming off
 
 		//make the shack "Bounce" on click
 		shackSprite.scale = 0.9;
@@ -190,6 +189,7 @@ function mousePressed(){
 				for(var x = 0; x < buyButtonMode; x++){
 					MPS += buildings[pressed].buy();
 					buildingSprites[pressed].changeImage('2');
+					setTimeout(function() {buildingSprites[pressed].changeImage('1')}, 100); 
 				}
 			}
 		}

@@ -1,0 +1,40 @@
+{
+	"buildings": {
+		"1": {
+			"name": "Student",
+			"description": "A Student",
+			"cost": "75", 
+			"BMPS": "0.5"
+		},
+		"3": {
+			"name": "Tree Farm", 
+			"description": "Production of trees", 
+			"cost": "3000",
+			"BMPS": "40"
+		}, 
+		"5": {
+			"name": "Surf Truck", 
+			"description": "Radical dude",
+			"cost": "10000", 
+			"BMPS": "1300"
+		}, 
+		"2": {
+			"name": "Design Team", 
+			"description": "A professional design team", 
+			"cost": "500", 
+			"BMPS": "5"
+		}, 
+		"4": {
+			"name": "Online Store", 
+			"description": "Sell to more people", 
+			"cost": "5000", 
+			"BMPS": "235"
+		}
+	},
+	"Upgrades":{
+		"id":{
+			"name":"TEST",
+			"cost":"100"
+		}
+	}
+}
