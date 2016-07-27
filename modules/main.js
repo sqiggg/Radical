@@ -158,8 +158,15 @@ function draw(){
 		}
 	}
 
+	//dealing with change of MPS in regards to upgrades
+	var tmpMPS = 0;
+	for(var i = 0; i< Object.keys(buildingSprites).length; i++){
+		pressed = Object.keys(buildingSprites)[i];		
+		tmpMPS += buildings[pressed].producing;
+	}
+	MPS = tmpMPS;
 
-
+	displayText();
 	fill(0);
 }
 
@@ -186,16 +193,16 @@ function mousePressed(){
 	//click check for buying buildings
 	for(var i = 0; i< Object.keys(buildingSprites).length; i++){
 		if(mouseSprite.overlap(buildingSprites[Object.keys(buildingSprites)[i]]) && buildingSprites[Object.keys(buildingSprites)[i]].visible === true){
-			//console.log(Object.keys(buildingSprites)[i]);
 			pressed = Object.keys(buildingSprites)[i];
 			
 			//buying the buildings
 			if(MONEY >= buildings[pressed].getCost(buyButtonMode) && buildings[pressed].unlocked){
 				MONEY -= buildings[pressed].getCost(buyButtonMode);
 				for(var x = 0; x < buyButtonMode; x++){
-					MPS += buildings[pressed].buy();
+					tmp = buildings[pressed].buy();		
 					buildingSprites[pressed].changeImage('2');
-					setTimeout(function() {buildingSprites[pressed].changeImage('1')}, 100); 
+					setTimeout(function(){buildingSprites[pressed].changeImage('1');}, 100); 
+
 				}
 			}
 		}

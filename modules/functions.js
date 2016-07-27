@@ -50,7 +50,7 @@ var getUpgrades = function(){
 		//putting them into the buildings dict
 		upgrades[Object.keys(obj[0].upgrades)[i]] = new Upgrade(mult, name, description, effected, cost);
 	}
-	console.log(upgrades);
+	//console.log(upgrades);
 	return upgrades
 }
 
@@ -184,4 +184,16 @@ var upgradeScene = function(){
 	changeVisible(buildingSprites, false);
 	changeVisible(upgradesSprites, true);
 	buildingMode = false;
+}
+
+var displayText = function(){
+	for(var i = 0; i< Object.keys(upgradesSprites).length; i++){
+		var pressed = Object.keys(upgradesSprites)[i];
+
+		fill(0);
+		if(pressed !== "back" && upgrades[pressed].unlocked && !upgrades[pressed].bought && !buildingMode){
+			text(upgrades[pressed].name + "-- " + upgrades[pressed].cost, upgradesSprites[pressed].position.x, upgradesSprites[pressed].position.y);
+		}
+	}
+
 }
