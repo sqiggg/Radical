@@ -40,12 +40,14 @@ var Building = function(name, cost, description, baseMps){
 	}
 }
 
-var Upgrade = function(mod, name, description, affectedBuilding){
+var Upgrade = function(mod, name, description, affectedBuilding, cost){
 	this.modifier = mod;
 	this.name = name;
 	this.description = description;
 	this.affectedBuilding = affectedBuilding;
 	this.bought = false;
+	this.unlocked = true;
+	this.cost = cost
 
 	this.buy = function(){
 		this.bought = true;

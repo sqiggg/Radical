@@ -180,9 +180,9 @@ function mousePressed(){
 		setTimeout(function() {shackSprite.scale = 1;}, 100);
 	}
 
-	//click check for buying
+	//click check for buying buildings
 	for(var i = 0; i< Object.keys(buildingSprites).length; i++){
-		if(mouseSprite.overlap(buildingSprites[Object.keys(buildingSprites)[i]])){
+		if(mouseSprite.overlap(buildingSprites[Object.keys(buildingSprites)[i]]) && buildingSprites[Object.keys(buildingSprites)[i]].visible === true){
 			//console.log(Object.keys(buildingSprites)[i]);
 			pressed = Object.keys(buildingSprites)[i];
 			
@@ -193,6 +193,26 @@ function mousePressed(){
 					MPS += buildings[pressed].buy();
 					buildingSprites[pressed].changeImage('2');
 					setTimeout(function() {buildingSprites[pressed].changeImage('1')}, 100); 
+				}
+			}
+		}
+	}
+
+	//check for buying upgrades
+	for(var i = 0; i< Object.keys(upgradesSprites).length; i++){
+
+		if(mouseSprite.overlap(upgradesSprites[Object.keys(upgradesSprites)[i]]) && upgradesSprites[Object.keys(upgradesSprites)[i]].visible === true){
+			//console.log(Object.keys(buildingSprites)[i]);
+			pressed = Object.keys(upgradesSprites)[i];
+			if (pressed !== "back"){
+				//buying the upgrade
+				if(MONEY >= upgrades[pressed].cost && upgrades[pressed].unlocked){
+					console.log("bought");
+					MONEY -= upgrades[pressed].cost;
+					upgrades[pressed].buy();
+					
+					upgradesSprites[pressed].bought = true;
+					upgradesSprites[pressed].visible = false; 
 				}
 			}
 		}

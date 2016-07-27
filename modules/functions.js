@@ -48,7 +48,7 @@ var getUpgrades = function(){
 		var mult = obj[0].upgrades[id].mult;
 
 		//putting them into the buildings dict
-		upgrades[Object.keys(obj[0].upgrades)[i]] = new Upgrade(mult, name, description, effected);
+		upgrades[Object.keys(obj[0].upgrades)[i]] = new Upgrade(mult, name, description, effected, cost);
 	}
 	console.log(upgrades);
 	return upgrades
@@ -70,7 +70,7 @@ var drawBuilding = function(){
 		var buildingHeight = buildingsImg[0].height*scale;
 		offsetDiff = buildingHeight/5;
 
-		console.log(buildingHeight);
+
 		buildingSprites[tmp] = createSprite(buildingWidth(width) + buildingWidth(width)/6, heightNew * i/buildingHeightDiv() + offset + (heightNew * 1/buildingHeightDiv())/2);
 
 		//Started to impliment the images
@@ -165,7 +165,13 @@ var bigNumbers = function(num){
 var changeVisible = function(spriteGroup, state){
 	for(var i = 0; i< Object.keys(spriteGroup).length; i++){
 		pressed = Object.keys(spriteGroup)[i];
-		spriteGroup[pressed].visible = state;
+
+		//making sure that bought upgrades will not be reshown
+		if(spriteGroup[pressed].bought === true){
+			spriteGroup[pressed].visible = false;
+		} else{
+			spriteGroup[pressed].visible = state;
+		}
 	}
 }
 
