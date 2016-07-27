@@ -17,16 +17,13 @@ var buildingSprites = {};
 
 function preload(){
 	img = loadImage("assets/shack.png");
-<<<<<<< HEAD
-	img1 = loadImage("assets/surfboardb10.png");
-=======
+
 	surfboards = [loadImage("assets/surfboard1.png"), loadImage("assets/surfboard2.png"), loadImage("assets/surfboard3.png")];
 
 	//shack sprite
 	shackSprite = createSprite(buildingWidth(w)/2, upgradeHeight(h)/2, 75, 75);
 	shackSprite.addImage(img);
 
->>>>>>> origin/master
 }
 
 function setup(){
@@ -65,7 +62,7 @@ function draw(){
 	if(frameCount%FRAMER8 === 0){
 		MONEY += MPS;
 		//set title of page to amount of money
-		window.document.title = bigNumbers(MONEY) + " Money";
+		window.document.title = bigNumbers(Math.round(MONEY)) + " Money";
 	}
 
 
@@ -75,7 +72,7 @@ function draw(){
 
 	//drawing MPS and MONEY
 	textSize(20);
-	text("Money: " + bigNumbers(Math.round(MONEY), 1) + "\n" + "Monies per second: " + bigNumbers(MPS), buildingWidth(width)/2, upgradeHeight(height)/2 * 1/4);
+	text("Money: " + bigNumbers(Math.round(MONEY)) + "\n" + "Monies per second: " + bigNumbers(MPS), buildingWidth(width)/2, upgradeHeight(height)/2 * 1/4);
 
 	//drawing all the sprites
 	drawSprites();
@@ -137,12 +134,9 @@ function mousePressed(){
 
 		//surfbaords coming off
 		var surfboard = createSprite(mouseX, mouseY, 10, 10);
-<<<<<<< HEAD
-		surfboard.addImage(img1);
-=======
 		surfboard.addImage(surfboards[Math.round(Math.random() * 2)]);
 		surfboard.shapeColor = 0;
->>>>>>> origin/master
+
 		surfboard.velocity = createVector(random(-0.5, 0.5), random(-1.5, -1));
 		surfboard.velocity.mult(5);
 
