@@ -24,6 +24,9 @@ var upgradesSprites = {};
 
 function preload(){
 	img = loadImage("assets/shack.png");
+	buy1 = loadImage("assets/buy1.png");
+	buy10 = loadImage("assets/buy10.png");
+	buy100 = loadImage("assets/buy100.png");
 
 	surfboards = [loadImage("assets/surfboard1.png")];
 
@@ -49,7 +52,7 @@ function setup(){
 	//buy mode buttons
 	//TODO
 	buyButton = createSprite(buildingWidth(width) + buildingWidth(width)/4, 25, 50, 40);
-	buyButton.shapeColor = 255;
+	buyButton.addImage(buy1);
 
 	upgradesButton = createSprite(buildingWidth(width)/2-200, height-60, 100, 60);
 	upgradesButton.shapeColor = 0;
@@ -228,6 +231,13 @@ function mousePressed(){
 		}
 	}
 
+	if(buyButtonMode === 100){
+		buyButton.addImage(buy100);
+	} else if (buyButtonMode === 10){
+		buyButton.addImage(buy10);
+	} else if (buyButtonMode === 1){
+		buyButton.addImage(buy1);
+	}
 	if(buyButton.overlap(mouseSprite) && buyButton.visible === true){
 		if (buyButtonMode === 100){
 			buyButtonMode = 1;
