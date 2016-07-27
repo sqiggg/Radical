@@ -1,5 +1,5 @@
 var canvas;
-var MONEY = 50;
+var MONEY = 0;
 var MPS = 0;
 var FRAMER8 = 30;
 
@@ -11,6 +11,8 @@ var overlayed;
 var surfboards;
 var w = 1000;
 var h = 500;
+var buyButton;
+var buyButtonMode = 1;
 
 var buildings = getBuildings();
 var buildingSprites = {};
@@ -38,6 +40,10 @@ function setup(){
 
 	//buy mode buttons
 	//TODO
+	buyButton = createSprite(buildingWidth(width) + buildingWidth(width)/4, 25, 50, 40);
+	buyButton.shapeColor = 255;
+
+
 
 	//init all buildings
 	//console.log(buildings);
@@ -96,7 +102,8 @@ function draw(){
 		}
 	}
 
-
+	//Showing buy button mode
+	text(buyButtonMode, buyButton.position.x, buyButton.position.y);
 
 
 	fill(255);
@@ -111,11 +118,11 @@ function draw(){
 		}
 
 		if (buildings[tmp].unlocked){
-			displayedText = buildings[tmp].amount + "x " + buildings[tmp].name + " -- " + buildings[tmp].cost;
+			displayedText = buildings[tmp].amount + "x " + buildings[tmp].name + " -- " + bigNumbers(Math.round(buildings[tmp].getCost(buyButtonMode)));
 
 		} else if(i > 0 && buildings[Object.keys(buildings)[i-1]].unlocked === true){
 			//limited information
-			displayedText = "??? -- " + buildings[tmp].cost;
+			displayedText = "??? -- " + bigNumbers(Math.round(buildings[tmp].getCost(buyButtonMode)));
 			buildingSprites[tmp].visible = true;
 		} else{
 			buildingSprites[tmp].visible = false;
@@ -136,6 +143,7 @@ function mousePressed(){
 		var surfboard = createSprite(mouseX, mouseY, 10, 10);
 		surfboard.addImage(surfboards[Math.round(Math.random() * 2)]);
 		surfboard.shapeColor = 0;
+		text("+5", surfboard.position.x, surfboard.position.y);
 
 		surfboard.velocity = createVector(random(-0.5, 0.5), random(-1.5, -1));
 		surfboard.velocity.mult(5);
@@ -154,10 +162,22 @@ function mousePressed(){
 			pressed = Object.keys(buildingSprites)[i];
 			
 			//buying the buildings
-			if(MONEY >= buildings[pressed].getCost() && buildings[pressed].unlocked){
-				MONEY -= buildings[pressed].cost;
-				MPS += buildings[pressed].buy();
+			if(MONEY >= buildings[pressed].getCost(buyButtonMode) && buildings[pressed].unlocked){
+				MONEY -= buildings[pressed].getCost(buyButtonMode);
+				for(var x = 0; x < buyButtonMode; x++){
+					MPS += buildings[pressed].buy();
+				}
 			}
+		}
+	}
+
+	if(buyButton.overlap(mouseSprite)){
+		if (buyButtonMode === 100){
+			buyButtonMode = 1;
+		} else if (buyButtonMode === 10){
+			buyButtonMode = 100;
+		} else if(buyButtonMode === 1){
+			buyButtonMode = 10;
 		}
 	}
 }

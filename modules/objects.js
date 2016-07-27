@@ -30,8 +30,9 @@ var Building = function(name, cost, description, baseMps){
 		this.producing += this.baseMps * this.modifier;
 		return this.baseMps * this.modifier;
 	}
-	this.getCost = function(){
-		return Math.round(this.initCost * Math.pow(1.15, this.amount));
+	this.getCost = function(n){
+		//console.log(Math.round(this.initCost * Math.pow(1.15, this.amount)));
+		return (this.initCost * (Math.pow(1.15, this.amount+n) - Math.pow(1.15, this.amount)))/0.15;
 	}
 }
 
