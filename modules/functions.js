@@ -166,8 +166,8 @@ var changeVisible = function(spriteGroup, state){
 	for(var i = 0; i< Object.keys(spriteGroup).length; i++){
 		pressed = Object.keys(spriteGroup)[i];
 
-		//making sure that bought upgrades will not be reshown
-		if(spriteGroup[pressed].bought === true){
+		//making sure that bought upgrades & locked buildings will not be reshown
+		if(spriteGroup[pressed].bought === true || spriteGroup[pressed].unlocked === false){
 			spriteGroup[pressed].visible = false;
 		} else{
 			spriteGroup[pressed].visible = state;

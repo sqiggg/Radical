@@ -31,7 +31,7 @@ function preload(){
 	shackSprite = createSprite(buildingWidth(w)/2, upgradeHeight(h)/2, 75, 75);
 	shackSprite.addImage(img);
 
-	buildingsImg = [loadImage("assets/buttonb1.png"), loadImage("assets/buttonb2.png")];
+	buildingsImg = [loadImage("assets/buttonc1.png"), loadImage("assets/buttonc2.png")];
 
 
 }
@@ -93,7 +93,7 @@ function draw(){
 
 	//drawing MPS and MONEY
 	textSize(20);
-	text("Money: " + bigNumbers(Math.round(MONEY)) + "\n" + "Monies per second: " + bigNumbers(MPS), buildingWidth(width)/2, upgradeHeight(height)/2 * 1/4);
+	text("Money: " + bigNumbers(Math.round(MONEY)) + "\n" + "Money per second (mps): " + bigNumbers(MPS), buildingWidth(width)/2, upgradeHeight(height)/2 * 1/4);
 
 	//drawing all the sprites
 	drawSprites();
@@ -157,6 +157,9 @@ function draw(){
 			text(displayedText, buildingSprites[tmp].position.x, buildingSprites[tmp].position.y + buildingSprites[tmp].height/6);
 		}
 	}
+
+
+
 	fill(0);
 }
 
