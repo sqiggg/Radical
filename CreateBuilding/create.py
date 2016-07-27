@@ -1,3 +1,8 @@
+'''
+Required modules:
+json
+
+'''
 import json
 
 fields = ["name", "cost", "description", "BMPS"]

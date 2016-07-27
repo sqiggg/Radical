@@ -8,19 +8,29 @@ var mouseSprite;
 var shack = new Shack(5);
 var overlay;
 var overlayed;
-
-
+var surfboards;
+var w = 1000;
+var h = 500;
 
 var buildings = getBuildings();
 var buildingSprites = {};
 
 function preload(){
 	img = loadImage("assets/shack.png");
+<<<<<<< HEAD
 	img1 = loadImage("assets/surfboardb10.png");
+=======
+	surfboards = [loadImage("assets/surfboard1.png"), loadImage("assets/surfboard2.png"), loadImage("assets/surfboard3.png")];
+
+	//shack sprite
+	shackSprite = createSprite(buildingWidth(w)/2, upgradeHeight(h)/2, 75, 75);
+	shackSprite.addImage(img);
+
+>>>>>>> origin/master
 }
 
 function setup(){
-	createCanvas(1000, 500);
+	createCanvas(w, h);
 	frameRate(FRAMER8);
 	textAlign(CENTER);
 
@@ -28,12 +38,6 @@ function setup(){
 	//making invisible mouse sprite for collision between other sprites
 	mouseSprite = createSprite(mouseX, mouseY, 1, 1);
 	mouseSprite.visible = false;
-
-	//shack sprite 
-    shackSprite = createSprite(buildingWidth(width)/2, upgradeHeight(height)/2, 75, 75);
-    shackSprite.addImage(img);
-
-
 
 	//buy mode buttons
 	//TODO
@@ -61,7 +65,7 @@ function draw(){
 	if(frameCount%FRAMER8 === 0){
 		MONEY += MPS;
 		//set title of page to amount of money
-		window.document.title = round(MONEY) + " Money";
+		window.document.title = bigNumbers(MONEY) + " Money";
 	}
 
 
@@ -71,7 +75,7 @@ function draw(){
 
 	//drawing MPS and MONEY
 	textSize(20);
-	text("Money: " + Math.round(MONEY) + "\n" + "Monies per second: " + Math.round(MPS * 10) / 10, buildingWidth(width)/2, upgradeHeight(height)/2 * 1/4);
+	text("Money: " + bigNumbers(Math.round(MONEY), 1) + "\n" + "Monies per second: " + bigNumbers(MPS), buildingWidth(width)/2, upgradeHeight(height)/2 * 1/4);
 
 	//drawing all the sprites
 	drawSprites();
@@ -85,7 +89,7 @@ function draw(){
 			overlayed = Object.keys(buildingSprites)[i];
 
 			if(buildings[overlayed].unlocked === true){
-				 text_to_display = buildings[overlayed].amount +" -- " +buildings[overlayed].name + "\n\n Each " + buildings[overlayed].name + " produces " + Math.round(buildings[overlayed].baseMps*10)/10 + " mps\n" + "total producing: " + Math.round(buildings[overlayed].producing*10)/10 + "\nCost: " + buildings[overlayed].cost + " -> " + buildings[overlayed].unlocked;
+				 text_to_display = buildings[overlayed].amount +" -- " +buildings[overlayed].name + "\n\n Each " + buildings[overlayed].name + " produces " + bigNumbers(buildings[overlayed].baseMps) + " mps\n" + "total producing: " + bigNumbers(buildings[overlayed].producing) + "\nCost: " + buildings[overlayed].cost;
 			} else{
 				text_to_display = "???" + "\n\n\nCost: " + buildings[overlayed].cost;
 			}
@@ -133,14 +137,20 @@ function mousePressed(){
 
 		//surfbaords coming off
 		var surfboard = createSprite(mouseX, mouseY, 10, 10);
+<<<<<<< HEAD
 		surfboard.addImage(img1);
+=======
+		surfboard.addImage(surfboards[Math.round(Math.random() * 2)]);
+		surfboard.shapeColor = 0;
+>>>>>>> origin/master
 		surfboard.velocity = createVector(random(-0.5, 0.5), random(-1.5, -1));
 		surfboard.velocity.mult(5);
 
+		//text coming off
+
+		//make the shack "Bounce" on click
 		shackSprite.scale = 0.9;
-		setTimeout(function() {		
-			shackSprite.scale = 1;
-		}, 100);
+		setTimeout(function() {shackSprite.scale = 1;}, 100);
 	}
 
 	//click check for buying
