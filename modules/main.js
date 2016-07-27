@@ -38,7 +38,7 @@ function setup(){
 	//TODO
 
 	//init all buildings
-	console.log(buildings);
+	//console.log(buildings);
 	drawBuilding();
 	overlay = overlayUpdate();
 }
@@ -109,7 +109,7 @@ function draw(){
 		}
 
 		if (buildings[tmp].unlocked){
-			displayedText = buildings[tmp].name + " -- " + buildings[tmp].cost;
+			displayedText = buildings[tmp].amount + "x " + buildings[tmp].name + " -- " + buildings[tmp].cost;
 
 		} else if(i > 0 && buildings[Object.keys(buildings)[i-1]].unlocked === true){
 			//limited information
@@ -145,7 +145,7 @@ function mousePressed(){
 	//click check for buying
 	for(var i = 0; i< Object.keys(buildingSprites).length; i++){
 		if(mouseSprite.overlap(buildingSprites[Object.keys(buildingSprites)[i]])){
-			console.log(Object.keys(buildingSprites)[i]);
+			//console.log(Object.keys(buildingSprites)[i]);
 			pressed = Object.keys(buildingSprites)[i];
 			
 			//buying the buildings
