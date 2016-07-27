@@ -31,7 +31,7 @@ function preload(){
 	shackSprite = createSprite(buildingWidth(w)/2, upgradeHeight(h)/2, 75, 75);
 	shackSprite.addImage(img);
 
-	buildingsImg = [loadImage("assets/buttonb1.png"), loadImage("assets/buttonb2.png")];
+	buildingsImg = [loadImage("assets/buttonc1.png"), loadImage("assets/buttonc2.png")];
 
 
 }
