@@ -16,6 +16,7 @@ var buildingSprites = {};
 
 function preload(){
 	img = loadImage("assets/shack.png");
+	img1 = loadImage("assets/surfboard1.png");
 }
 
 function setup(){
@@ -132,7 +133,7 @@ function mousePressed(){
 
 		//surfbaords coming off
 		var surfboard = createSprite(mouseX, mouseY, 10, 10);
-		surfboard.shapeColor = 0;
+		surfboard.addImage(img1);
 		surfboard.velocity = createVector(random(-0.5, 0.5), random(-1.5, -1));
 		surfboard.velocity.mult(5);
 
