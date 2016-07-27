@@ -45,7 +45,18 @@ var drawBuilding = function(){
 	for(var i = 0; i < Object.keys(buildings).length; i++){
 		var tmp = Object.keys(buildings)[i];
 
-		buildingSprites[tmp] = createSprite(buildingWidth(width) + buildingWidth(width)/4, heightNew * i/buildingHeightDiv() + offset + (heightNew * 1/buildingHeightDiv())/2, buildingWidth(width)/2, heightNew * 1/buildingHeightDiv());
+		var scale = (buildingWidth(width)/3)/buildingsImg[0].width;
+		var buildingHeight = buildingsImg[0].height*scale;
+		offsetDiff = buildingHeight/5;
+
+		console.log(buildingHeight);
+		buildingSprites[tmp] = createSprite(buildingWidth(width) + buildingWidth(width)/6, heightNew * i/buildingHeightDiv() + offset + (heightNew * 1/buildingHeightDiv())/2);
+
+		//Started to impliment the images
+		buildingSprites[tmp].addImage('1', buildingsImg[0]);
+		buildingSprites[tmp].addImage('2', buildingsImg[1]);
+		buildingSprites[tmp].scale = scale;
+		buildingSprites[tmp].visible = false;
 
 		offset += offsetDiff;
 		buildingSprites[tmp].shapeColor = 0;
@@ -100,4 +111,19 @@ var bigNumbers = function(num){
 	}
 
 	return niceNumbers(num, 1);
+}
+
+var buildingScene = function(){
+	buildingMode = true;
+	for(var i = 0; i< Object.keys(buildingSprites).length; i++){
+		pressed = Object.keys(buildingSprites)[i];
+		buildingSprites[pressed].visible = true;
+	}
+}
+var upgradeScene = function(){
+	buildingMode = false;
+	for(var i = 0; i< Object.keys(buildingSprites).length; i++){
+		pressed = Object.keys(buildingSprites)[i];
+		buildingSprites[pressed].visible = false;
+	}
 }

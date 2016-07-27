@@ -13,9 +13,12 @@ var w = 1000;
 var h = 500;
 var buyButton;
 var buyButtonMode = 1;
+var upgradesButton;
 
+var buildingsImg = []
 var buildings = getBuildings();
 var buildingSprites = {};
+var buildingMode = true;
 
 function preload(){
 	img = loadImage("assets/shack.png");
@@ -25,6 +28,9 @@ function preload(){
 	//shack sprite
 	shackSprite = createSprite(buildingWidth(w)/2, upgradeHeight(h)/2, 75, 75);
 	shackSprite.addImage(img);
+
+	buildingsImg = [loadImage("assets/button1.png"), loadImage("assets/button2.png")];
+
 
 }
 
@@ -43,12 +49,18 @@ function setup(){
 	buyButton = createSprite(buildingWidth(width) + buildingWidth(width)/4, 25, 50, 40);
 	buyButton.shapeColor = 255;
 
+	upgradesButton = createSprite(buildingWidth(width)/2-200, height-60, 100, 60);
+	upgradesButton.shapeColor = 0;
+
+	buildingButton = createSprite(buildingWidth(width)/2, height-60, 100, 60);
+	buildingButton.shapeColor = 0;
 
 
 	//init all buildings
-	//console.log(buildings);
-	drawBuilding();
 	overlay = overlayUpdate();
+	drawBuilding();	
+	buildingScene();
+
 }
 
 function draw(){
@@ -103,10 +115,18 @@ function draw(){
 	}
 
 	//Showing buy button mode
-	text(buyButtonMode, buyButton.position.x, buyButton.position.y);
+	if(buildingMode){
+		text(buyButtonMode, buyButton.position.x, buyButton.position.y);
+	}
 
 
 	fill(255);
+
+	//showing mode buttons' text
+	text("Upgrades", upgradesButton.position.x, upgradesButton.position.y);
+	text("Buildings", buildingButton.position.x, buildingButton.position.y);
+
+
 	//money and unlocking
 	for(var i = 0; i < Object.keys(buildings).length; i++){
 		var tmp = Object.keys(buildings)[i];
@@ -123,13 +143,16 @@ function draw(){
 		} else if(i > 0 && buildings[Object.keys(buildings)[i-1]].unlocked === true){
 			//limited information
 			displayedText = "??? -- " + bigNumbers(Math.round(buildings[tmp].getCost(buyButtonMode)));
-			buildingSprites[tmp].visible = true;
+			buildingSprites[tmp].visible = buildingMode;
+			buyButton.visible = buildingMode;
 		} else{
 			buildingSprites[tmp].visible = false;
 			displayedText = '';
 		}
 
-		text(displayedText, buildingSprites[tmp].position.x - buildingSprites[tmp].width/6, buildingSprites[tmp].position.y + buildingSprites[tmp].height/6);
+		if(buildingSprites[tmp].visible){
+			text(displayedText, buildingSprites[tmp].position.x, buildingSprites[tmp].position.y + buildingSprites[tmp].height/6);
+		}
 	}
 	fill(0);
 }
@@ -166,12 +189,13 @@ function mousePressed(){
 				MONEY -= buildings[pressed].getCost(buyButtonMode);
 				for(var x = 0; x < buyButtonMode; x++){
 					MPS += buildings[pressed].buy();
+					buildingSprites[pressed].changeImage('2');
 				}
 			}
 		}
 	}
 
-	if(buyButton.overlap(mouseSprite)){
+	if(buyButton.overlap(mouseSprite) && buyButton.visible ===true){
 		if (buyButtonMode === 100){
 			buyButtonMode = 1;
 		} else if (buyButtonMode === 10){
@@ -179,6 +203,13 @@ function mousePressed(){
 		} else if(buyButtonMode === 1){
 			buyButtonMode = 10;
 		}
+	}
+
+	if(upgradesButton.overlap(mouseSprite)){
+		upgradeScene();
+	}
+	if(buildingButton.overlap(mouseSprite)){
+		buildingScene();
 	}
 }
 
