@@ -26,7 +26,7 @@ var mousePress = function(){
 			if(MONEY >= buildings[pressed].getCost(buyButtonMode) && buildings[pressed].unlocked){
 				MONEY -= buildings[pressed].getCost(buyButtonMode);
 				for(var x = 0; x < buyButtonMode; x++){
-					buildings[pressed].buy();		
+					buildings[pressed].buy();
 					buildingSprites[pressed].changeImage('2');
 					setTimeout(function(){buildingSprites[pressed].changeImage('1');}, 100); 
 
@@ -37,12 +37,13 @@ var mousePress = function(){
 
 
 	if(buyButton.overlap(mouseSprite) && buyButton.visible === true){
-		if (buyButtonMode === 100){
+		//if (buyButtonMode === 100){
+		//	buyButtonMode = 1;
+		//	buyButton.addImage(buy1);
+		//} else
+		 if (buyButtonMode === 10){
 			buyButtonMode = 1;
 			buyButton.addImage(buy1);
-		} else if (buyButtonMode === 10){
-			buyButtonMode = 100;
-			buyButton.addImage(buy100);
 		} else if(buyButtonMode === 1){
 			buyButtonMode = 10;
 			buyButton.addImage(buy10);

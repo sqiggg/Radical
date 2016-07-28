@@ -98,14 +98,15 @@ var drawUpgrades = function(){
 	//drawing the building icons
 	var heightNew = height - (buildingHeightDiv() * (offsetDiff+1));
 	
-	upgradesSprites["back"] = createSprite(width/2, upgradeHeight(height)/2, width, upgradeHeight(height));
-	upgradesSprites.back.shapeColor = 0;
+	upgradesSprites["back"] = createSprite(width/2 - buildingWidth(width)/3+125, upgradeHeight(height)/2, buildingWidth(width), upgradeHeight(height));
+	upgradesSprites.back.shapeColor = 50;
 }
 
 var overlayUpdate = function(){
 
 	var overlay = createSprite(buildingWidth(width)-buildingWidth(width)/4, mouseY, buildingWidth(width)/2, height*2/buildingHeightDiv());
 	overlay.shapeColor = 255;
+	overlay.visible = buildingMode;
 
 	return overlay;
 }
@@ -187,22 +188,31 @@ var techTreeDisplay = function(){
 
 		var textDisplay = buildings[tmp].name;
 
-		text(textDisplay, techTreeBuildings[tmp].position.x, techTreeBuildings[tmp].position.y);
+		if(buildings[tmp].unlocked){
+			text(textDisplay, techTreeBuildings[tmp].position.x, techTreeBuildings[tmp].position.y);
+		}
 		offset += 50;
 	}
 }
 
 var techTreeInit = function(){
+	var initOffset = 100;
 	var offset = 10;
+	var xVal = 100;
 	for(var i = 0; i < Object.keys(buildings).length; i++){
 		var tmp = Object.keys(buildings)[i];
 
 		var textDisplay = buildings[tmp].name;
-		techTreeBuildings[tmp] = createSprite(100, 100+offset, 150, 40);
+		techTreeBuildings[tmp] = createSprite(xVal, initOffset+offset, 150, 40);
 		techTreeBuildings[tmp].shapeColor = color(255,0,0);
 		techTreeBuildings[tmp].visible = false;
 
 		offset += 50;
+
+		if (offset+150 >= upgradeHeight(height)){
+			offset = 10;
+			xVal += 160
+		}
 	}
 }
 
@@ -244,6 +254,7 @@ var buildingsUnlocking = function(){
 
 
 		if (Math.round(MONEY) >= buildings[tmp].cost && buildings[tmp].unlocked == false){
+
 			buildings[tmp].unlocked = true;
 			buildings[tmp].selected = true;
 		}
@@ -270,6 +281,10 @@ var buildingsUnlocking = function(){
 			textAlign(CENTER);
 		}
 
+		if(buildingSprites[tmp].position.y+buildingSprites[tmp].height/2 > height){
+			buildings[tmp].selected = false;
+		}
+
 		//buildingWidth(width) + buildingWidth(width)/6, heightNew * i/buildingHeightDiv() + offset + (heightNew * 1/buildingHeightDiv())/2
 
 		}
@@ -279,14 +294,16 @@ var overlayDisplay = function(){
 	overlay.visible = false;
 	for(var i = 0; i< Object.keys(buildingSprites).length; i++){
 		if(mouseSprite.overlap(buildingSprites[Object.keys(buildingSprites)[i]]) && buildingSprites[Object.keys(buildingSprites)[i]].visible === true){
-			var text_to_display;
+			var text_to_display = '';
 
 			overlayed = Object.keys(buildingSprites)[i];
 
-			if(buildings[overlayed].unlocked === true){
-				 text_to_display = buildings[overlayed].amount +" -- " +buildings[overlayed].name + "\n\n Each " + buildings[overlayed].name + " produces " + bigNumbers(buildings[overlayed].baseMps) + " mps\n" + "total producing: " + bigNumbers(buildings[overlayed].producing) + "\nCost: " + buildings[overlayed].cost;
-			} else{
-				text_to_display = "???" + "\n\n\nCost: " + buildings[overlayed].cost;
+			if(buildingMode){
+				if(buildings[overlayed].unlocked === true){
+					 text_to_display = buildings[overlayed].amount +" -- " +buildings[overlayed].name + "\n\n Each " + buildings[overlayed].name + " produces " + bigNumbers(buildings[overlayed].baseMps) + " mps\n" + "total producing: " + bigNumbers(buildings[overlayed].producing) + "\nCost: " + buildings[overlayed].cost;
+				} else{
+					text_to_display = "???" + "\n\n\nCost: " + buildings[overlayed].cost;
+				}
 			}
 
 			text(text_to_display, overlay.position.x-overlay.width/2, overlay.position.y-overlay.height/2, overlay.position.x-overlay.width/2, overlay.position.y + overlay.width/2);

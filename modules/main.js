@@ -51,10 +51,10 @@ function setup(){
 
 	//buy mode buttons
 	//TODO
-	buyButton = createSprite(buildingWidth(width) + buildingWidth(width)/6, (height * 1/buildingHeightDiv())/3);
+	buyButton = createSprite(buildingWidth(width) + buildingWidth(width)/6-50, (height * 1/buildingHeightDiv())/3);
 	buyButton.addImage(buy1);
 
-	upgradesButton = createSprite(buildingWidth(width)/2-200, height-60, 200, 60);
+	upgradesButton = createSprite(buildingWidth(width) + buildingWidth(width)/6+50, (height * 1/buildingHeightDiv())/3, 100, 40);
 	upgradesButton.shapeColor = 0;
 
 
@@ -125,13 +125,12 @@ function draw(){
 			techTreeBuildings[tmp].shapeColor = color(255,0,0);
 
 	}
-	//buildingWidth(width) + buildingWidth(width)/6, heightNew * i/buildingHeightDiv() + offset + (heightNew * 1/buildingHeightDiv())/2
 
 
 	//dealing with change of MPS in regards to upgrades
 	var tmpMPS = 0;
 	for(var i = 0; i< Object.keys(buildingSprites).length; i++){
-		pressed = Object.keys(buildingSprites)[i];		
+		pressed = Object.keys(buildingSprites)[i];
 		tmpMPS += buildings[pressed].producing;
 	}
 	MPS = tmpMPS;
