@@ -33,10 +33,17 @@
 	},
 	"upgrades":{
 		"1":{
-			"name":"TEST",
-			"cost":100,
+			"name":"College students",
+			"cost":700,
 			"mult":3,
 			"effected":1,
+			"description":"words"
+		},
+		"2":{
+			"name":"Design team Upgrade",
+			"cost":3000,
+			"mult":3,
+			"effected":2,
 			"description":"words"
 		}
 	}

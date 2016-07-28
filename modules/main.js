@@ -10,7 +10,7 @@ var overlay;
 var overlayed;
 var surfboards;
 var w = 1000;
-var h = 500;
+var h = 500
 var buyButton;
 var buyButtonMode = 1;
 var upgradesButton;
@@ -23,7 +23,7 @@ var upgrades = getUpgrades();
 var upgradesSprites = {};
 
 function preload(){
-	img = loadImage("assets/shack.png");
+	shackImg = loadImage("assets/shack.png");
 	buy1 = loadImage("assets/buy1.png");
 	buy10 = loadImage("assets/buy10.png");
 	buy100 = loadImage("assets/buy100.png");
@@ -32,7 +32,7 @@ function preload(){
 
 	//shack sprite
 	shackSprite = createSprite(buildingWidth(w)/2, upgradeHeight(h)/2, 75, 75);
-	shackSprite.addImage(img);
+	shackSprite.addImage(shackImg);
 
 	buildingsImg = [loadImage("assets/buttonc1.png"), loadImage("assets/buttonc2.png")];
 
@@ -51,14 +51,11 @@ function setup(){
 
 	//buy mode buttons
 	//TODO
-	buyButton = createSprite(buildingWidth(width) + buildingWidth(width)/4, 25, 50, 40);
+	buyButton = createSprite(buildingWidth(width)/2, height-60, 25);
 	buyButton.addImage(buy1);
 
-	upgradesButton = createSprite(buildingWidth(width)/2-200, height-60, 100, 60);
+	upgradesButton = createSprite(buildingWidth(width)/2-200, height-60, 200, 60);
 	upgradesButton.shapeColor = 0;
-
-	buildingButton = createSprite(buildingWidth(width)/2, height-60, 100, 60);
-	buildingButton.shapeColor = 0;
 
 
 	//init all buildings
@@ -96,7 +93,7 @@ function draw(){
 
 	//drawing MPS and MONEY
 	textSize(20);
-	text("Money: " + bigNumbers(Math.round(MONEY)) + "\n" + "Money per second (mps): " + bigNumbers(MPS), buildingWidth(width)/2, upgradeHeight(height)/2 * 1/4);
+	text("Money: " + bigNumbers(Math.round(MONEY)) + "\n" + "Money per second (mps): " + bigNumbers(Math.round(MPS*10)/10), buildingWidth(width)/2, upgradeHeight(height)/2 * 1/4);
 
 	//drawing all the sprites
 	drawSprites();
@@ -120,23 +117,16 @@ function draw(){
 		}
 	}
 
-	//Showing buy button mode
-	if(buildingMode){
-		text(buyButtonMode, buyButton.position.x, buyButton.position.y);
-	}
-
-
-	fill(255);
-
 	//showing mode buttons' text
-	text("Upgrades", upgradesButton.position.x, upgradesButton.position.y);
-	text("Buildings", buildingButton.position.x, buildingButton.position.y);
+	fill(255);
+	text("Upgrades/Buildings", upgradesButton.position.x, upgradesButton.position.y);
 
+	fill(0);
 
 	//money and unlocking
 	for(var i = 0; i < Object.keys(buildings).length; i++){
 		var tmp = Object.keys(buildings)[i];
-		var displayingText = "Not Displayed";
+		//var displayingText = "Not Displayed";
 		buildings[Object.keys(buildings)[0]].unlocked = true;
 
 		if (Math.round(MONEY) >= buildings[tmp].cost){
@@ -144,13 +134,13 @@ function draw(){
 		}
 
 		if (buildings[tmp].unlocked){
-			displayedText = buildings[tmp].amount + "x " + buildings[tmp].name + " -- " + bigNumbers(Math.round(buildings[tmp].getCost(buyButtonMode)));
+			displayedText = buildings[tmp].name + " -- " + bigNumbers(Math.round(buildings[tmp].getCost(buyButtonMode)));
 
 		} else if(i > 0 && buildings[Object.keys(buildings)[i-1]].unlocked === true){
 			//limited information
 			displayedText = "??? -- " + bigNumbers(Math.round(buildings[tmp].getCost(buyButtonMode)));
-			buildingSprites[tmp].visible = buildingMode;
-			buyButton.visible = buildingMode;
+			buildingSprites[tmp].visible = buildingMode
+			//buyButton.visible = buildingMode;
 		} else{
 			buildingSprites[tmp].visible = false;
 			displayedText = '';
@@ -158,8 +148,12 @@ function draw(){
 
 		if(buildingSprites[tmp].visible){
 			text(displayedText, buildingSprites[tmp].position.x, buildingSprites[tmp].position.y + buildingSprites[tmp].height/6);
+			textAlign(LEFT);
+			text(buildings[tmp].amount + "x " + buildings[tmp].name + "(s)", width-100 - buildingSprites[tmp].position.x, buildingSprites[tmp].position.y + buildingSprites[tmp].height/6)
+			textAlign(CENTER);
 		}
 	}
+
 
 	//dealing with change of MPS in regards to upgrades
 	var tmpMPS = 0;
@@ -182,7 +176,6 @@ function mousePressed(){
 		var surfboard = createSprite(mouseX, mouseY, 10, 10);
 		surfboard.addImage(surfboards[Math.round(Math.random() * (surfboards.length-1))]);
 		surfboard.shapeColor = 0;
-		//text("+5", surfboard.position.x, surfboard.position.y);
 
 		surfboard.velocity = createVector(random(-0.5, 0.5), random(-1.5, -1));
 		surfboard.velocity.mult(5);
@@ -202,7 +195,7 @@ function mousePressed(){
 			if(MONEY >= buildings[pressed].getCost(buyButtonMode) && buildings[pressed].unlocked){
 				MONEY -= buildings[pressed].getCost(buyButtonMode);
 				for(var x = 0; x < buyButtonMode; x++){
-					tmp = buildings[pressed].buy();		
+					buildings[pressed].buy();		
 					buildingSprites[pressed].changeImage('2');
 					setTimeout(function(){buildingSprites[pressed].changeImage('1');}, 100); 
 
@@ -231,28 +224,26 @@ function mousePressed(){
 		}
 	}
 
-	if(buyButtonMode === 100){
-		buyButton.addImage(buy100);
-	} else if (buyButtonMode === 10){
-		buyButton.addImage(buy10);
-	} else if (buyButtonMode === 1){
-		buyButton.addImage(buy1);
-	}
+
 	if(buyButton.overlap(mouseSprite) && buyButton.visible === true){
 		if (buyButtonMode === 100){
 			buyButtonMode = 1;
+			buyButton.addImage(buy1);
 		} else if (buyButtonMode === 10){
 			buyButtonMode = 100;
+			buyButton.addImage(buy100);
 		} else if(buyButtonMode === 1){
 			buyButtonMode = 10;
+			buyButton.addImage(buy10);
 		}
 	}
 
 	if(upgradesButton.overlap(mouseSprite)){
-		upgradeScene();
-	}
-	if(buildingButton.overlap(mouseSprite)){
-		buildingScene();
+		if(buildingMode)
+			upgradeScene();
+		else
+			buildingScene();
+
 	}
 }
 

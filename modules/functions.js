@@ -73,6 +73,7 @@ var drawBuilding = function(){
 
 		buildingSprites[tmp] = createSprite(buildingWidth(width) + buildingWidth(width)/6, heightNew * i/buildingHeightDiv() + offset + (heightNew * 1/buildingHeightDiv())/2);
 
+
 		//Started to impliment the images
 		buildingSprites[tmp].addImage('1', buildingsImg[0]);
 		buildingSprites[tmp].addImage('2', buildingsImg[1]);
@@ -104,7 +105,7 @@ var drawUpgrades = function(){
 		var buildingHeight = 60;
 		offsetDiff = buildingHeight/5;
 
-		upgradesSprites[tmp] = createSprite(buildingWidth(width) + buildingWidth(width)/6, heightNew * i/buildingHeightDiv() + offset + (heightNew * 1/buildingHeightDiv())/2, buildingWidth(width)/4, buildingHeight);
+		upgradesSprites[tmp] = createSprite(buildingWidth(width) + buildingWidth(width)/6, heightNew * i/buildingHeightDiv() + offset + (heightNew * 1/buildingHeightDiv())/2, buildingWidth(width)/3-10, buildingHeight);
 		upgradesSprites[tmp].visible = false;
 		offset += offsetDiff;
 		upgradesSprites[tmp].shapeColor = 255;
@@ -192,7 +193,7 @@ var displayText = function(){
 
 		fill(0);
 		if(pressed !== "back" && upgrades[pressed].unlocked && !upgrades[pressed].bought && !buildingMode){
-			text(upgrades[pressed].name + "-- " + upgrades[pressed].cost, upgradesSprites[pressed].position.x, upgradesSprites[pressed].position.y);
+			text(upgrades[pressed].name + "\n" + upgrades[pressed].cost, upgradesSprites[pressed].position.x, upgradesSprites[pressed].position.y);
 		}
 	}
 
