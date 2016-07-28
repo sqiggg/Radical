@@ -35,8 +35,6 @@ function preload(){
 	shackSprite.addImage(shackImg);
 
 	buildingsImg = [loadImage("assets/buttonc1.png"), loadImage("assets/buttonc2.png")];
-
-
 }
 
 function setup(){
@@ -63,7 +61,6 @@ function setup(){
 	drawBuilding();	
 	drawUpgrades();
 	buildingScene();
-
 }
 
 function draw(){
