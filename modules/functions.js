@@ -243,14 +243,31 @@ var buildingsUnlocking = function(){
 		if(buildingSprites[tmp].visible){
 			text(displayedText, buildingSprites[tmp].position.x, buildingSprites[tmp].position.y + buildingSprites[tmp].height/6);
 			textAlign(LEFT);
-			text(buildings[tmp].amount + "x " + buildings[tmp].name + "(s)", width-100 - buildingSprites[tmp].position.x, buildingSprites[tmp].position.y + buildingSprites[tmp].height/6)
+			//text(buildings[tmp].amount + "x " + buildings[tmp].name + "(s)", width-100 - buildingSprites[tmp].position.x, buildingSprites[tmp].position.y + buildingSprites[tmp].height/6)
 			textAlign(CENTER);
 		}
-
 
 		//buildingWidth(width) + buildingWidth(width)/6, heightNew * i/buildingHeightDiv() + offset + (heightNew * 1/buildingHeightDiv())/2
 		}
 	}
+
+var alertSystem = function(){
+	for(var i = 0; i < Object.keys(buildings).length; i++){
+	var tmp = Object.keys(buildings)[i];
+	if ((buildings[tmp].name === "Student") && (buildings[tmp].amount === 5)){
+		var student = "News Flash: Students working at a local SurfShop make shoddy surfboards.(Click to dismiss)"
+			fill('#fae');
+			textSize(20);
+			text(student, 0, 0, 200, 100);
+			fill(0);
+			if (mousePress == true){
+				student = undefined;
+			}
+			
+		}
+	}
+
+}
 
 var overlayDisplay = function(){
 	overlay.visible = false;

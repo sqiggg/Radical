@@ -109,43 +109,10 @@ function draw(){
 	fill(0);
 
 	//money and unlocking
-<<<<<<< Updated upstream
 	buildingsUnlocking();
-=======
-	for(var i = 0; i < Object.keys(buildings).length; i++){
-		var tmp = Object.keys(buildings)[i];
-		//var displayingText = "Not Displayed";
-		buildings[Object.keys(buildings)[0]].unlocked = true;
 
-		if (Math.round(MONEY) >= buildings[tmp].cost){
-			buildings[tmp].unlocked = true;
-		}
-
-		if (buildings[tmp].unlocked){
-			displayedText = buildings[tmp].name + " -- " + bigNumbers(Math.round(buildings[tmp].getCost(buyButtonMode)));
-
-		} else if(i > 0 && buildings[Object.keys(buildings)[i-1]].unlocked === true){
-			//limited information
-			displayedText = "??? -- " + bigNumbers(Math.round(buildings[tmp].getCost(buyButtonMode)));
-			buildingSprites[tmp].visible = buildingMode
-			//buyButton.visible = buildingMode;
-		} else{
-			buildingSprites[tmp].visible = false;
-			displayedText = '';
-		}
-
-		if(buildingSprites[tmp].visible){
-			text(displayedText, buildingSprites[tmp].position.x, buildingSprites[tmp].position.y + buildingSprites[tmp].height/6);
-			textAlign(LEFT);
-			text(buildings[tmp].amount + "x " + buildings[tmp].name + "(s)", width-100 - buildingSprites[tmp].position.x, buildingSprites[tmp].position.y + buildingSprites[tmp].height/6)
-			textAlign(CENTER);
-			}
-
-		/*if((building[tmp].name === "Student")) && ((building[tmp].amount === 10));
-			window.alert("News Flash: Surprise Motherfucker");*/
-	}
->>>>>>> Stashed changes
-
+	//alert system
+	alertSystem();
 
 	//dealing with change of MPS in regards to upgrades
 	var tmpMPS = 0;
@@ -162,7 +129,7 @@ function draw(){
 	displayText();
 	fill(0);
 }
-
+`
 function mousePressed(){
 	mousePress();
 }
