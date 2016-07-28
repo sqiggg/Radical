@@ -93,23 +93,8 @@ var drawUpgrades = function(){
 	//drawing the building icons
 	var heightNew = height - (buildingHeightDiv() * (offsetDiff+1));
 	
-	upgradesSprites["back"] = createSprite(buildingWidth(width)+250, height/2, height, 700);
+	upgradesSprites["back"] = createSprite(width/2, upgradeHeight(height)/2, width, upgradeHeight(height));
 	upgradesSprites.back.shapeColor = 0;
-
-	for(var i = 0; i < Object.keys(upgrades).length; i++){
-		var tmp = Object.keys(upgrades)[i];
-
-		/*
-		var scale = (buildingWidth(width)/3)/buildingsImg[0].width;
-		var buildingHeight = buildingsImg[0].height*scale;*/
-		var buildingHeight = 60;
-		offsetDiff = buildingHeight/5;
-
-		upgradesSprites[tmp] = createSprite(buildingWidth(width) + buildingWidth(width)/6, heightNew * i/buildingHeightDiv() + offset + (heightNew * 1/buildingHeightDiv())/2, buildingWidth(width)/3-10, buildingHeight);
-		upgradesSprites[tmp].visible = false;
-		offset += offsetDiff;
-		upgradesSprites[tmp].shapeColor = 255;
-	}
 }
 
 var overlayUpdate = function(){
@@ -176,14 +161,46 @@ var changeVisible = function(spriteGroup, state){
 	}
 }
 
+var techTreeDisplay = function(){
+	
+	var offset = 10;
+	for(var i = 0; i < Object.keys(techTreeBuildings).length; i++){
+		var tmp = Object.keys(techTreeBuildings)[i];
+
+		var textDisplay = buildings[tmp].name;
+
+		text(textDisplay, techTreeBuildings[tmp].position.x, techTreeBuildings[tmp].position.y);
+		offset += 50;
+	}
+
+}
+
+var techTreeInit = function(){
+	var offset = 10;
+	for(var i = 0; i < Object.keys(buildings).length; i++){
+		var tmp = Object.keys(buildings)[i];
+
+		var textDisplay = buildings[tmp].name;
+		techTreeBuildings[tmp] = createSprite(100, 100+offset, 150, 40);
+		techTreeBuildings[tmp].shapeColor = color(255,0,0);
+		techTreeBuildings[tmp].visible = !buildingMode;
+
+		text(textDisplay, techTreeBuildings[tmp].position.x, techTreeBuildings[tmp].position.y);
+		offset += 50;
+	}
+}
+
 var buildingScene = function(){
 	changeVisible(buildingSprites, true);
 	changeVisible(upgradesSprites, false);
+	changeVisible(techTreeBuildings, false);
 	buildingMode = true;
 }
+
 var upgradeScene = function(){
 	changeVisible(buildingSprites, false);
 	changeVisible(upgradesSprites, true);
+	changeVisible(techTreeBuildings, true);
 	buildingMode = false;
 }
 
@@ -197,4 +214,60 @@ var displayText = function(){
 		}
 	}
 
+}
+
+var buildingsUnlocking = function(){
+	for(var i = 0; i < Object.keys(buildings).length; i++){
+		var tmp = Object.keys(buildings)[i];
+		//var displayingText = "Not Displayed";
+		buildings[Object.keys(buildings)[0]].unlocked = true;
+
+
+		if (Math.round(MONEY) >= buildings[tmp].cost){
+			buildings[tmp].unlocked = true;
+		}
+
+
+		if (buildings[tmp].unlocked){
+			displayedText = buildings[tmp].name + " -- " + bigNumbers(Math.round(buildings[tmp].getCost(buyButtonMode)));
+
+		} else if(i > 0 && buildings[Object.keys(buildings)[i-1]].unlocked === true){
+			//limited information
+			displayedText = "??? -- " + bigNumbers(Math.round(buildings[tmp].getCost(buyButtonMode)));
+			buildingSprites[tmp].visible = buildingMode
+		} else{
+			buildingSprites[tmp].visible = false;
+			displayedText = '';
+		}
+
+		if(buildingSprites[tmp].visible){
+			text(displayedText, buildingSprites[tmp].position.x, buildingSprites[tmp].position.y + buildingSprites[tmp].height/6);
+			textAlign(LEFT);
+			text(buildings[tmp].amount + "x " + buildings[tmp].name + "(s)", width-100 - buildingSprites[tmp].position.x, buildingSprites[tmp].position.y + buildingSprites[tmp].height/6)
+			textAlign(CENTER);
+		}
+
+
+		//buildingWidth(width) + buildingWidth(width)/6, heightNew * i/buildingHeightDiv() + offset + (heightNew * 1/buildingHeightDiv())/2
+		}
+	}
+
+var overlayDisplay = function(){
+	overlay.visible = false;
+	for(var i = 0; i< Object.keys(buildingSprites).length; i++){
+		if(mouseSprite.overlap(buildingSprites[Object.keys(buildingSprites)[i]]) && buildingSprites[Object.keys(buildingSprites)[i]].visible === true){
+			var text_to_display;
+
+			overlayed = Object.keys(buildingSprites)[i];
+
+			if(buildings[overlayed].unlocked === true){
+				 text_to_display = buildings[overlayed].amount +" -- " +buildings[overlayed].name + "\n\n Each " + buildings[overlayed].name + " produces " + bigNumbers(buildings[overlayed].baseMps) + " mps\n" + "total producing: " + bigNumbers(buildings[overlayed].producing) + "\nCost: " + buildings[overlayed].cost;
+			} else{
+				text_to_display = "???" + "\n\n\nCost: " + buildings[overlayed].cost;
+			}
+
+			text(text_to_display, overlay.position.x-overlay.width/2, overlay.position.y-overlay.height/2, overlay.position.x-overlay.width/2, overlay.position.y + overlay.width/2);
+			overlay.visible = true;
+		}
+	}
 }

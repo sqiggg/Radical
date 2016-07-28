@@ -16,6 +16,7 @@ var Building = function(name, cost, description, baseMps){
 	this.cost = cost;
 	this.producing = 0;
 	this.unlocked = false;
+	this.selected = false;
 
 	this.getMps = function(){
 		return this.baseMps * this.modifier * this.amount;
