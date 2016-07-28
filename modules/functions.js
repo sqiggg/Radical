@@ -32,6 +32,7 @@ var getBuildings = function(){
 	//console.log(buildings);
 	return buildings;
 }
+
 var getUpgrades = function(){
 	var obj = JSON.parse(data);
 	//console.log(obj);
@@ -82,8 +83,12 @@ var drawBuilding = function(){
 
 		offset += offsetDiff;
 		buildingSprites[tmp].shapeColor = 0;
+
+		if (i<2)
+			buildings[tmp].selected = true;
 	}
 }
+
 var drawUpgrades = function(){
 	fill(0);
 
@@ -161,6 +166,19 @@ var changeVisible = function(spriteGroup, state){
 	}
 }
 
+var changeVisibleTechTree = function(spriteGroup, state){
+	for(var i = 0; i< Object.keys(spriteGroup).length; i++){
+		pressed = Object.keys(spriteGroup)[i];
+
+		//making sure that bought upgrades & locked buildings will not be reshown
+		if(spriteGroup[pressed].bought === true || buildings[pressed].unlocked === false){
+			spriteGroup[pressed].visible = false;
+		} else{
+			spriteGroup[pressed].visible = state;
+		}
+	}
+}
+
 var techTreeDisplay = function(){
 	
 	var offset = 10;
@@ -172,7 +190,6 @@ var techTreeDisplay = function(){
 		text(textDisplay, techTreeBuildings[tmp].position.x, techTreeBuildings[tmp].position.y);
 		offset += 50;
 	}
-
 }
 
 var techTreeInit = function(){
@@ -183,9 +200,8 @@ var techTreeInit = function(){
 		var textDisplay = buildings[tmp].name;
 		techTreeBuildings[tmp] = createSprite(100, 100+offset, 150, 40);
 		techTreeBuildings[tmp].shapeColor = color(255,0,0);
-		techTreeBuildings[tmp].visible = !buildingMode;
+		techTreeBuildings[tmp].visible = false;
 
-		text(textDisplay, techTreeBuildings[tmp].position.x, techTreeBuildings[tmp].position.y);
 		offset += 50;
 	}
 }
@@ -193,14 +209,14 @@ var techTreeInit = function(){
 var buildingScene = function(){
 	changeVisible(buildingSprites, true);
 	changeVisible(upgradesSprites, false);
-	changeVisible(techTreeBuildings, false);
+	changeVisibleTechTree(techTreeBuildings, false);
 	buildingMode = true;
 }
 
 var upgradeScene = function(){
 	changeVisible(buildingSprites, false);
 	changeVisible(upgradesSprites, true);
-	changeVisible(techTreeBuildings, true);
+	changeVisibleTechTree(techTreeBuildings, true);
 	buildingMode = false;
 }
 
@@ -213,18 +229,23 @@ var displayText = function(){
 			text(upgrades[pressed].name + "\n" + upgrades[pressed].cost, upgradesSprites[pressed].position.x, upgradesSprites[pressed].position.y);
 		}
 	}
-
 }
 
 var buildingsUnlocking = function(){
 	for(var i = 0; i < Object.keys(buildings).length; i++){
 		var tmp = Object.keys(buildings)[i];
 		//var displayingText = "Not Displayed";
+
 		buildings[Object.keys(buildings)[0]].unlocked = true;
+			//console.log(buildings[Object.keys(buildings)[tmp]])
+		
+
+		buildingSprites[tmp].visible = buildings[tmp].selected;
 
 
-		if (Math.round(MONEY) >= buildings[tmp].cost){
+		if (Math.round(MONEY) >= buildings[tmp].cost && buildings[tmp].unlocked == false){
 			buildings[tmp].unlocked = true;
+			buildings[tmp].selected = true;
 		}
 
 
@@ -243,14 +264,16 @@ var buildingsUnlocking = function(){
 		if(buildingSprites[tmp].visible){
 			text(displayedText, buildingSprites[tmp].position.x, buildingSprites[tmp].position.y + buildingSprites[tmp].height/6);
 			textAlign(LEFT);
-			text(buildings[tmp].amount + "x " + buildings[tmp].name + "(s)", width-100 - buildingSprites[tmp].position.x, buildingSprites[tmp].position.y + buildingSprites[tmp].height/6)
+
+			if(buildingMode && buildings[tmp].unlocked)
+				text(buildings[tmp].amount + "x " + buildings[tmp].name + "(s)", width-100 - buildingSprites[tmp].position.x, buildingSprites[tmp].position.y + buildingSprites[tmp].height/6)
 			textAlign(CENTER);
 		}
 
-
 		//buildingWidth(width) + buildingWidth(width)/6, heightNew * i/buildingHeightDiv() + offset + (heightNew * 1/buildingHeightDiv())/2
+
 		}
-	}
+}
 
 var overlayDisplay = function(){
 	overlay.visible = false;

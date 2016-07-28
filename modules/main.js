@@ -64,7 +64,7 @@ function setup(){
 	drawUpgrades();
 	buildingScene();
 	techTreeInit();	
-	techTreeBuildings;
+	//techTreeBuildings;
 }
 
 function draw(){
@@ -104,7 +104,7 @@ function draw(){
 
 	//showing mode buttons' text
 	fill(255);
-	text("Upgrades/Buildings", upgradesButton.position.x, upgradesButton.position.y);
+	text("Tech tree", upgradesButton.position.x, upgradesButton.position.y);
 
 	fill(0);
 
@@ -146,6 +146,20 @@ function draw(){
 	}
 >>>>>>> Stashed changes
 
+	if(buildingMode === false){
+		techTreeDisplay();
+	}
+
+	for(var i = 0; i < Object.keys(techTreeBuildings).length; i++){
+		var tmp = Object.keys(techTreeBuildings)[i];
+
+		//console.log(buildings[tmp].selected, buildings[tmp].name);
+		if(tmp != 'back' && buildings[tmp].selected === true)
+			techTreeBuildings[tmp].shapeColor = color(0,128,0);
+		else
+			techTreeBuildings[tmp].shapeColor = color(255,0,0);
+
+	}
 
 	//dealing with change of MPS in regards to upgrades
 	var tmpMPS = 0;
@@ -155,9 +169,7 @@ function draw(){
 	}
 	MPS = tmpMPS;
 
-	if(buildingMode === false){
-		techTreeDisplay();
-	}
+
 
 	displayText();
 	fill(0);

@@ -65,12 +65,35 @@ var mousePress = function(){
 
 			//console.log(buildings[pressed].name);
 			if (buildings[pressed].selected === false){
-				techTreeBuildings[pressed].shapeColor = color(0,128,0);
 				buildings[pressed].selected = true;
 			} else{
-				techTreeBuildings[pressed].shapeColor = color(255,0,0);
 				buildings[pressed].selected = false;
 			}
+
+			//Redrawing the order
+			var offset = 50;
+			var offsetDiff = 0;
+			offset += offsetDiff;
+
+			//moving the icons
+			var heightNew = height - (buildingHeightDiv() * (offsetDiff+1));
+			var p = 0;
+			for(var i = 0; i < Object.keys(buildings).length; i++){
+				var tmp = Object.keys(buildings)[i];
+				if (buildings[tmp].selected || !buildings[tmp].unlocked){
+					var scale = (buildingWidth(width)/3)/buildingsImg[0].width;
+					var buildingHeight = buildingsImg[0].height*scale;
+					
+					offsetDiff = buildingHeight/5;
+					buildingSprites[tmp].position = createVector(buildingWidth(width) + buildingWidth(width)/6, heightNew * p/buildingHeightDiv() + offset + (heightNew * 1/buildingHeightDiv())/2)
+					buildingSprites[tmp].scale = scale;
+					p++;
+					offset += offsetDiff;
+				}
+			}
+			
+
+
 		}
 	}
 }
