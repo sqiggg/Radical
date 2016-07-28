@@ -91,9 +91,6 @@ var mousePress = function(){
 					offset += offsetDiff;
 				}
 			}
-			
-
-
 		}
 	}
 }
