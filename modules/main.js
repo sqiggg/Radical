@@ -110,8 +110,6 @@ function draw(){
 
 	//money and unlocking
 	buildingsUnlocking();
-<<<<<<< HEAD
-=======
 
 	if(buildingMode === false){
 		techTreeDisplay();
@@ -127,8 +125,6 @@ function draw(){
 			techTreeBuildings[tmp].shapeColor = color(255,0,0);
 
 	}
->>>>>>> origin/master
-
 	//alert system
 	alertSystem();
 

@@ -1,1 +1,13 @@
-data='[{"buildings": {"10": {"name": "Online 4", "BMPS": 235, "cost": 5000, "description": "Sell to more people"}, "8": {"name": "Online 2", "BMPS": 235, "cost": 5000, "description": "Sell to more people"}, "1": {"name": "Student", "BMPS": 0.5, "cost": 75, "description": "A Student"}, "6": {"name": "Online Store", "BMPS": 235, "cost": 5000, "description": "Sell to more people"}, "2": {"name": "Design Team", "BMPS": 5, "cost": 500, "description": "A professional design team"}, "4": {"name": "Online Store", "BMPS": 235, "cost": 5000, "description": "Sell to more people"}, "3": {"name": "Tree Farm", "BMPS": 40, "cost": 3000, "description": "Production of trees"}, "7": {"name": "Online 1", "BMPS": 235, "cost": 5000, "description": "Sell to more people"}, "5": {"name": "Surf Truck", "BMPS": 1300, "cost": 10000, "description": "Radical dude"}, "9": {"name": "Online 3", "BMPS": 235, "cost": 5000, "description": "Sell to more people"}}, "upgrades": {"1": {"name": "College students", "effected": 1, "mult": 3, "cost": 700, "description": "words"}, "2": {"name": "Design team Upgrade", "effected": 2, "mult": 3, "cost": 3000, "description": "words"}}}]'
+data='[{"buildings": {"10": 
+	{"name": "Online 4", "BMPS": 235, "cost": 5000, "description": "Sell to more people"}, "8": 
+	{"name": "Online 2", "BMPS": 235, "cost": 5000, "description": "Sell to more people"}, "1": 
+	{"name": "Student", "BMPS": 0.5, "cost": 75, "description": "A Student"}, "6": 
+	{"name": "Online Store", "BMPS": 235, "cost": 5000, "description": "Sell to more people"}, "2": 
+	{"name": "Design Team", "BMPS": 5, "cost": 500, "description": "A professional design team"}, "4": 
+	{"name": "Online Store", "BMPS": 235, "cost": 5000, "description": "Sell to more people"}, "3": 
+	{"name": "Tree Farm", "BMPS": 40, "cost": 3000, "description": "Production of trees"}, "7": 
+	{"name": "Online 1", "BMPS": 235, "cost": 5000, "description": "Sell to more people"}, "5": 
+	{"name": "Surf Truck", "BMPS": 1300, "cost": 10000, "description": "Radical dude"}, "9": 
+	{"name": "Online 3", "BMPS": 235, "cost": 5000, "description": "Sell to more people"}}, "upgrades": {"1": 
+	{"name": "College students", "effected": 1, "mult": 3, "cost": 700, "description": "words"}, "2": 
+	{"name": "Design team Upgrade", "effected": 2, "mult": 3, "cost": 3000, "description": "words"}}}]'

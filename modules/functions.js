@@ -275,12 +275,10 @@ var buildingsUnlocking = function(){
 		if(buildingSprites[tmp].visible){
 			text(displayedText, buildingSprites[tmp].position.x, buildingSprites[tmp].position.y + buildingSprites[tmp].height/6);
 			textAlign(LEFT);
-<<<<<<< HEAD
 			//text(buildings[tmp].amount + "x " + buildings[tmp].name + "(s)", width-100 - buildingSprites[tmp].position.x, buildingSprites[tmp].position.y + buildingSprites[tmp].height/6)
 			textAlign(CENTER);
 		}
 
-=======
 
 			if(buildingMode && buildings[tmp].unlocked)
 				text(buildings[tmp].amount + "x " + buildings[tmp].name + "(s)", width-100 - buildingSprites[tmp].position.x, buildingSprites[tmp].position.y + buildingSprites[tmp].height/6)
@@ -291,13 +289,10 @@ var buildingsUnlocking = function(){
 			buildings[tmp].selected = false;
 		}
 
->>>>>>> origin/master
 		//buildingWidth(width) + buildingWidth(width)/6, heightNew * i/buildingHeightDiv() + offset + (heightNew * 1/buildingHeightDiv())/2
 
-		}
-}
 
-var alertSystem = function(){
+/*var alertSystem = function(){
 	for(var i = 0; i < Object.keys(buildings).length; i++){
 	var tmp = Object.keys(buildings)[i];
 	if ((buildings[tmp].name === "Student") && (buildings[tmp].amount === 5)){
@@ -313,7 +308,7 @@ var alertSystem = function(){
 		}
 	}
 
-}
+}*/
 
 var overlayDisplay = function(){
 	overlay.visible = false;
