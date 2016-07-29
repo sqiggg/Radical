@@ -35,6 +35,8 @@ var mousePress = function(){
 				MONEY -= buildings[pressed].getCost(buyButtonMode);
 				for(var x = 0; x < buyButtonMode; x++){
 					buildings[pressed].buy();
+					toot.setVolume(0.6);
+					toot.play();
 					buildingSprites[pressed].changeImage('1');
 					setTimeout(function(){
 						buildingSprites[pressed].changeImage('2');
@@ -47,10 +49,7 @@ var mousePress = function(){
 
 
 	if(buyButton.overlap(mouseSprite) && buyButton.visible === true){
-		//if (buyButtonMode === 100){
-		//	buyButtonMode = 1;
-		//	buyButton.addImage(buy1);
-		//} else
+
 		 if (buyButtonMode === 10){
 			buyButtonMode = 1;
 			buyButton.addImage(buy1);

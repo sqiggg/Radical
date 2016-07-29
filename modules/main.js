@@ -33,6 +33,7 @@ var pixelFont;
 
 var music;
 var boop;
+var toot;
 
 function preload(){
 	shackImg = loadImage("assets/shack.png");
@@ -52,6 +53,8 @@ function preload(){
 
 	music = loadSound("assets/music/Pixelland.mp3")
 	boop = loadSound("assets/music/boop.wav")
+	toot = loadSound("assets/music/toot.wav")
+
 
 	var widget = createSprite(w-lineDivImg.width*8 + buildingWidth(w)/6, h/2, buildingWidth(w), h);
 	widget.shapeColor = '#ec3d91';
