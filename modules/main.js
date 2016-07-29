@@ -28,12 +28,16 @@ var techTreeIcons = {};
 
 var sunburst;
 var imgIconCount = {};
+var pixelFont;
 
 function preload(){
 	shackImg = loadImage("assets/shack.png");
 	buy1 = loadImage("assets/buy1.png");
 	buy10 = loadImage("assets/buy10.png");
 	buy100 = loadImage("assets/buy100.png");
+
+	//loading custom font
+	pixelFont = loadFont("assets/fonts/04B_03__.TTF")
 
 	surfboards = [loadImage("assets/surfboard1.png")];
 
@@ -54,6 +58,8 @@ function preload(){
 }
 
 function setup(){
+	textFont(pixelFont);
+
 	createCanvas(w, h);
 	frameRate(FRAMER8);
 	textAlign(CENTER);
@@ -75,15 +81,15 @@ function setup(){
 
 
 	//init all buildings
-	overlay = overlayUpdate();
 	drawBuilding();
 	drawUpgrades();
 	buildingScene();
 	techTreeInit();
 	//techTreeBuildings;
 	displayAmountInit();
-
+	overlay = overlayUpdate();
 	sunburstSprite.addImage(sunburst)
+
 
 }
 
@@ -92,6 +98,7 @@ function draw(){
 	//setting the mouse sprite to the position of the mouse
 	mouseSprite.position.x = mouseX;
 	mouseSprite.position.y = mouseY;
+	drawSprites();
 
 	sunburstSprite.rotation += 0.4;
 	if(sunburstSprite.rotation >= 360){
@@ -126,10 +133,8 @@ function draw(){
 	}
 
 	//drawing all the sprites
-	drawSprites();
 
-	//showing overlay and displaying text
-	overlayDisplay();
+
 
 	//showing mode buttons' text
 	fill(255);
@@ -154,10 +159,8 @@ function draw(){
 			techTreeBuildings[tmp].shapeColor = color(255,0,0);
 
 	}
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/master
+
 	//alert system
 	alertSystem();
 
@@ -172,9 +175,12 @@ function draw(){
 
 	//diving lines
 	line(buildingWidth(width), 0, buildingWidth(width), height);
-	line(0, upgradeHeight(height), buildingWidth(width), upgradeHeight(height));
+	//line(0, upgradeHeight(height), buildingWidth(width), upgradeHeight(height));
 
 	displayText();
+
+	//showing overlay and displaying text
+	overlayDisplay();
 	fill(0);
 }
 
