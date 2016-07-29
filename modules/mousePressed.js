@@ -26,7 +26,7 @@ var mousePress = function(){
 			if(MONEY >= buildings[pressed].getCost(buyButtonMode) && buildings[pressed].unlocked){
 				MONEY -= buildings[pressed].getCost(buyButtonMode);
 				for(var x = 0; x < buyButtonMode; x++){
-					buildings[pressed].buy();		
+					buildings[pressed].buy();
 					buildingSprites[pressed].changeImage('2');
 					setTimeout(function(){buildingSprites[pressed].changeImage('1');}, 100); 
 
@@ -37,12 +37,13 @@ var mousePress = function(){
 
 
 	if(buyButton.overlap(mouseSprite) && buyButton.visible === true){
-		if (buyButtonMode === 100){
+		//if (buyButtonMode === 100){
+		//	buyButtonMode = 1;
+		//	buyButton.addImage(buy1);
+		//} else
+		 if (buyButtonMode === 10){
 			buyButtonMode = 1;
 			buyButton.addImage(buy1);
-		} else if (buyButtonMode === 10){
-			buyButtonMode = 100;
-			buyButton.addImage(buy100);
 		} else if(buyButtonMode === 1){
 			buyButtonMode = 10;
 			buyButton.addImage(buy10);
@@ -65,11 +66,31 @@ var mousePress = function(){
 
 			//console.log(buildings[pressed].name);
 			if (buildings[pressed].selected === false){
-				techTreeBuildings[pressed].shapeColor = color(0,128,0);
 				buildings[pressed].selected = true;
 			} else{
-				techTreeBuildings[pressed].shapeColor = color(255,0,0);
 				buildings[pressed].selected = false;
+			}
+
+			//Redrawing the order
+			var offset = 50;
+			var offsetDiff = 0;
+			offset += offsetDiff;
+
+			//moving the icons
+			var heightNew = height - (buildingHeightDiv() * (offsetDiff+1));
+			var p = 0;
+			for(var i = 0; i < Object.keys(buildings).length; i++){
+				var tmp = Object.keys(buildings)[i];
+				if (buildings[tmp].selected || !buildings[tmp].unlocked){
+					var scale = (buildingWidth(width)/3)/buildingsImg[0].width;
+					var buildingHeight = buildingsImg[0].height*scale;
+					
+					offsetDiff = buildingHeight/5;
+					buildingSprites[tmp].position = createVector(buildingWidth(width) + buildingWidth(width)/6, heightNew * p/buildingHeightDiv() + offset + (heightNew * 1/buildingHeightDiv())/2)
+					buildingSprites[tmp].scale = scale;
+					p++;
+					offset += offsetDiff;
+				}
 			}
 		}
 	}

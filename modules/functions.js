@@ -32,6 +32,7 @@ var getBuildings = function(){
 	//console.log(buildings);
 	return buildings;
 }
+
 var getUpgrades = function(){
 	var obj = JSON.parse(data);
 	//console.log(obj);
@@ -82,8 +83,12 @@ var drawBuilding = function(){
 
 		offset += offsetDiff;
 		buildingSprites[tmp].shapeColor = 0;
+
+		if (i<2)
+			buildings[tmp].selected = true;
 	}
 }
+
 var drawUpgrades = function(){
 	fill(0);
 
@@ -93,14 +98,15 @@ var drawUpgrades = function(){
 	//drawing the building icons
 	var heightNew = height - (buildingHeightDiv() * (offsetDiff+1));
 	
-	upgradesSprites["back"] = createSprite(width/2, upgradeHeight(height)/2, width, upgradeHeight(height));
-	upgradesSprites.back.shapeColor = 0;
+	upgradesSprites["back"] = createSprite(width/2 - buildingWidth(width)/3+125, upgradeHeight(height)/2, buildingWidth(width), upgradeHeight(height));
+	upgradesSprites.back.shapeColor = 50;
 }
 
 var overlayUpdate = function(){
 
 	var overlay = createSprite(buildingWidth(width)-buildingWidth(width)/4, mouseY, buildingWidth(width)/2, height*2/buildingHeightDiv());
 	overlay.shapeColor = 255;
+	overlay.visible = buildingMode;
 
 	return overlay;
 }
@@ -161,6 +167,19 @@ var changeVisible = function(spriteGroup, state){
 	}
 }
 
+var changeVisibleTechTree = function(spriteGroup, state){
+	for(var i = 0; i< Object.keys(spriteGroup).length; i++){
+		pressed = Object.keys(spriteGroup)[i];
+
+		//making sure that bought upgrades & locked buildings will not be reshown
+		if(spriteGroup[pressed].bought === true || buildings[pressed].unlocked === false){
+			spriteGroup[pressed].visible = false;
+		} else{
+			spriteGroup[pressed].visible = state;
+		}
+	}
+}
+
 var techTreeDisplay = function(){
 	
 	var offset = 10;
@@ -169,38 +188,45 @@ var techTreeDisplay = function(){
 
 		var textDisplay = buildings[tmp].name;
 
-		text(textDisplay, techTreeBuildings[tmp].position.x, techTreeBuildings[tmp].position.y);
+		if(buildings[tmp].unlocked){
+			text(textDisplay, techTreeBuildings[tmp].position.x, techTreeBuildings[tmp].position.y);
+		}
 		offset += 50;
 	}
-
 }
 
 var techTreeInit = function(){
+	var initOffset = 100;
 	var offset = 10;
+	var xVal = 100;
 	for(var i = 0; i < Object.keys(buildings).length; i++){
 		var tmp = Object.keys(buildings)[i];
 
 		var textDisplay = buildings[tmp].name;
-		techTreeBuildings[tmp] = createSprite(100, 100+offset, 150, 40);
+		techTreeBuildings[tmp] = createSprite(xVal, initOffset+offset, 150, 40);
 		techTreeBuildings[tmp].shapeColor = color(255,0,0);
-		techTreeBuildings[tmp].visible = !buildingMode;
+		techTreeBuildings[tmp].visible = false;
 
-		text(textDisplay, techTreeBuildings[tmp].position.x, techTreeBuildings[tmp].position.y);
 		offset += 50;
+
+		if (offset+150 >= upgradeHeight(height)){
+			offset = 10;
+			xVal += 160
+		}
 	}
 }
 
 var buildingScene = function(){
 	changeVisible(buildingSprites, true);
 	changeVisible(upgradesSprites, false);
-	changeVisible(techTreeBuildings, false);
+	changeVisibleTechTree(techTreeBuildings, false);
 	buildingMode = true;
 }
 
 var upgradeScene = function(){
 	changeVisible(buildingSprites, false);
 	changeVisible(upgradesSprites, true);
-	changeVisible(techTreeBuildings, true);
+	changeVisibleTechTree(techTreeBuildings, true);
 	buildingMode = false;
 }
 
@@ -213,18 +239,24 @@ var displayText = function(){
 			text(upgrades[pressed].name + "\n" + upgrades[pressed].cost, upgradesSprites[pressed].position.x, upgradesSprites[pressed].position.y);
 		}
 	}
-
 }
 
 var buildingsUnlocking = function(){
 	for(var i = 0; i < Object.keys(buildings).length; i++){
 		var tmp = Object.keys(buildings)[i];
 		//var displayingText = "Not Displayed";
+
 		buildings[Object.keys(buildings)[0]].unlocked = true;
+			//console.log(buildings[Object.keys(buildings)[tmp]])
+		
+
+		buildingSprites[tmp].visible = buildings[tmp].selected;
 
 
-		if (Math.round(MONEY) >= buildings[tmp].cost){
+		if (Math.round(MONEY) >= buildings[tmp].cost && buildings[tmp].unlocked == false){
+
 			buildings[tmp].unlocked = true;
+			buildings[tmp].selected = true;
 		}
 
 
@@ -243,13 +275,27 @@ var buildingsUnlocking = function(){
 		if(buildingSprites[tmp].visible){
 			text(displayedText, buildingSprites[tmp].position.x, buildingSprites[tmp].position.y + buildingSprites[tmp].height/6);
 			textAlign(LEFT);
+<<<<<<< HEAD
 			//text(buildings[tmp].amount + "x " + buildings[tmp].name + "(s)", width-100 - buildingSprites[tmp].position.x, buildingSprites[tmp].position.y + buildingSprites[tmp].height/6)
 			textAlign(CENTER);
 		}
 
-		//buildingWidth(width) + buildingWidth(width)/6, heightNew * i/buildingHeightDiv() + offset + (heightNew * 1/buildingHeightDiv())/2
+=======
+
+			if(buildingMode && buildings[tmp].unlocked)
+				text(buildings[tmp].amount + "x " + buildings[tmp].name + "(s)", width-100 - buildingSprites[tmp].position.x, buildingSprites[tmp].position.y + buildingSprites[tmp].height/6)
+			textAlign(CENTER);
 		}
-	}
+
+		if(buildingSprites[tmp].position.y+buildingSprites[tmp].height/2 > height){
+			buildings[tmp].selected = false;
+		}
+
+>>>>>>> origin/master
+		//buildingWidth(width) + buildingWidth(width)/6, heightNew * i/buildingHeightDiv() + offset + (heightNew * 1/buildingHeightDiv())/2
+
+		}
+}
 
 var alertSystem = function(){
 	for(var i = 0; i < Object.keys(buildings).length; i++){
@@ -273,14 +319,16 @@ var overlayDisplay = function(){
 	overlay.visible = false;
 	for(var i = 0; i< Object.keys(buildingSprites).length; i++){
 		if(mouseSprite.overlap(buildingSprites[Object.keys(buildingSprites)[i]]) && buildingSprites[Object.keys(buildingSprites)[i]].visible === true){
-			var text_to_display;
+			var text_to_display = '';
 
 			overlayed = Object.keys(buildingSprites)[i];
 
-			if(buildings[overlayed].unlocked === true){
-				 text_to_display = buildings[overlayed].amount +" -- " +buildings[overlayed].name + "\n\n Each " + buildings[overlayed].name + " produces " + bigNumbers(buildings[overlayed].baseMps) + " mps\n" + "total producing: " + bigNumbers(buildings[overlayed].producing) + "\nCost: " + buildings[overlayed].cost;
-			} else{
-				text_to_display = "???" + "\n\n\nCost: " + buildings[overlayed].cost;
+			if(buildingMode){
+				if(buildings[overlayed].unlocked === true){
+					 text_to_display = buildings[overlayed].amount +" -- " +buildings[overlayed].name + "\n\n Each " + buildings[overlayed].name + " produces " + bigNumbers(buildings[overlayed].baseMps) + " mps\n" + "total producing: " + bigNumbers(buildings[overlayed].producing) + "\nCost: " + buildings[overlayed].cost;
+				} else{
+					text_to_display = "???" + "\n\n\nCost: " + buildings[overlayed].cost;
+				}
 			}
 
 			text(text_to_display, overlay.position.x-overlay.width/2, overlay.position.y-overlay.height/2, overlay.position.x-overlay.width/2, overlay.position.y + overlay.width/2);

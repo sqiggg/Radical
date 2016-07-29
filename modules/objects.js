@@ -32,7 +32,7 @@ var Building = function(name, cost, description, baseMps){
 		//incramentally getting more expensive the more the player buys
 		this.cost = Math.round(this.initCost * Math.pow(1.15, this.amount));
 		
-		console.log(this.baseMps);
+		//console.log(this.baseMps);
 		this.producing += this.baseMps;
 		return this.baseMps;
 	}

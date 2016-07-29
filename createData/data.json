@@ -15,8 +15,8 @@
 		"5": {
 			"name": "Surf Truck", 
 			"description": "Radical dude",
-			"cost": 10000, 
-			"BMPS": 1300
+			"cost": 15000, 
+			"BMPS": 470
 		}, 
 		"2": {
 			"name": "Design Team", 
@@ -29,6 +29,12 @@
 			"description": "Sell to more people", 
 			"cost": 5000, 
 			"BMPS": 235
+		},
+		"6": {
+			"name": "Online Store", 
+			"description": "Sell to more people", 
+			"cost": 20000, 
+			"BMPS": 680
 		}
 	},
 	"upgrades":{

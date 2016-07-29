@@ -51,10 +51,10 @@ function setup(){
 
 	//buy mode buttons
 	//TODO
-	buyButton = createSprite(buildingWidth(width) + buildingWidth(width)/6, (height * 1/buildingHeightDiv())/3);
+	buyButton = createSprite(buildingWidth(width) + buildingWidth(width)/6-50, (height * 1/buildingHeightDiv())/3);
 	buyButton.addImage(buy1);
 
-	upgradesButton = createSprite(buildingWidth(width)/2-200, height-60, 200, 60);
+	upgradesButton = createSprite(buildingWidth(width) + buildingWidth(width)/6+50, (height * 1/buildingHeightDiv())/3, 100, 40);
 	upgradesButton.shapeColor = 0;
 
 
@@ -64,7 +64,7 @@ function setup(){
 	drawUpgrades();
 	buildingScene();
 	techTreeInit();	
-	techTreeBuildings;
+	//techTreeBuildings;
 }
 
 function draw(){
@@ -104,12 +104,30 @@ function draw(){
 
 	//showing mode buttons' text
 	fill(255);
-	text("Upgrades/Buildings", upgradesButton.position.x, upgradesButton.position.y);
+	text("Tech tree", upgradesButton.position.x, upgradesButton.position.y);
 
 	fill(0);
 
 	//money and unlocking
 	buildingsUnlocking();
+<<<<<<< HEAD
+=======
+
+	if(buildingMode === false){
+		techTreeDisplay();
+	}
+
+	for(var i = 0; i < Object.keys(techTreeBuildings).length; i++){
+		var tmp = Object.keys(techTreeBuildings)[i];
+
+		//console.log(buildings[tmp].selected, buildings[tmp].name);
+		if(tmp != 'back' && buildings[tmp].selected === true)
+			techTreeBuildings[tmp].shapeColor = color(0,128,0);
+		else
+			techTreeBuildings[tmp].shapeColor = color(255,0,0);
+
+	}
+>>>>>>> origin/master
 
 	//alert system
 	alertSystem();
@@ -117,14 +135,12 @@ function draw(){
 	//dealing with change of MPS in regards to upgrades
 	var tmpMPS = 0;
 	for(var i = 0; i< Object.keys(buildingSprites).length; i++){
-		pressed = Object.keys(buildingSprites)[i];		
+		pressed = Object.keys(buildingSprites)[i];
 		tmpMPS += buildings[pressed].producing;
 	}
 	MPS = tmpMPS;
 
-	if(buildingMode === false){
-		techTreeDisplay();
-	}
+
 
 	displayText();
 	fill(0);
