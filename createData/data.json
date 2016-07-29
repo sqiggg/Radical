@@ -5,58 +5,57 @@
 			"description": "A Student",
 			"cost": 75, 
 			"BMPS": 0.5
-		},
-		"3": {
-			"name": "Tree Farm", 
-			"description": "Production of trees", 
-			"cost": 3000,
-			"BMPS": 40
-		}, 
-		"5": {
-			"name": "Surf Truck", 
-			"description": "Radical dude",
-			"cost": 15000, 
-			"BMPS": 470
-		}, 
-		"2": {
+		},"2": {
 			"name": "Design Team", 
 			"description": "A professional design team", 
 			"cost": 500, 
 			"BMPS": 5
-		}, 
-		"4": {
+		},"3": {
+			"name": "Tree Farm", 
+			"description": "Production of trees", 
+			"cost": 3000,
+			"BMPS": 40
+		},"4": {
 			"name": "Online Store", 
 			"description": "Sell to more people", 
 			"cost": 5000, 
 			"BMPS": 235
-		},
-		"6": {
-			"name": "Online Store2", 
-			"description": "Sell to more people", 
-			"cost": 20000, 
-			"BMPS": 680
-		},
-		"7": {
-			"name": "Online Store3", 
-			"description": "Sell to more people", 
-			"cost": 20000, 
-			"BMPS": 680
-		}
-	},
-	"upgrades":{
-		"1":{
-			"name":"College students",
-			"cost":700,
-			"mult":3,
-			"effected":1,
-			"description":"words"
-		},
-		"2":{
-			"name":"Design team Upgrade",
-			"cost":3000,
-			"mult":3,
-			"effected":2,
-			"description":"words"
+		},"5": {
+			"name": "Surf Truck", 
+			"description": "Radical dude",
+			"cost": 15000, 
+			"BMPS": 470
+		},"6":{
+			"name": "Hippie Reserve",
+			"BMPS": 7000, 
+			"cost": 7000000, 
+			"description": "Large working for that manufactures surfboards"
+		},"7":{
+			"name": "Legal Weed",
+			"BMPS": 39000,
+			"cost": 100000000,
+			"description": "Encourages more people to surf"
+		},"8":{
+			"name": "Pro-Surfer Endorsement",
+			"BMPS": 220000,
+			"cost": 1650000000,
+			"description": "If a pro uses it, it must be good...right?"
+		},"9": {
+			"name": "Hawaii Expansion",
+			"BMPS": 1300000,
+			"cost": 25500000000,
+			"description": "Takes the brand to the motherland of surfing"
+		},"10":{
+			"name": "Aliens Learn to Surf",
+			"BMPS": 8000000, 
+			"cost": 375000000000, 
+			"description": "Introduces the shack to a new market"
+		},"11": {
+			"name": "Universal Enterprise Expansion",
+			"BMPS": 50000000, 
+			"cost": 5000000000000, 
+			"description": 
+			"Selling surfboards everywhere"
 		}
 	}
 }

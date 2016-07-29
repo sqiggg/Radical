@@ -175,7 +175,7 @@ function draw(){
 
 
 	//alert system
-	alertSystem();
+	//alertSystem();
 
 	//dealing with change of MPS in regards to upgrades
 	var tmpMPS = 0;

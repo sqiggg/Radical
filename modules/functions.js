@@ -37,7 +37,7 @@ var getUpgrades = function(){
 	var obj = JSON.parse(data);
 	//console.log(obj);
 	var upgrades = {};
-
+	/*
 	for(var i = 0; i < Object.keys(obj[0].upgrades).length; i++){
 
 		//Fetching all of the data from the json 
@@ -50,7 +50,7 @@ var getUpgrades = function(){
 
 		//putting them into the buildings dict
 		upgrades[Object.keys(obj[0].upgrades)[i]] = new Upgrade(mult, name, description, effected, cost);
-	}
+	}*/
 	//console.log(upgrades);
 	return upgrades
 }
@@ -330,7 +330,7 @@ var buildingsUnlocking = function(){
 		//buildingWidth(width) + buildingWidth(width)/6, heightNew * i/buildingHeightDiv() + offset + (heightNew * 1/buildingHeightDiv())/2
 }
 
-var alertSystem = function(){
+/*var alertSystem = function(){
 	for(var i = 0; i < Object.keys(buildings).length; i++){
 	var tmp = Object.keys(buildings)[i];
 	if ((buildings[tmp].name === "Student") && (buildings[tmp].amount === 5)){
@@ -345,8 +345,7 @@ var alertSystem = function(){
 			
 		}
 	}
-
-}
+}*/
 
 var overlayDisplay = function(){
 	overlay.visible = false;
@@ -356,21 +355,18 @@ var overlayDisplay = function(){
 
 
 			overlayed = Object.keys(buildingSprites)[i];
-			//console.log(buildingSprites[overlayed].overlap(mouseSprite));
 
 
 			if(buildingMode && buildings[overlayed].selected){
-				//overlay.position.y = buildingSprites[overlayed].position.y;
-
 				fill('#ec3d91')
 				rect(overlay.position.x-overlay.width/2, overlay.position.y-overlay.height/2, overlay.width, overlay.height)
 
 				fill(0)				
 				if(buildings[overlayed].unlocked === true){
 					
-					text_to_display = buildings[overlayed].amount +"x " +buildings[overlayed].name + "\n\n Each " + buildings[overlayed].name + " Produces " + bigNumbers(buildings[overlayed].baseMps) + "\nCost: " + buildings[overlayed].cost;
+					text_to_display = buildings[overlayed].amount +"x " + buildings[overlayed].name + " -> " + buildings[overlayed].cost + " Money\n\n Each " + buildings[overlayed].name + " Produces " + bigNumbers(buildings[overlayed].baseMps) + "mps \nDesicription: \"" + buildings[overlayed].description;
 				} else{
-					text_to_display = "???" + "\n\n\nCost: " + buildings[overlayed].cost;
+					text_to_display = "???" + "\n\n\n\nCost: " + buildings[overlayed].cost;
 				}
 			}
 
