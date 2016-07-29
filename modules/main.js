@@ -31,6 +31,9 @@ var sunburst;
 var imgIconCount = {};
 var pixelFont;
 
+var music;
+var boop;
+
 function preload(){
 	shackImg = loadImage("assets/shack.png");
 	buy1 = loadImage("assets/buy1.png");
@@ -47,6 +50,8 @@ function preload(){
 	sunburstSprite = [loadImage("assets/surfboard1.png")];
 	sunburstSprite = createSprite(buildingWidth(w)/2, upgradeHeight(h)/2);
 
+	music = loadSound("assets/music/Pixelland.mp3")
+	boop = loadSound("assets/music/boop.wav")
 
 	var widget = createSprite(w-lineDivImg.width*8 + buildingWidth(w)/6, h/2, buildingWidth(w), h);
 	widget.shapeColor = '#ec3d91';
@@ -61,6 +66,8 @@ function preload(){
 }
 
 function setup(){
+  	music.setVolume(0.4);
+  	music.loop();
 	textFont(pixelFont);
 
 	createCanvas(w, h);
@@ -187,7 +194,7 @@ function draw(){
 
 
 	//diving lines
-	//line(buildingWidth(width), 0, buildingWidth(width), height);
+	//line(0, 30, width, 30);
 	//line(0, upgradeHeight(height), buildingWidth(width), upgradeHeight(height));
 
 	displayText();

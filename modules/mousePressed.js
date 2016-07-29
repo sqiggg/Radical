@@ -13,6 +13,8 @@ var mousePress = function(){
 
 		}	
 		surfboard.shapeColor = 0;
+		boop.setVolume(0.8);
+		boop.play();
 
 		surfboard.velocity = createVector(random(-0.5, 0.5), random(-1.5, -1));
 		surfboard.velocity.mult(5);

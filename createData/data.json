@@ -36,7 +36,7 @@
 			"cost": 100000000,
 			"description": "Encourages more people to surf"
 		},"8":{
-			"name": "Pro-Surfer Endorsement",
+			"name": "Pro-Surfer usage",
 			"BMPS": 220000,
 			"cost": 1650000000,
 			"description": "If a pro uses it, it must be good...right?"
@@ -46,16 +46,15 @@
 			"cost": 25500000000,
 			"description": "Takes the brand to the motherland of surfing"
 		},"10":{
-			"name": "Aliens Learn to Surf",
+			"name": "Aliens dude!",
 			"BMPS": 8000000, 
 			"cost": 375000000000, 
 			"description": "Introduces the shack to a new market"
 		},"11": {
-			"name": "Universal Enterprise Expansion",
+			"name": "Intergalactic sales",
 			"BMPS": 50000000, 
 			"cost": 5000000000000, 
-			"description": 
-			"Selling surfboards everywhere"
+			"description": "Selling surfboards everywhere"
 		}
 	}
 }

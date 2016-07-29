@@ -108,8 +108,8 @@ var drawUpgrades = function(){
 	//drawing the building icons
 	var heightNew = height - (buildingHeightDiv() * (offsetDiff+1));
 	
-	upgradesSprites["back"] = createSprite(width/2 - buildingWidth(width)/3+125, upgradeHeight(height)/2, buildingWidth(width), upgradeHeight(height));
-	upgradesSprites.back.shapeColor = 50;
+	//upgradesSprites["back"] = createSprite(width/2 - buildingWidth(width)/3+125, upgradeHeight(height)/2, buildingWidth(width), upgradeHeight(height));
+	//upgradesSprites.back.shapeColor = 50;
 }
 
 var overlayUpdate = function(){
@@ -296,7 +296,7 @@ var buildingsUnlocking = function(){
 		if (buildings[tmp].unlocked){
 			displayedText = buildings[tmp].name + "\n" + bigNumbers(Math.round(buildings[tmp].getCost(buyButtonMode)));
 
-		} else if(i > 0 && buildings[Object.keys(buildings)[i-1]].unlocked === true){
+		} else if(i > 0 && buildings[Object.keys(buildings)[i-1]].unlocked === true && buildingSprites[tmp].position.y+buildingSprites[tmp].height/2 <= height){
 			//limited information
 			displayedText = "???\n" + bigNumbers(Math.round(buildings[tmp].getCost(buyButtonMode)));
 			buildingSprites[tmp].visible = buildingMode
@@ -324,6 +324,7 @@ var buildingsUnlocking = function(){
 
 		if(buildingSprites[tmp].position.y+buildingSprites[tmp].height/2 >= height){
 			buildings[tmp].selected = false;
+			buildings[tmp].visible = false
 		}
 	}
 
