@@ -71,7 +71,6 @@ function setup(){
 
 
 	//buy mode buttons
-	//TODO
 	buyButton = createSprite(buildingWidth(width) + buildingWidth(width)/6-50, (height * 1/buildingHeightDiv())/3);
 	buyButton.addImage(buy1);
 
@@ -88,6 +87,10 @@ function setup(){
 	//techTreeBuildings;
 	displayAmountInit();
 	overlay = overlayUpdate();
+
+	//TODO
+	//CREATE LINE
+
 	sunburstSprite.addImage(sunburst)
 
 

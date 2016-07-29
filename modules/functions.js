@@ -374,7 +374,7 @@ var overlayDisplay = function(){
 var displayAmount = function(){
 	var initOffset = upgradeHeight(height);
 	var offset = 30;
-	var xVal = 50;
+	var xVal = 80;
 	for(var i = 0; i < Object.keys(buildings).length; i++){
 		var tmp = Object.keys(buildings)[i];
 
@@ -394,7 +394,7 @@ var displayAmount = function(){
 		//console.log(offset, height)
 		if (offset+initOffset+10 >= height){
 			offset = 30;
-			xVal += 160
+			xVal += 80;
 		}
 	}
 }
@@ -402,7 +402,7 @@ var displayAmount = function(){
 var displayAmountInit = function(){
 	var initOffset = upgradeHeight(height);
 	var offset = 30;
-	var xVal = 50;
+	var xVal = 60;
 
 	for(var i = 0; i < Object.keys(buildings).length; i++){
 		var tmp = Object.keys(buildings)[i];
@@ -428,7 +428,7 @@ var displayAmountInit = function(){
 		//console.log(offset, height)
 		if (offset+initOffset+10 >= height){
 			offset = 30;
-			xVal += 160
+			xVal += 80
 		}
 	}
 }
