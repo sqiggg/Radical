@@ -11,13 +11,13 @@ data='[{"buildings": {"10":
 	{"name": "Surf Truck", "BMPS": 1300, "cost": 10000, "description": "Radical dude"}, "9": 
 	{"name": "Online 3", "BMPS": 235, "cost": 5000, "description": "Sell to more people"}}, "upgrades": {"1": 
 	{"name": "College students", "effected": 1, "mult": 3, "cost": 700, "description": "words"}, "2": 
-	{"name": "Design team Upgrade", "effected": 2, "mult": 3, "cost": 3000, "description": "words"},"x":
-	{"name": "Hippie Reserve", "BMPS": 7000, "cost": 7000000, "description": "Large working for that manufactures surfboards"},"x":
-	{"name": "Legal Weed", "BMPS": 39000, "cost": 100000000, "description": "Encourages more people to surf"},"x":
-	{"name": "Pro-Surfer Endorsement", "BMPS": 220000, "cost": 1650000000, "description": "If a pro uses it, it must be good...right?"},"X":
-	{"name": "Hawaii Expansion, "BMPS": 1300000, "cost": 25500000000, "description": "Takes the brand to the motherland of surfing"},"x":
-	{"name": "Aliens Learn to Surf", "BMPS": 8000000, "cost": 375000000000, "description": "Introduces the shop to a new market"}, "x":
-	{"name": "Universal Enterprise Expansion", "BMPS": 50000000, "cost": 5000000000000, "description": "Selling surfboards everywhere"}, "x"}}]
+	{"name": "Design team Upgrade", "effected": 2, "mult": 3, "cost": 3000, "description": "words"},"10":
+	{"name": "Hippie Reserve", "BMPS": 7000, "cost": 7000000, "description": "Large working for that manufactures surfboards"},"11":
+	{"name": "Legal Weed", "BMPS": 39000, "cost": 100000000, "description": "Encourages more people to surf"},"12":
+	{"name": "Pro-Surfer Endorsement", "BMPS": 220000, "cost": 1650000000, "description": "If a pro uses it, it must be good...right?"},"13":
+	{"name": "Hawaii Expansion, "BMPS": 1300000, "cost": 25500000000, "description": "Takes the brand to the motherland of surfing"},"14":
+	{"name": "Aliens Learn to Surf", "BMPS": 8000000, "cost": 375000000000, "description": "Introduces the shop to a new market"}, "15":
+	{"name": "Universal Enterprise Expansion", "BMPS": 50000000, "cost": 5000000000000, "description": "Selling surfboards everywhere"}, "16"}}]
 =======
 data='[{"buildings": {"3": {"BMPS": 40, "description": "Production of trees", "cost": 3000, "name": "Tree Farm"}, "1": {"BMPS": 0.5, "description": "A Student", "cost": 75, "name": "Student"}, "4": {"BMPS": 235, "description": "Sell to more people", "cost": 5000, "name": "Online Store"}, "6": {"BMPS": 680, "description": "Sell to more people", "cost": 20000, "name": "Online Store"}, "5": {"BMPS": 470, "description": "Radical dude", "cost": 15000, "name": "Surf Truck"}, "2": {"BMPS": 5, "description": "A professional design team", "cost": 500, "name": "Design Team"}}, "upgrades": {"1": {"description": "words", "effected": 1, "mult": 3, "cost": 700, "name": "College students"}, "2": {"description": "words", "effected": 2, "mult": 3, "cost": 3000, "name": "Design team Upgrade"}}}]'
 >>>>>>> origin/master
