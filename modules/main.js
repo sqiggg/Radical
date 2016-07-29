@@ -26,6 +26,7 @@ var upgradesSprites = {};
 var buildingsIconsSprites = {};
 var techTreeIcons = {};
 
+var lineDivImg
 var sunburst;
 var imgIconCount = {};
 var pixelFont;
@@ -34,7 +35,6 @@ function preload(){
 	shackImg = loadImage("assets/shack.png");
 	buy1 = loadImage("assets/buy1.png");
 	buy10 = loadImage("assets/buy10.png");
-	buy100 = loadImage("assets/buy100.png");
 
 	//loading custom font
 	pixelFont = loadFont("assets/fonts/04B_03__.TTF")
@@ -42,13 +42,15 @@ function preload(){
 	surfboards = [loadImage("assets/surfboard1.png")];
 
 	sunburst = loadImage("assets/sunburst.png");
+	lineDivImg = loadImage("assets/line.png")
 
 	sunburstSprite = [loadImage("assets/surfboard1.png")];
 	sunburstSprite = createSprite(buildingWidth(w)/2, upgradeHeight(h)/2);
 
 
-	var widget = createSprite(w + buildingWidth(w)/6, h/2, buildingWidth(w), h);
+	var widget = createSprite(w-lineDivImg.width*8 + buildingWidth(w)/6, h/2, buildingWidth(w), h);
 	widget.shapeColor = '#ec3d91';
+
 
 	//shack sprite
 	shackSprite = createSprite(buildingWidth(w)/2, upgradeHeight(h)/2, 75, 75);
@@ -91,7 +93,10 @@ function setup(){
 	overlay = overlayUpdate();
 
 	//TODO
-	//CREATE LINE
+	//CREATE Kuston Line
+	divLine = createSprite(buildingWidth(width)-lineDivImg.width/2, height/2, 2, height)
+	divLine.addImage(lineDivImg);
+	divLine.shapeColor = 0
 
 	sunburstSprite.addImage(sunburst)
 
@@ -182,7 +187,7 @@ function draw(){
 
 
 	//diving lines
-	line(buildingWidth(width), 0, buildingWidth(width), height);
+	//line(buildingWidth(width), 0, buildingWidth(width), height);
 	//line(0, upgradeHeight(height), buildingWidth(width), upgradeHeight(height));
 
 	displayText();
