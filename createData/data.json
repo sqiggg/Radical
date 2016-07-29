@@ -31,7 +31,13 @@
 			"BMPS": 235
 		},
 		"6": {
-			"name": "Online Store", 
+			"name": "Online Store2", 
+			"description": "Sell to more people", 
+			"cost": 20000, 
+			"BMPS": 680
+		},
+		"7": {
+			"name": "Online Store3", 
 			"description": "Sell to more people", 
 			"cost": 20000, 
 			"BMPS": 680

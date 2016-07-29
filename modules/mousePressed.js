@@ -5,7 +5,13 @@ var mousePress = function(){
 
 		//surfbaords coming off
 		var surfboard = createSprite(mouseX, mouseY, 10, 10);
-		surfboard.addImage(surfboards[Math.round(Math.random() * (surfboards.length-1))]);
+		try{
+			var randNum = Math.round(Math.random() * (surfboards.length-1));
+			surfboard.addImage(surfboards[randNum]);
+			surfboard.scale = surfboards[0].width/surfboards[randNum].width
+		}catch(err){
+
+		}	
 		surfboard.shapeColor = 0;
 
 		surfboard.velocity = createVector(random(-0.5, 0.5), random(-1.5, -1));
@@ -88,7 +94,10 @@ var mousePress = function(){
 					var buildingHeight = buildingsImg[0].height*scale;
 					
 					offsetDiff = buildingHeight/5;
-					buildingSprites[tmp].position = createVector(buildingWidth(width) + buildingWidth(width)/6, heightNew * p/buildingHeightDiv() + offset + (heightNew * 1/buildingHeightDiv())/2)
+
+					buildingSprites[tmp].position.x = buildingWidth(width) + buildingWidth(width)/6;
+					buildingSprites[tmp].position.y = heightNew * p/buildingHeightDiv() + offset + (heightNew * 1/buildingHeightDiv())/2;
+
 					buildingSprites[tmp].scale = scale;
 					p++;
 					offset += offsetDiff;

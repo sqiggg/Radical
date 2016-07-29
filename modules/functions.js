@@ -114,7 +114,7 @@ var drawUpgrades = function(){
 
 var overlayUpdate = function(){
 
-	var overlay = createSprite(buildingWidth(width)-buildingWidth(width)/4, mouseY, buildingWidth(width)/2, height*2/buildingHeightDiv());
+	var overlay = createSprite(buildingWidth(width)-buildingWidth(width)/4, mouseY, buildingWidth(width)/2, height*2/buildingHeightDiv()+20);
 	overlay.shapeColor = 255;
 	overlay.visible = buildingMode;
 
@@ -215,7 +215,7 @@ var techTreeInit = function(){
 		var textDisplay = buildings[tmp].name;
 
 		techTreeBuildings[tmp] = createSprite(xVal, initOffset+offset, 200, 40);
-		techTreeBuildings[tmp].shapeColor = color(255,0,0);
+		techTreeBuildings[tmp].shapeColor = 255;
 		techTreeBuildings[tmp].visible = false;
 
 
@@ -241,7 +241,6 @@ var techTreeInit = function(){
 var buildingScene = function(){
 	changeVisible(buildingSprites, true);
 	changeVisible(buildingsIconsSprites, true);
-	//changeVisible(imgIconCount, true);
 
 	changeVisible(upgradesSprites, false);
 	changeVisibleTechTree(techTreeBuildings, false);
@@ -252,7 +251,6 @@ var buildingScene = function(){
 var upgradeScene = function(){
 	changeVisible(buildingSprites, false);
 	changeVisible(buildingsIconsSprites, false);
-	//changeVisible(imgIconCount, false);
 
 	changeVisible(upgradesSprites, true);
 	changeVisibleTechTree(techTreeBuildings, true);
@@ -284,7 +282,9 @@ var buildingsUnlocking = function(){
 		buildingSprites[tmp].visible = buildings[tmp].selected;
 		buildingsIconsSprites[tmp].visible = buildings[tmp].selected;
 
-
+		if(i > 0 && buildings[Object.keys(buildings)[i-1]].unlocked === true && surfboards.indexOf(buildingsIcons[i-1]) === -1){
+			surfboards.push(buildingsIcons[i-1]);
+		}
 
 		if (Math.round(MONEY) >= buildings[tmp].cost && buildings[tmp].unlocked == false){
 
@@ -319,18 +319,17 @@ var buildingsUnlocking = function(){
 		}
 
 
-			textAlign(CENTER);
-		}
-
-		//12345
-		console.log(tmp)
+		//textAlign(CENTER);
+		
 
 		if(buildingSprites[tmp].position.y+buildingSprites[tmp].height/2 >= height){
 			buildings[tmp].selected = false;
 		}
+	}
 
 		//buildingWidth(width) + buildingWidth(width)/6, heightNew * i/buildingHeightDiv() + offset + (heightNew * 1/buildingHeightDiv())/2
 }
+
 var alertSystem = function(){
 	for(var i = 0; i < Object.keys(buildings).length; i++){
 	var tmp = Object.keys(buildings)[i];
@@ -352,21 +351,31 @@ var alertSystem = function(){
 var overlayDisplay = function(){
 	overlay.visible = false;
 	for(var i = 0; i< Object.keys(buildingSprites).length; i++){
-		if(mouseSprite.overlap(buildingSprites[Object.keys(buildingSprites)[i]]) && buildingSprites[Object.keys(buildingSprites)[i]].visible === true){
+		if(mouseSprite.overlap(buildingSprites[Object.keys(buildingSprites)[i]]) && buildingSprites[Object.keys(buildingSprites)[i]].visible === true && buildings[Object.keys(buildingSprites)[i]].selected === true){
 			var text_to_display = '';
 
-			overlayed = Object.keys(buildingSprites)[i];
 
-			if(buildingMode){
+			overlayed = Object.keys(buildingSprites)[i];
+			//console.log(buildingSprites[overlayed].overlap(mouseSprite));
+
+
+			if(buildingMode && buildings[overlayed].selected){
+				//overlay.position.y = buildingSprites[overlayed].position.y;
+
+				fill('#ec3d91')
+				rect(overlay.position.x-overlay.width/2, overlay.position.y-overlay.height/2, overlay.width, overlay.height)
+
+				fill(0)				
 				if(buildings[overlayed].unlocked === true){
-					 text_to_display = buildings[overlayed].amount +" -- " +buildings[overlayed].name + "\n\n Each " + buildings[overlayed].name + " produces " + bigNumbers(buildings[overlayed].baseMps) + " mps\n" + "total producing: " + bigNumbers(buildings[overlayed].producing) + "\nCost: " + buildings[overlayed].cost;
+					
+					text_to_display = buildings[overlayed].amount +"x " +buildings[overlayed].name + "\n\n Each " + buildings[overlayed].name + " Produces " + bigNumbers(buildings[overlayed].baseMps) + " mps\n" + "Total Production: " + bigNumbers(buildings[overlayed].producing) + "\nCost: " + buildings[overlayed].cost;
 				} else{
 					text_to_display = "???" + "\n\n\nCost: " + buildings[overlayed].cost;
 				}
 			}
 
-			text(text_to_display, overlay.position.x-overlay.width/2, overlay.position.y-overlay.height/2, overlay.position.x-overlay.width/2, overlay.position.y + overlay.width/2);
-			overlay.visible = true;
+			text(text_to_display, overlay.position.x-overlay.width/2, overlay.position.y-overlay.height/2+10, overlay.position.x-overlay.width/2, overlay.position.y + overlay.width/2);
+			overlay.visible = false;
 		}
 	}
 }
@@ -381,11 +390,11 @@ var displayAmount = function(){
 		var textDisplay = buildings[tmp].name;
 
 		if(buildings[tmp].unlocked)
-			imgIconCount[tmp].visible = buildingMode;
+			imgIconCount[tmp].visible = true;
 		else
 			imgIconCount[tmp].visible = false;
 
-		if(buildingMode && buildings[tmp].unlocked){
+		if(buildings[tmp].unlocked){
 			text(buildings[tmp].amount + "x ", xVal, initOffset+offset)
 		}
 
@@ -432,3 +441,4 @@ var displayAmountInit = function(){
 		}
 	}
 }
+
