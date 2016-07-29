@@ -359,7 +359,7 @@ var overlayDisplay = function(){
 
 			if(buildingMode){
 				if(buildings[overlayed].unlocked === true){
-					 text_to_display = buildings[overlayed].amount +" -- " +buildings[overlayed].name + "\n\n Each " + buildings[overlayed].name + " produces " + bigNumbers(buildings[overlayed].baseMps) + " mps\n" + "total producing: " + bigNumbers(buildings[overlayed].producing) + "\nCost: " + buildings[overlayed].cost;
+					 text_to_display = buildings[overlayed].amount +"x " +buildings[overlayed].name + "\n\n Each " + buildings[overlayed].name + " Produces " + bigNumbers(buildings[overlayed].baseMps) + " mps\n" + "Total Production: " + bigNumbers(buildings[overlayed].producing) + "\nCost: " + buildings[overlayed].cost;
 				} else{
 					text_to_display = "???" + "\n\n\nCost: " + buildings[overlayed].cost;
 				}
