@@ -46,6 +46,7 @@ function preload(){
 	sunburstSprite = [loadImage("assets/surfboard1.png")];
 	sunburstSprite = createSprite(buildingWidth(w)/2, upgradeHeight(h)/2);
 
+
 	var widget = createSprite(w + buildingWidth(w)/6, h/2, buildingWidth(w), h);
 	widget.shapeColor = '#ec3d91';
 
@@ -80,6 +81,7 @@ function setup(){
 
 
 	//init all buildings
+
 	drawBuilding();
 	drawUpgrades();
 	buildingScene();
@@ -101,6 +103,8 @@ function draw(){
 	//setting the mouse sprite to the position of the mouse
 	mouseSprite.position.x = mouseX;
 	mouseSprite.position.y = mouseY;
+	//drawing all the sprites
+
 	drawSprites();
 
 	sunburstSprite.rotation += 0.4;
@@ -123,11 +127,13 @@ function draw(){
 	}
 
 
+	textSize(20);
 
 	//drawing MPS and MONEY
-	textSize(20);
-	text("Money: " + bigNumbers(Math.round(MONEY)) + "\n" + "Money per second (mps): " + bigNumbers(Math.round(MPS*10)/10), buildingWidth(width)/2, upgradeHeight(height)/2 * 1/4);
+	if(buildingMode)
+		text("Money: " + bigNumbers(Math.round(MONEY)) + "\n" + "Money per second (mps): " + bigNumbers(Math.round(MPS*10)/10), buildingWidth(width)/2, upgradeHeight(height)/2 * 1/4);	
 
+	
 
 	for(var i = 0; i < Object.keys(techTreeBuildings).length; i++){
 		var tmp = Object.keys(techTreeBuildings)[i];
@@ -135,7 +141,6 @@ function draw(){
 		buildingsIconsSprites[tmp].position.y = buildingSprites[tmp].position.y;
 	}
 
-	//drawing all the sprites
 
 
 
@@ -184,6 +189,7 @@ function draw(){
 
 	//showing overlay and displaying text
 	overlayDisplay();
+
 	fill(0);
 }
 

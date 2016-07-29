@@ -356,17 +356,20 @@ var overlayDisplay = function(){
 			var text_to_display = '';
 
 			overlayed = Object.keys(buildingSprites)[i];
-
+			fill('#ec3d91')
+			rect(overlay.position.x-overlay.width/2, overlay.position.y-overlay.height/2, overlay.width, overlay.height)
+			fill(0)
 			if(buildingMode){
 				if(buildings[overlayed].unlocked === true){
-					 text_to_display = buildings[overlayed].amount +"x " +buildings[overlayed].name + "\n\n Each " + buildings[overlayed].name + " Produces " + bigNumbers(buildings[overlayed].baseMps) + " mps\n" + "Total Production: " + bigNumbers(buildings[overlayed].producing) + "\nCost: " + buildings[overlayed].cost;
+					
+					text_to_display = buildings[overlayed].amount +"x " +buildings[overlayed].name + "\n\n Each " + buildings[overlayed].name + " Produces " + bigNumbers(buildings[overlayed].baseMps) + " mps\n" + "Total Production: " + bigNumbers(buildings[overlayed].producing) + "\nCost: " + buildings[overlayed].cost;
 				} else{
 					text_to_display = "???" + "\n\n\nCost: " + buildings[overlayed].cost;
 				}
 			}
 
-			text(text_to_display, overlay.position.x-overlay.width/2, overlay.position.y-overlay.height/2, overlay.position.x-overlay.width/2, overlay.position.y + overlay.width/2);
-			overlay.visible = true;
+			text(text_to_display, overlay.position.x-overlay.width/2, overlay.position.y-overlay.height/2+10, overlay.position.x-overlay.width/2, overlay.position.y + overlay.width/2);
+			overlay.visible = false;
 		}
 	}
 }
@@ -432,3 +435,4 @@ var displayAmountInit = function(){
 		}
 	}
 }
+
