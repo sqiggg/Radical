@@ -309,17 +309,21 @@ var buildingsUnlocking = function(){
 		}
 
 		if(buildingSprites[tmp].visible){
+
+			if(buildings[tmp].getCost(buyButtonMode) >= MONEY){
+				fill(255, 0, 0);
+			} else{
+				fill(0,128,0);
+			}
 			textAlign(CENTER)
 			text(displayedText, buildingSprites[tmp].position.x, buildingSprites[tmp].position.y);
 			textAlign(RIGHT);
+			fill(0);
 			displayAmount();
 
-			//text(buildings[tmp].amount + "x " + buildings[tmp].name + "(s)", width-100 - buildingSprites[tmp].position.x, buildingSprites[tmp].position.y + buildingSprites[tmp].height/6)
 			textAlign(CENTER);
 		}
 
-
-		//textAlign(CENTER);
 		
 
 		if(buildingSprites[tmp].position.y+buildingSprites[tmp].height/2 >= height){

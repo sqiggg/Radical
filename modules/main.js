@@ -51,9 +51,9 @@ function preload(){
 	sunburstSprite = [loadImage("assets/surfboard1.png")];
 	sunburstSprite = createSprite(buildingWidth(w)/2, upgradeHeight(h)/2);
 
-	music = loadSound("assets/music/Pixelland.mp3")
-	boop = loadSound("assets/music/boop.wav")
-	toot = loadSound("assets/music/toot.wav")
+	music = loadSound("assets/music/Pixelland.wav");
+	boop = loadSound("assets/music/boop.wav");
+	toot = loadSound("assets/music/toot.wav");
 
 
 	var widget = createSprite(w-lineDivImg.width*8 + buildingWidth(w)/6, h/2, buildingWidth(w), h);
