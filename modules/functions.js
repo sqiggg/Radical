@@ -310,18 +310,20 @@ var buildingsUnlocking = function(){
 
 		if(buildingSprites[tmp].visible){
 			text(displayedText, buildingSprites[tmp].position.x, buildingSprites[tmp].position.y + buildingSprites[tmp].height/6);
-			textAlign(LEFT);
+			textAlign(RIGHT);
+			displayAmount();
+
 			//text(buildings[tmp].amount + "x " + buildings[tmp].name + "(s)", width-100 - buildingSprites[tmp].position.x, buildingSprites[tmp].position.y + buildingSprites[tmp].height/6)
 			textAlign(CENTER);
 		}
 
 
-			//12345
 			textAlign(CENTER);
-			displayAmount();
 		}
 
-		console.log(buildingSprites[tmp].position.y, height)
+		//12345
+		console.log(tmp)
+
 		if(buildingSprites[tmp].position.y+buildingSprites[tmp].height/2 >= height){
 			buildings[tmp].selected = false;
 		}
