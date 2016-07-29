@@ -73,16 +73,26 @@ var drawBuilding = function(){
 
 
 		buildingSprites[tmp] = createSprite(buildingWidth(width) + buildingWidth(width)/6, heightNew * i/buildingHeightDiv() + offset + (heightNew * 1/buildingHeightDiv())/2);
+		buildingsIconsSprites[tmp] = createSprite(buildingWidth(width)+30, heightNew * i/buildingHeightDiv() + offset + (heightNew * 1/buildingHeightDiv())/2, 1, 1);
 
+		try {
+			buildingsIconsSprites[tmp].addImage('icon', buildingsIcons[i]);
+			buildingsIconsSprites[tmp].scale = 40/buildingsIcons[i].height;
+		} catch(error){
+
+		}
 
 		//Started to impliment the images
 		buildingSprites[tmp].addImage('1', buildingsImg[0]);
 		buildingSprites[tmp].addImage('2', buildingsImg[1]);
+
 		buildingSprites[tmp].scale = scale;
 		buildingSprites[tmp].visible = false;
+		buildingsIconsSprites[tmp].visible = false;
 
 		offset += offsetDiff;
 		buildingSprites[tmp].shapeColor = 0;
+		buildingsIconsSprites[tmp].shapeColor = 0;
 
 		if (i<2)
 			buildings[tmp].selected = true;
@@ -203,9 +213,21 @@ var techTreeInit = function(){
 		var tmp = Object.keys(buildings)[i];
 
 		var textDisplay = buildings[tmp].name;
+
 		techTreeBuildings[tmp] = createSprite(xVal, initOffset+offset, 150, 40);
 		techTreeBuildings[tmp].shapeColor = color(255,0,0);
 		techTreeBuildings[tmp].visible = false;
+
+
+		techTreeIcons[tmp] = createSprite(xVal-50, initOffset+offset, 1, 1);
+
+		try{
+			techTreeIcons[tmp].addImage(buildingsIcons[i]);
+			techTreeIcons[tmp].scale = 20/buildingsIcons[i].height;
+			techTreeIcons[tmp].shapeColor = 0;
+			techTreeIcons[tmp].visible = false;
+		} catch(err){
+		}
 
 		offset += 50;
 
@@ -218,15 +240,21 @@ var techTreeInit = function(){
 
 var buildingScene = function(){
 	changeVisible(buildingSprites, true);
+	changeVisible(buildingsIconsSprites, true);
+
 	changeVisible(upgradesSprites, false);
 	changeVisibleTechTree(techTreeBuildings, false);
+	changeVisibleTechTree(techTreeIcons, false);
 	buildingMode = true;
 }
 
 var upgradeScene = function(){
 	changeVisible(buildingSprites, false);
+	changeVisible(buildingsIconsSprites, false);
+
 	changeVisible(upgradesSprites, true);
 	changeVisibleTechTree(techTreeBuildings, true);
+	changeVisibleTechTree(techTreeIcons, true);
 	buildingMode = false;
 }
 
@@ -251,6 +279,8 @@ var buildingsUnlocking = function(){
 		
 
 		buildingSprites[tmp].visible = buildings[tmp].selected;
+		buildingsIconsSprites[tmp].visible = buildings[tmp].selected;
+
 
 
 		if (Math.round(MONEY) >= buildings[tmp].cost && buildings[tmp].unlocked == false){
@@ -267,8 +297,11 @@ var buildingsUnlocking = function(){
 			//limited information
 			displayedText = "??? -- " + bigNumbers(Math.round(buildings[tmp].getCost(buyButtonMode)));
 			buildingSprites[tmp].visible = buildingMode
+			buildingsIconsSprites[tmp].visible = buildingMode
 		} else{
 			buildingSprites[tmp].visible = false;
+			buildingsIconsSprites[tmp].visible = false;
+
 			displayedText = '';
 		}
 
@@ -282,18 +315,21 @@ var buildingsUnlocking = function(){
 
 =======
 
-			if(buildingMode && buildings[tmp].unlocked)
-				text(buildings[tmp].amount + "x " + buildings[tmp].name + "(s)", width-100 - buildingSprites[tmp].position.x, buildingSprites[tmp].position.y + buildingSprites[tmp].height/6)
+				//12345
 			textAlign(CENTER);
+			displayAmount();
 		}
 
 		if(buildingSprites[tmp].position.y+buildingSprites[tmp].height/2 > height){
 			buildings[tmp].selected = false;
 		}
+<<<<<<< Updated upstream
 
 >>>>>>> origin/master
 		//buildingWidth(width) + buildingWidth(width)/6, heightNew * i/buildingHeightDiv() + offset + (heightNew * 1/buildingHeightDiv())/2
 
+=======
+>>>>>>> Stashed changes
 		}
 }
 
@@ -333,6 +369,62 @@ var overlayDisplay = function(){
 
 			text(text_to_display, overlay.position.x-overlay.width/2, overlay.position.y-overlay.height/2, overlay.position.x-overlay.width/2, overlay.position.y + overlay.width/2);
 			overlay.visible = true;
+		}
+	}
+}
+
+var displayAmount = function(){
+	var initOffset = upgradeHeight(height);
+	var offset = 30;
+	var xVal = 50;
+	for(var i = 0; i < Object.keys(buildings).length; i++){
+		var tmp = Object.keys(buildings)[i];
+
+		var textDisplay = buildings[tmp].name;
+
+		if(buildingMode && buildings[tmp].unlocked){
+			text(buildings[tmp].amount + "x ", xVal, initOffset+offset)
+		}
+
+		//imgIconCount[tmp].shapeColor = 0;
+
+
+		offset += 50;
+		//console.log(offset, height)
+		if (offset+initOffset+10 >= height){
+			offset = 30;
+			xVal += 160
+		}
+	}
+}
+var displayAmountInit = function(){
+	var initOffset = upgradeHeight(height);
+	var offset = 30;
+	var xVal = 50;
+	for(var i = 0; i < Object.keys(buildings).length; i++){
+		var tmp = Object.keys(buildings)[i];
+
+		var textDisplay = buildings[tmp].name;
+
+		if(buildingMode && buildings[tmp].unlocked){
+			imgIconCount[tmp] = createSprite(xVal+20, initOffset+offset-5, 1, 1);
+
+			try{
+				imgIconCount[tmp].addImage(buildingsIcons[i]);
+				imgIconCount[tmp].scale = 30/buildingsIcons[i].height;
+				imgIconCount[tmp].shapeColor = 0;
+
+			} catch(err){
+			}
+		}
+
+
+
+		offset += 50;
+		//console.log(offset, height)
+		if (offset+initOffset+10 >= height){
+			offset = 30;
+			xVal += 160
 		}
 	}
 }

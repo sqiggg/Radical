@@ -27,8 +27,10 @@ var mousePress = function(){
 				MONEY -= buildings[pressed].getCost(buyButtonMode);
 				for(var x = 0; x < buyButtonMode; x++){
 					buildings[pressed].buy();
-					buildingSprites[pressed].changeImage('2');
-					setTimeout(function(){buildingSprites[pressed].changeImage('1');}, 100); 
+					buildingSprites[pressed].changeImage('1');
+					setTimeout(function(){
+						buildingSprites[pressed].changeImage('2');
+					}, 100);
 
 				}
 			}
