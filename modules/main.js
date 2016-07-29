@@ -65,7 +65,7 @@ function preload(){
 	shackSprite.addImage(shackImg);
 
 	buildingsImg = [loadImage("assets/buttonc1.png"), loadImage("assets/buttonc2.png")];
-	buildingsIcons = [loadImage("assets/student1.png"), loadImage("assets/designteam1.png"), loadImage("assets/treefarm1.png"), loadImage("assets/onlinestore1.png"), loadImage("assets/surftruck1.png")]
+	buildingsIcons = [loadImage("assets/student1.png"), loadImage("assets/designteam1.png"), loadImage("assets/treefarm1.png"), loadImage("assets/onlinestore1.png"), loadImage("assets/surftruck1.png"), loadImage("assets/hippieReserve0.png"), loadImage("assets/legalWeed0.png"), loadImage("assets/prosurferEndorsement0.png"), loadImage("assets/hawaiiExpansion0.png"), loadImage("assets/alienSurf0.png"), loadImage("assets/universalExpansion0.png")];
 }
 
 function setup(){
