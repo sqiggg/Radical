@@ -76,12 +76,12 @@ function setup(){
 
 	//init all buildings
 	overlay = overlayUpdate();
-	//displayAmountInit();
 	drawBuilding();
 	drawUpgrades();
 	buildingScene();
 	techTreeInit();
 	//techTreeBuildings;
+	displayAmountInit();
 
 	sunburstSprite.addImage(sunburst)
 
@@ -132,8 +132,6 @@ function draw(){
 
 	//money and unlocking
 	buildingsUnlocking();
-<<<<<<< HEAD
-=======
 
 	if(buildingMode === false){
 		techTreeDisplay();
@@ -149,7 +147,6 @@ function draw(){
 			techTreeBuildings[tmp].shapeColor = color(255,0,0);
 
 	}
->>>>>>> origin/master
 
 	//alert system
 	alertSystem();
@@ -170,7 +167,7 @@ function draw(){
 	displayText();
 	fill(0);
 }
-`
+
 function mousePressed(){
 	mousePress();
 }

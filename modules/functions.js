@@ -241,6 +241,7 @@ var techTreeInit = function(){
 var buildingScene = function(){
 	changeVisible(buildingSprites, true);
 	changeVisible(buildingsIconsSprites, true);
+	//changeVisible(imgIconCount, true);
 
 	changeVisible(upgradesSprites, false);
 	changeVisibleTechTree(techTreeBuildings, false);
@@ -251,10 +252,12 @@ var buildingScene = function(){
 var upgradeScene = function(){
 	changeVisible(buildingSprites, false);
 	changeVisible(buildingsIconsSprites, false);
+	//changeVisible(imgIconCount, false);
 
 	changeVisible(upgradesSprites, true);
 	changeVisibleTechTree(techTreeBuildings, true);
 	changeVisibleTechTree(techTreeIcons, true);
+
 	buildingMode = false;
 }
 
@@ -308,29 +311,23 @@ var buildingsUnlocking = function(){
 		if(buildingSprites[tmp].visible){
 			text(displayedText, buildingSprites[tmp].position.x, buildingSprites[tmp].position.y + buildingSprites[tmp].height/6);
 			textAlign(LEFT);
-<<<<<<< HEAD
 			//text(buildings[tmp].amount + "x " + buildings[tmp].name + "(s)", width-100 - buildingSprites[tmp].position.x, buildingSprites[tmp].position.y + buildingSprites[tmp].height/6)
 			textAlign(CENTER);
 		}
 
-=======
 
-				//12345
+			//12345
 			textAlign(CENTER);
 			displayAmount();
 		}
 
-		if(buildingSprites[tmp].position.y+buildingSprites[tmp].height/2 > height){
+		console.log(buildingSprites[tmp].position.y, height)
+		if(buildingSprites[tmp].position.y+buildingSprites[tmp].height/2 >= height){
 			buildings[tmp].selected = false;
 		}
-<<<<<<< Updated upstream
 
->>>>>>> origin/master
 		//buildingWidth(width) + buildingWidth(width)/6, heightNew * i/buildingHeightDiv() + offset + (heightNew * 1/buildingHeightDiv())/2
 
-=======
->>>>>>> Stashed changes
-		}
 }
 
 var alertSystem = function(){
@@ -343,7 +340,7 @@ var alertSystem = function(){
 			text(student, 0, 0, 200, 100);
 			fill(0);
 			if (mousePress == true){
-				student = undefined;
+				student = '';
 			}
 			
 		}
@@ -382,11 +379,14 @@ var displayAmount = function(){
 
 		var textDisplay = buildings[tmp].name;
 
+		if(buildings[tmp].unlocked)
+			imgIconCount[tmp].visible = buildingMode;
+		else
+			imgIconCount[tmp].visible = false;
+
 		if(buildingMode && buildings[tmp].unlocked){
 			text(buildings[tmp].amount + "x ", xVal, initOffset+offset)
 		}
-
-		//imgIconCount[tmp].shapeColor = 0;
 
 
 		offset += 50;
@@ -401,24 +401,26 @@ var displayAmountInit = function(){
 	var initOffset = upgradeHeight(height);
 	var offset = 30;
 	var xVal = 50;
+
 	for(var i = 0; i < Object.keys(buildings).length; i++){
 		var tmp = Object.keys(buildings)[i];
-
 		var textDisplay = buildings[tmp].name;
 
-		if(buildingMode && buildings[tmp].unlocked){
+
+		//&& buildings[tmp].unlocked){
+		if(buildingMode ){
 			imgIconCount[tmp] = createSprite(xVal+20, initOffset+offset-5, 1, 1);
 
 			try{
 				imgIconCount[tmp].addImage(buildingsIcons[i]);
 				imgIconCount[tmp].scale = 30/buildingsIcons[i].height;
 				imgIconCount[tmp].shapeColor = 0;
+				imgIconCount[tmp].position.x += (buildingsIcons[i].width * 30/buildingsIcons[i].height)/2
+				//console.log(buildingsIcons[i].width * 30/buildingsIcons[i].height)
 
 			} catch(err){
 			}
 		}
-
-
 
 		offset += 50;
 		//console.log(offset, height)
