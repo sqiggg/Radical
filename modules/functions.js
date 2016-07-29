@@ -208,18 +208,18 @@ var techTreeDisplay = function(){
 var techTreeInit = function(){
 	var initOffset = 100;
 	var offset = 10;
-	var xVal = 100;
+	var xVal = 150;
 	for(var i = 0; i < Object.keys(buildings).length; i++){
 		var tmp = Object.keys(buildings)[i];
 
 		var textDisplay = buildings[tmp].name;
 
-		techTreeBuildings[tmp] = createSprite(xVal, initOffset+offset, 150, 40);
+		techTreeBuildings[tmp] = createSprite(xVal, initOffset+offset, 200, 40);
 		techTreeBuildings[tmp].shapeColor = color(255,0,0);
 		techTreeBuildings[tmp].visible = false;
 
 
-		techTreeIcons[tmp] = createSprite(xVal-50, initOffset+offset, 1, 1);
+		techTreeIcons[tmp] = createSprite(xVal-80, initOffset+offset, 1, 1);
 
 		try{
 			techTreeIcons[tmp].addImage(buildingsIcons[i]);
@@ -233,7 +233,7 @@ var techTreeInit = function(){
 
 		if (offset+150 >= upgradeHeight(height)){
 			offset = 10;
-			xVal += 160
+			xVal += 210
 		}
 	}
 }
@@ -294,11 +294,11 @@ var buildingsUnlocking = function(){
 
 
 		if (buildings[tmp].unlocked){
-			displayedText = buildings[tmp].name + " -- " + bigNumbers(Math.round(buildings[tmp].getCost(buyButtonMode)));
+			displayedText = buildings[tmp].name + "\n" + bigNumbers(Math.round(buildings[tmp].getCost(buyButtonMode)));
 
 		} else if(i > 0 && buildings[Object.keys(buildings)[i-1]].unlocked === true){
 			//limited information
-			displayedText = "??? -- " + bigNumbers(Math.round(buildings[tmp].getCost(buyButtonMode)));
+			displayedText = "???\n" + bigNumbers(Math.round(buildings[tmp].getCost(buyButtonMode)));
 			buildingSprites[tmp].visible = buildingMode
 			buildingsIconsSprites[tmp].visible = buildingMode
 		} else{
@@ -309,37 +309,29 @@ var buildingsUnlocking = function(){
 		}
 
 		if(buildingSprites[tmp].visible){
-			text(displayedText, buildingSprites[tmp].position.x, buildingSprites[tmp].position.y + buildingSprites[tmp].height/6);
-			textAlign(LEFT);
+			textAlign(CENTER)
+			text(displayedText, buildingSprites[tmp].position.x, buildingSprites[tmp].position.y);
+			textAlign(RIGHT);
+			displayAmount();
+
 			//text(buildings[tmp].amount + "x " + buildings[tmp].name + "(s)", width-100 - buildingSprites[tmp].position.x, buildingSprites[tmp].position.y + buildingSprites[tmp].height/6)
 			textAlign(CENTER);
 		}
 
 
-			//12345
 			textAlign(CENTER);
-			displayAmount();
 		}
 
-		console.log(buildingSprites[tmp].position.y, height)
+		//12345
+		console.log(tmp)
+
 		if(buildingSprites[tmp].position.y+buildingSprites[tmp].height/2 >= height){
 			buildings[tmp].selected = false;
 		}
 
 		//buildingWidth(width) + buildingWidth(width)/6, heightNew * i/buildingHeightDiv() + offset + (heightNew * 1/buildingHeightDiv())/2
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> Stashed changes
-		}
-=======
->>>>>>> origin/master
 }
->>>>>>> origin/master
-
-/*var alertSystem = function(){
+var alertSystem = function(){
 	for(var i = 0; i < Object.keys(buildings).length; i++){
 	var tmp = Object.keys(buildings)[i];
 	if ((buildings[tmp].name === "Student") && (buildings[tmp].amount === 5)){
@@ -355,7 +347,7 @@ var buildingsUnlocking = function(){
 		}
 	}
 
-}*/
+}
 
 var overlayDisplay = function(){
 	overlay.visible = false;
@@ -382,7 +374,7 @@ var overlayDisplay = function(){
 var displayAmount = function(){
 	var initOffset = upgradeHeight(height);
 	var offset = 30;
-	var xVal = 50;
+	var xVal = 80;
 	for(var i = 0; i < Object.keys(buildings).length; i++){
 		var tmp = Object.keys(buildings)[i];
 
@@ -402,14 +394,15 @@ var displayAmount = function(){
 		//console.log(offset, height)
 		if (offset+initOffset+10 >= height){
 			offset = 30;
-			xVal += 160
+			xVal += 80;
 		}
 	}
 }
+
 var displayAmountInit = function(){
 	var initOffset = upgradeHeight(height);
 	var offset = 30;
-	var xVal = 50;
+	var xVal = 60;
 
 	for(var i = 0; i < Object.keys(buildings).length; i++){
 		var tmp = Object.keys(buildings)[i];
@@ -435,7 +428,7 @@ var displayAmountInit = function(){
 		//console.log(offset, height)
 		if (offset+initOffset+10 >= height){
 			offset = 30;
-			xVal += 160
+			xVal += 80
 		}
 	}
 }

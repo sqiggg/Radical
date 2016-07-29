@@ -28,12 +28,16 @@ var techTreeIcons = {};
 
 var sunburst;
 var imgIconCount = {};
+var pixelFont;
 
 function preload(){
 	shackImg = loadImage("assets/shack.png");
 	buy1 = loadImage("assets/buy1.png");
 	buy10 = loadImage("assets/buy10.png");
 	buy100 = loadImage("assets/buy100.png");
+
+	//loading custom font
+	pixelFont = loadFont("assets/fonts/04B_03__.TTF")
 
 	surfboards = [loadImage("assets/surfboard1.png")];
 
@@ -54,6 +58,8 @@ function preload(){
 }
 
 function setup(){
+	textFont(pixelFont);
+
 	createCanvas(w, h);
 	frameRate(FRAMER8);
 	textAlign(CENTER);
@@ -65,7 +71,6 @@ function setup(){
 
 
 	//buy mode buttons
-	//TODO
 	buyButton = createSprite(buildingWidth(width) + buildingWidth(width)/6-50, (height * 1/buildingHeightDiv())/3);
 	buyButton.addImage(buy1);
 
@@ -75,15 +80,19 @@ function setup(){
 
 
 	//init all buildings
-	overlay = overlayUpdate();
 	drawBuilding();
 	drawUpgrades();
 	buildingScene();
 	techTreeInit();
 	//techTreeBuildings;
 	displayAmountInit();
+	overlay = overlayUpdate();
+
+	//TODO
+	//CREATE LINE
 
 	sunburstSprite.addImage(sunburst)
+
 
 }
 
@@ -92,6 +101,7 @@ function draw(){
 	//setting the mouse sprite to the position of the mouse
 	mouseSprite.position.x = mouseX;
 	mouseSprite.position.y = mouseY;
+	drawSprites();
 
 	sunburstSprite.rotation += 0.4;
 	if(sunburstSprite.rotation >= 360){
@@ -118,11 +128,16 @@ function draw(){
 	textSize(20);
 	text("Money: " + bigNumbers(Math.round(MONEY)) + "\n" + "Money per second (mps): " + bigNumbers(Math.round(MPS*10)/10), buildingWidth(width)/2, upgradeHeight(height)/2 * 1/4);
 
-	//drawing all the sprites
-	drawSprites();
 
-	//showing overlay and displaying text
-	overlayDisplay();
+	for(var i = 0; i < Object.keys(techTreeBuildings).length; i++){
+		var tmp = Object.keys(techTreeBuildings)[i];
+		buildingsIconsSprites[tmp].position.x = buildingSprites[tmp].position.x-90;
+		buildingsIconsSprites[tmp].position.y = buildingSprites[tmp].position.y;
+	}
+
+	//drawing all the sprites
+
+
 
 	//showing mode buttons' text
 	fill(255);
@@ -147,10 +162,8 @@ function draw(){
 			techTreeBuildings[tmp].shapeColor = color(255,0,0);
 
 	}
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/master
+
 	//alert system
 	alertSystem();
 
@@ -165,9 +178,12 @@ function draw(){
 
 	//diving lines
 	line(buildingWidth(width), 0, buildingWidth(width), height);
-	line(0, upgradeHeight(height), buildingWidth(width), upgradeHeight(height));
+	//line(0, upgradeHeight(height), buildingWidth(width), upgradeHeight(height));
 
 	displayText();
+
+	//showing overlay and displaying text
+	overlayDisplay();
 	fill(0);
 }
 

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 data='[{"buildings": {"10": 
 	{"name": "Online 4", "BMPS": 235, "cost": 5000, "description": "Sell to more people"}, "8": 
 	{"name": "Online 2", "BMPS": 235, "cost": 5000, "description": "Sell to more people"}, "1": 
@@ -17,3 +18,6 @@ data='[{"buildings": {"10":
 	{"name": "Hawaii Expansion, "BMPS": 1300000, "cost": 25500000000, "description": "Takes the brand to the motherland of surfing"},"x":
 	{"name": "Aliens Learn to Surf", "BMPS": 8000000, "cost": 375000000000, "description": "Introduces the shop to a new market"}, "x":
 	{"name": "Universal Enterprise Expansion", "BMPS": 50000000, "cost": 5000000000000, "description": "Selling surfboards everywhere"}, "x"}}]
+=======
+data='[{"buildings": {"3": {"BMPS": 40, "description": "Production of trees", "cost": 3000, "name": "Tree Farm"}, "1": {"BMPS": 0.5, "description": "A Student", "cost": 75, "name": "Student"}, "4": {"BMPS": 235, "description": "Sell to more people", "cost": 5000, "name": "Online Store"}, "6": {"BMPS": 680, "description": "Sell to more people", "cost": 20000, "name": "Online Store"}, "5": {"BMPS": 470, "description": "Radical dude", "cost": 15000, "name": "Surf Truck"}, "2": {"BMPS": 5, "description": "A professional design team", "cost": 500, "name": "Design Team"}}, "upgrades": {"1": {"description": "words", "effected": 1, "mult": 3, "cost": 700, "name": "College students"}, "2": {"description": "words", "effected": 2, "mult": 3, "cost": 3000, "name": "Design team Upgrade"}}}]'
+>>>>>>> origin/master
