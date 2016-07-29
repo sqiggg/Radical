@@ -132,13 +132,13 @@ function draw(){
 	}
 
 
-	textSize(20);
+	textSize(25);
 
 	//drawing MPS and MONEY
 	if(buildingMode)
 		text("Money: " + bigNumbers(Math.round(MONEY)) + "\n" + "Money per second (mps): " + bigNumbers(Math.round(MPS*10)/10), buildingWidth(width)/2, upgradeHeight(height)/2 * 1/4);	
 
-	
+	textSize(20);
 	
 	for(var i = 0; i < Object.keys(techTreeBuildings).length; i++){
 		var tmp = Object.keys(techTreeBuildings)[i];
