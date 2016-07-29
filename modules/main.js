@@ -15,6 +15,7 @@ var buyButton;
 var buyButtonMode = 1;
 var upgradesButton;
 var upgradeButtonImg;
+var selectionSprite;
 
 var techTreeBuildings = {};
 var buildingsImg = []
@@ -35,6 +36,7 @@ var music;
 var boop;
 var toot;
 
+
 function preload(){
 	shackImg = loadImage("assets/shack.png");
 	buy1 = loadImage("assets/buy1.png");
@@ -46,7 +48,9 @@ function preload(){
 	surfboards = [loadImage("assets/surfboard1.png")];
 
 	sunburst = loadImage("assets/sunburst.png");
-	lineDivImg = loadImage("assets/line.png")
+	lineDivImg = loadImage("assets/line.png");
+
+	selectionSprite = loadImage("assets/selectionButton0.png");
 
 	sunburstSprite = [loadImage("assets/surfboard1.png")];
 	sunburstSprite = createSprite(buildingWidth(w)/2, upgradeHeight(h)/2);
@@ -87,7 +91,9 @@ function setup(){
 	buyButton = createSprite(buildingWidth(width) + buildingWidth(width)/6-50, (height * 1/buildingHeightDiv())/3);
 	buyButton.addImage(buy1);
 
-	upgradesButton = createSprite(buildingWidth(width) + buildingWidth(width)/6+50, (height * 1/buildingHeightDiv())/3, 100, 40);
+	upgradesButton = createSprite(buildingWidth(width) + buildingWidth(width)/6+50, (height * 1/buildingHeightDiv())-47, 100, 40);
+	upgradesButton.addImage(selectionSprite);
+	upgradesButton.scale = upgradesButton.height/selectionSprite.height;
 	upgradesButton.shapeColor = 0;
 	//upgradesButton.rotation = 300;
 
@@ -160,9 +166,10 @@ function draw(){
 
 
 	//showing mode buttons' text
-	fill(255);
+	fill(0);
+	textSize(15);
 	text("Selection", upgradesButton.position.x, upgradesButton.position.y);
-
+	textSize(20);
 	fill(0);
 
 	//money and unlocking
