@@ -5,7 +5,13 @@ var mousePress = function(){
 
 		//surfbaords coming off
 		var surfboard = createSprite(mouseX, mouseY, 10, 10);
-		surfboard.addImage(surfboards[Math.round(Math.random() * (surfboards.length-1))]);
+		try{
+			var randNum = Math.round(Math.random() * (surfboards.length-1));
+			surfboard.addImage(surfboards[randNum]);
+			surfboard.scale = surfboards[0].width/surfboards[randNum].width
+		}catch(err){
+
+		}	
 		surfboard.shapeColor = 0;
 
 		surfboard.velocity = createVector(random(-0.5, 0.5), random(-1.5, -1));

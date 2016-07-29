@@ -146,7 +146,7 @@ function draw(){
 
 	//showing mode buttons' text
 	fill(255);
-	text("Tech tree", upgradesButton.position.x, upgradesButton.position.y);
+	text("Selection", upgradesButton.position.x, upgradesButton.position.y);
 
 	fill(0);
 
