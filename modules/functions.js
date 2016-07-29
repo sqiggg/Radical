@@ -282,7 +282,7 @@ var buildingsUnlocking = function(){
 		buildingSprites[tmp].visible = buildings[tmp].selected;
 		buildingsIconsSprites[tmp].visible = buildings[tmp].selected;
 
-		if(i >0 && buildings[Object.keys(buildings)[i-1]].unlocked === true && surfboards.indexOf(buildingsIcons[i-1]) === -1){
+		if(i > 0 && buildings[Object.keys(buildings)[i-1]].unlocked === true && surfboards.indexOf(buildingsIcons[i-1]) === -1){
 			surfboards.push(buildingsIcons[i-1]);
 		}
 
@@ -319,7 +319,7 @@ var buildingsUnlocking = function(){
 		}
 
 
-			textAlign(CENTER);
+		//textAlign(CENTER);
 		
 
 		if(buildingSprites[tmp].position.y+buildingSprites[tmp].height/2 >= height){
@@ -329,6 +329,7 @@ var buildingsUnlocking = function(){
 
 		//buildingWidth(width) + buildingWidth(width)/6, heightNew * i/buildingHeightDiv() + offset + (heightNew * 1/buildingHeightDiv())/2
 }
+
 var alertSystem = function(){
 	for(var i = 0; i < Object.keys(buildings).length; i++){
 	var tmp = Object.keys(buildings)[i];
@@ -350,10 +351,12 @@ var alertSystem = function(){
 var overlayDisplay = function(){
 	overlay.visible = false;
 	for(var i = 0; i< Object.keys(buildingSprites).length; i++){
-		if(mouseSprite.overlap(buildingSprites[Object.keys(buildingSprites)[i]]) && buildingSprites[Object.keys(buildingSprites)[i]].visible === true){
+		if(mouseSprite.overlap(buildingSprites[Object.keys(buildingSprites)[i]]) && buildingSprites[Object.keys(buildingSprites)[i]].visible === true && buildings[Object.keys(buildingSprites)[i]].selected === true){
 			var text_to_display = '';
 
+
 			overlayed = Object.keys(buildingSprites)[i];
+			//console.log(buildingSprites[overlayed].overlap(mouseSprite));
 
 
 			if(buildingMode && buildings[overlayed].selected){

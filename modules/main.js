@@ -134,7 +134,7 @@ function draw(){
 		text("Money: " + bigNumbers(Math.round(MONEY)) + "\n" + "Money per second (mps): " + bigNumbers(Math.round(MPS*10)/10), buildingWidth(width)/2, upgradeHeight(height)/2 * 1/4);	
 
 	
-
+	
 	for(var i = 0; i < Object.keys(techTreeBuildings).length; i++){
 		var tmp = Object.keys(techTreeBuildings)[i];
 		buildingsIconsSprites[tmp].position.x = buildingSprites[tmp].position.x-90;

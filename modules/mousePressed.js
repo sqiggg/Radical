@@ -94,7 +94,10 @@ var mousePress = function(){
 					var buildingHeight = buildingsImg[0].height*scale;
 					
 					offsetDiff = buildingHeight/5;
-					buildingSprites[tmp].position = createVector(buildingWidth(width) + buildingWidth(width)/6, heightNew * p/buildingHeightDiv() + offset + (heightNew * 1/buildingHeightDiv())/2)
+
+					buildingSprites[tmp].position.x = buildingWidth(width) + buildingWidth(width)/6;
+					buildingSprites[tmp].position.y = heightNew * p/buildingHeightDiv() + offset + (heightNew * 1/buildingHeightDiv())/2;
+
 					buildingSprites[tmp].scale = scale;
 					p++;
 					offset += offsetDiff;
