@@ -114,7 +114,7 @@ var drawUpgrades = function(){
 
 var overlayUpdate = function(){
 
-	var overlay = createSprite(buildingWidth(width)-buildingWidth(width)/4, mouseY, buildingWidth(width)/2, height*2/buildingHeightDiv()+20);
+	var overlay = createSprite(buildingWidth(width)-buildingWidth(width)/4, mouseY, buildingWidth(width)/2, height*2/buildingHeightDiv()+40);
 	overlay.shapeColor = 255;
 	overlay.visible = buildingMode;
 
@@ -197,29 +197,29 @@ var techTreeDisplay = function(){
 		var tmp = Object.keys(techTreeBuildings)[i];
 
 		var textDisplay = buildings[tmp].name;
-
+		textAlign(CENTER);
 		if(buildings[tmp].unlocked){
-			text(textDisplay, techTreeBuildings[tmp].position.x, techTreeBuildings[tmp].position.y);
+			text(textDisplay, techTreeBuildings[tmp].position.x+15, techTreeBuildings[tmp].position.y);
 		}
-		offset += 50;
+		offset += 60;
 	}
 }
 
 var techTreeInit = function(){
 	var initOffset = 100;
 	var offset = 10;
-	var xVal = 150;
+	var xVal = 130;
 	for(var i = 0; i < Object.keys(buildings).length; i++){
 		var tmp = Object.keys(buildings)[i];
 
 		var textDisplay = buildings[tmp].name;
 
-		techTreeBuildings[tmp] = createSprite(xVal, initOffset+offset, 200, 40);
+		techTreeBuildings[tmp] = createSprite(xVal, initOffset+offset, 230, 40);
 		techTreeBuildings[tmp].shapeColor = 255;
 		techTreeBuildings[tmp].visible = false;
 
 
-		techTreeIcons[tmp] = createSprite(xVal-80, initOffset+offset, 1, 1);
+		techTreeIcons[tmp] = createSprite(xVal-97, initOffset+offset, 1, 1);
 
 		try{
 			techTreeIcons[tmp].addImage(buildingsIcons[i]);
@@ -233,7 +233,7 @@ var techTreeInit = function(){
 
 		if (offset+150 >= upgradeHeight(height)){
 			offset = 10;
-			xVal += 210
+			xVal += 240
 		}
 	}
 }
@@ -321,6 +321,7 @@ var buildingsUnlocking = function(){
 			fill(0);
 			displayAmount();
 
+
 			textAlign(CENTER);
 		}
 
@@ -334,23 +335,6 @@ var buildingsUnlocking = function(){
 
 		//buildingWidth(width) + buildingWidth(width)/6, heightNew * i/buildingHeightDiv() + offset + (heightNew * 1/buildingHeightDiv())/2
 }
-
-/*var alertSystem = function(){
-	for(var i = 0; i < Object.keys(buildings).length; i++){
-	var tmp = Object.keys(buildings)[i];
-	if ((buildings[tmp].name === "Student") && (buildings[tmp].amount === 5)){
-		var student = "News Flash: Students working at a local SurfShop make shoddy surfboards.(Click to dismiss)"
-			fill('#fae');
-			textSize(20);
-			text(student, 0, 0, 200, 100);
-			fill(0);
-			if (mousePress == true){
-				student = '';
-			}
-			
-		}
-	}
-}*/
 
 var overlayDisplay = function(){
 	overlay.visible = false;
@@ -369,7 +353,9 @@ var overlayDisplay = function(){
 				fill(0)				
 				if(buildings[overlayed].unlocked === true){
 					
-					text_to_display = buildings[overlayed].amount +"x " + buildings[overlayed].name + " -> " + buildings[overlayed].cost + " Money\n\n Each " + buildings[overlayed].name + " Produces " + bigNumbers(buildings[overlayed].baseMps) + "mps \nDesicription: \"" + buildings[overlayed].description;
+					text_to_display = buildings[overlayed].amount +"x " + buildings[overlayed].name + " -> " + buildings[overlayed].cost + " Money\n\n Each " + buildings[overlayed].name + " Produces " + bigNumbers(buildings[overlayed].baseMps) + " mps";
+					text("\n\n\n\n\n->>: \"" + buildings[overlayed].description, overlay.position.x-overlay.width/2, overlay.position.y-overlay.height/2+10, overlay.position.x-overlay.width/2, overlay.position.y + overlay.width/2)
+
 				} else{
 					text_to_display = "???" + "\n\n\n\nCost: " + buildings[overlayed].cost;
 				}

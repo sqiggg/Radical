@@ -1,40 +1,40 @@
 {
 	"buildings": {
 		"1": {
-			"name": "Student",
-			"description": "A Student",
+			"name": "Surfer Dude",
+			"description": "Sufer dudes need money too!",
 			"cost": 75, 
 			"BMPS": 0.5
 		},"2": {
 			"name": "Design Team", 
-			"description": "A professional design team", 
+			"description": "Sick boards bro!", 
 			"cost": 500, 
 			"BMPS": 5
 		},"3": {
 			"name": "Tree Farm", 
-			"description": "Production of trees", 
+			"description": "Good wood is best wood.", 
 			"cost": 3000,
 			"BMPS": 40
 		},"4": {
 			"name": "Online Store", 
-			"description": "Sell to more people", 
+			"description": "Open your audience.", 
 			"cost": 5000, 
 			"BMPS": 235
 		},"5": {
 			"name": "Surf Truck", 
-			"description": "Radical dude",
+			"description": "Radical dude!",
 			"cost": 15000, 
 			"BMPS": 470
 		},"6":{
 			"name": "Hippie Reserve",
 			"BMPS": 7000, 
 			"cost": 7000000, 
-			"description": "Large working for that manufactures surfboards"
+			"description": "Whoa dude radical workforce!"
 		},"7":{
 			"name": "Legal Weed",
 			"BMPS": 39000,
 			"cost": 100000000,
-			"description": "Encourages more people to surf"
+			"description": "Surfers need to have fun too!"
 		},"8":{
 			"name": "Pro-Surfer usage",
 			"BMPS": 220000,
@@ -54,7 +54,7 @@
 			"name": "Intergalactic sales",
 			"BMPS": 50000000, 
 			"cost": 5000000000000, 
-			"description": "Selling surfboards everywhere"
+			"description": "The shack coming to a star near you!"
 		}
 	}
 }

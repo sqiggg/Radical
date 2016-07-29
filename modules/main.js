@@ -108,7 +108,7 @@ function setup(){
 	divLine.addImage(lineDivImg);
 	divLine.shapeColor = 0
 
-	sunburstSprite.addImage(sunburst)
+	sunburstSprite.addImage(sunburst);
 
 
 }
