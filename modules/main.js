@@ -14,6 +14,7 @@ var h = 500
 var buyButton;
 var buyButtonMode = 1;
 var upgradesButton;
+var upgradeButtonImg;
 
 var techTreeBuildings = {};
 var buildingsImg = []
@@ -22,6 +23,11 @@ var buildingSprites = {};
 var buildingMode = true;
 var upgrades = getUpgrades();
 var upgradesSprites = {};
+var buildingsIconsSprites = {};
+var techTreeIcons = {};
+
+var sunburst;
+var imgIconCount = {};
 
 function preload(){
 	shackImg = loadImage("assets/shack.png");
@@ -31,11 +37,20 @@ function preload(){
 
 	surfboards = [loadImage("assets/surfboard1.png")];
 
+	sunburst = loadImage("assets/sunburst.png");
+
+	sunburstSprite = [loadImage("assets/surfboard1.png")];
+	sunburstSprite = createSprite(buildingWidth(w)/2, upgradeHeight(h)/2);
+
+	var widget = createSprite(w + buildingWidth(w)/6, h/2, buildingWidth(w), h);
+	widget.shapeColor = '#ec3d91';
+
 	//shack sprite
 	shackSprite = createSprite(buildingWidth(w)/2, upgradeHeight(h)/2, 75, 75);
 	shackSprite.addImage(shackImg);
 
 	buildingsImg = [loadImage("assets/buttonc1.png"), loadImage("assets/buttonc2.png")];
+	buildingsIcons = [loadImage("assets/student1.png"), loadImage("assets/designteam1.png"), loadImage("assets/treefarm1.png"), loadImage("assets/onlinestore1.png"), loadImage("assets/surftruck1.png")]
 }
 
 function setup(){
@@ -56,15 +71,20 @@ function setup(){
 
 	upgradesButton = createSprite(buildingWidth(width) + buildingWidth(width)/6+50, (height * 1/buildingHeightDiv())/3, 100, 40);
 	upgradesButton.shapeColor = 0;
+	//upgradesButton.rotation = 300;
 
 
 	//init all buildings
 	overlay = overlayUpdate();
-	drawBuilding();	
+	//displayAmountInit();
+	drawBuilding();
 	drawUpgrades();
 	buildingScene();
-	techTreeInit();	
+	techTreeInit();
 	//techTreeBuildings;
+
+	sunburstSprite.addImage(sunburst)
+
 }
 
 function draw(){
@@ -72,6 +92,11 @@ function draw(){
 	//setting the mouse sprite to the position of the mouse
 	mouseSprite.position.x = mouseX;
 	mouseSprite.position.y = mouseY;
+
+	sunburstSprite.rotation += 0.4;
+	if(sunburstSprite.rotation >= 360){
+		sunburstSprite.rotation = 0;
+	}
 
 	overlay.position.y = mouseY;
 	if (overlay.position.y - overlay.height/2< 0){
@@ -88,9 +113,6 @@ function draw(){
 	}
 
 
-	//diving lines
-	line(0, upgradeHeight(height), buildingWidth(width), upgradeHeight(height));
-	line(buildingWidth(width), 0, buildingWidth(width), height);
 
 	//drawing MPS and MONEY
 	textSize(20);
@@ -137,6 +159,9 @@ function draw(){
 	MPS = tmpMPS;
 
 
+	//diving lines
+	line(buildingWidth(width), 0, buildingWidth(width), height);
+	line(0, upgradeHeight(height), buildingWidth(width), upgradeHeight(height));
 
 	displayText();
 	fill(0);
