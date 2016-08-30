@@ -5,6 +5,7 @@ var Shack = function(Mps) {
 		return Money += this.MoneyPerClick;
 	}
 }
+
 var Building = function(name, cost, description, baseMps){
 	this.baseMps = baseMps;
 	this.initCost = cost;

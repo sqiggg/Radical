@@ -1,14 +1,14 @@
 var buildingWidth = function(width){
 	return width/4 * 3;
-}
+};
 
 var upgradeHeight = function(height){
 	return height - height/4; 
-}
+};
 
 var buildingHeightDiv = function(){
 	return 7;
-}
+};
 
 var getBuildings = function(){
 
@@ -31,7 +31,7 @@ var getBuildings = function(){
 
 	//console.log(buildings);
 	return buildings;
-}
+};
 
 var getUpgrades = function(){
 	var obj = JSON.parse(data);
@@ -53,7 +53,7 @@ var getUpgrades = function(){
 	}*/
 	//console.log(upgrades);
 	return upgrades
-}
+};
 
 var drawBuilding = function(){
 	fill(0);
@@ -97,7 +97,7 @@ var drawBuilding = function(){
 		if (i<2)
 			buildings[tmp].selected = true;
 	}
-}
+};
 
 var drawUpgrades = function(){
 	fill(0);
@@ -110,7 +110,7 @@ var drawUpgrades = function(){
 	
 	//upgradesSprites["back"] = createSprite(width/2 - buildingWidth(width)/3+125, upgradeHeight(height)/2, buildingWidth(width), upgradeHeight(height));
 	//upgradesSprites.back.shapeColor = 50;
-}
+};
 
 var overlayUpdate = function(){
 
@@ -119,7 +119,7 @@ var overlayUpdate = function(){
 	overlay.visible = buildingMode;
 
 	return overlay;
-}
+};
 
 var niceNumbers = function(num, floats){
 	var str='';
@@ -143,7 +143,7 @@ var niceNumbers = function(num, floats){
 		}
 	}
 	return str;
-}
+};
 
 var bigNumbers = function(num){
 	num = Math.round(num*10)/10;
@@ -162,7 +162,7 @@ var bigNumbers = function(num){
 	}
 
 	return niceNumbers(num, 1);
-}
+};
 
 var changeVisible = function(spriteGroup, state){
 	for(var i = 0; i< Object.keys(spriteGroup).length; i++){
@@ -175,7 +175,7 @@ var changeVisible = function(spriteGroup, state){
 			spriteGroup[pressed].visible = state;
 		}
 	}
-}
+};
 
 var changeVisibleTechTree = function(spriteGroup, state){
 	for(var i = 0; i< Object.keys(spriteGroup).length; i++){
@@ -188,7 +188,7 @@ var changeVisibleTechTree = function(spriteGroup, state){
 			spriteGroup[pressed].visible = state;
 		}
 	}
-}
+};
 
 var techTreeDisplay = function(){
 	
@@ -203,7 +203,7 @@ var techTreeDisplay = function(){
 		}
 		offset += 60;
 	}
-}
+};
 
 var techTreeInit = function(){
 	var initOffset = 100;
@@ -236,7 +236,7 @@ var techTreeInit = function(){
 			xVal += 240
 		}
 	}
-}
+};
 
 var buildingScene = function(){
 	changeVisible(buildingSprites, true);
@@ -246,7 +246,7 @@ var buildingScene = function(){
 	changeVisibleTechTree(techTreeBuildings, false);
 	changeVisibleTechTree(techTreeIcons, false);
 	buildingMode = true;
-}
+};
 
 var upgradeScene = function(){
 	changeVisible(buildingSprites, false);
@@ -257,7 +257,7 @@ var upgradeScene = function(){
 	changeVisibleTechTree(techTreeIcons, true);
 
 	buildingMode = false;
-}
+};
 
 var displayText = function(){
 	for(var i = 0; i< Object.keys(upgradesSprites).length; i++){
@@ -268,7 +268,7 @@ var displayText = function(){
 			text(upgrades[pressed].name + "\n" + upgrades[pressed].cost, upgradesSprites[pressed].position.x, upgradesSprites[pressed].position.y);
 		}
 	}
-}
+};
 
 var buildingsUnlocking = function(){
 	for(var i = 0; i < Object.keys(buildings).length; i++){
@@ -334,7 +334,7 @@ var buildingsUnlocking = function(){
 	}
 
 		//buildingWidth(width) + buildingWidth(width)/6, heightNew * i/buildingHeightDiv() + offset + (heightNew * 1/buildingHeightDiv())/2
-}
+};
 
 var overlayDisplay = function(){
 	overlay.visible = false;
@@ -365,7 +365,7 @@ var overlayDisplay = function(){
 			overlay.visible = false;
 		}
 	}
-}
+};
 
 var displayAmount = function(){
 	var initOffset = upgradeHeight(height);
@@ -393,7 +393,7 @@ var displayAmount = function(){
 			xVal += 80;
 		}
 	}
-}
+};
 
 var displayAmountInit = function(){
 	var initOffset = upgradeHeight(height);
@@ -414,18 +414,15 @@ var displayAmountInit = function(){
 				imgIconCount[tmp].scale = 30/buildingsIcons[i].height;
 				imgIconCount[tmp].shapeColor = 0;
 				imgIconCount[tmp].position.x += (buildingsIcons[i].width * 30/buildingsIcons[i].height)/2
-				//console.log(buildingsIcons[i].width * 30/buildingsIcons[i].height)
 
 			} catch(err){
 			}
 		}
 
 		offset += 50;
-		//console.log(offset, height)
 		if (offset+initOffset+10 >= height){
 			offset = 30;
 			xVal += 80
 		}
 	}
-}
-
+};

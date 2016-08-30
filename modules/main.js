@@ -10,7 +10,7 @@ var overlay;
 var overlayed;
 var surfboards;
 var w = 1000;
-var h = 500
+var h = 500;
 var buyButton;
 var buyButtonMode = 1;
 var upgradesButton;
@@ -18,7 +18,7 @@ var upgradeButtonImg;
 var selectionSprite;
 
 var techTreeBuildings = {};
-var buildingsImg = []
+var buildingsImg = [];
 var buildings = getBuildings();
 var buildingSprites = {};
 var buildingMode = true;
@@ -27,14 +27,21 @@ var upgradesSprites = {};
 var buildingsIconsSprites = {};
 var techTreeIcons = {};
 
-var lineDivImg
+var lineDivImg;
 var sunburst;
 var imgIconCount = {};
 var pixelFont;
+var surfboard = [];
+var musicButton;
+var musicButtonSprite;
+var sfxButton;
+var sfxButtonSprite;
 
 var music;
 var boop;
 var toot;
+var vol = 0.4;
+var mute = 1;
 
 
 function preload(){
@@ -43,7 +50,7 @@ function preload(){
 	buy10 = loadImage("assets/buy10.png");
 
 	//loading custom font
-	pixelFont = loadFont("assets/fonts/04B_03__.TTF")
+	pixelFont = loadFont("assets/fonts/04B_03__.otf");
 
 	surfboards = [loadImage("assets/surfboard1.png")];
 
@@ -70,10 +77,19 @@ function preload(){
 
 	buildingsImg = [loadImage("assets/buttonc1.png"), loadImage("assets/buttonc2.png")];
 	buildingsIcons = [loadImage("assets/student1.png"), loadImage("assets/designteam1.png"), loadImage("assets/treefarm1.png"), loadImage("assets/onlinestore1.png"), loadImage("assets/surftruck1.png"), loadImage("assets/hippieReserve0.png"), loadImage("assets/legalWeed0.png"), loadImage("assets/prosurferEndorsement0.png"), loadImage("assets/hawaiiExpansion0.png"), loadImage("assets/alienSurf0.png"), loadImage("assets/universalExpansion0.png")];
+
+	musicButton = createSprite(30, 30, 40, 40);
+	musicButton.color = 0;
+	musicButtonSprite = [loadImage("assets/musicNote.png"), loadImage("assets/musicNoteCross.png")];
+
+	sfxButton = createSprite(30, 70, 40, 40);
+	sfxButton.color = 0;
+	sfxButtonSprite = [loadImage("assets/sfx.png"), loadImage("assets/sfxCross.png")];
+
 }
 
 function setup(){
-  	music.setVolume(0.4);
+  	music.setVolume(vol);
   	music.loop();
 	textFont(pixelFont);
 
@@ -97,6 +113,13 @@ function setup(){
 	upgradesButton.shapeColor = 0;
 	//upgradesButton.rotation = 300;
 
+	musicButton.addImage('nocross', musicButtonSprite[0]);
+	musicButton.addImage('cross', musicButtonSprite[1]);
+	musicButton.changeImage('nocross');
+
+	sfxButton.addImage('nocross', sfxButtonSprite[0]);
+	sfxButton.addImage('cross', sfxButtonSprite[1]);
+	sfxButton.changeImage('nocross');
 
 	//init all buildings
 
@@ -112,7 +135,7 @@ function setup(){
 	//CREATE Kuston Line
 	divLine = createSprite(buildingWidth(width)-lineDivImg.width/2, height/2, 2, height)
 	divLine.addImage(lineDivImg);
-	divLine.shapeColor = 0
+	divLine.shapeColor = 0;
 
 	sunburstSprite.addImage(sunburst);
 
@@ -121,11 +144,11 @@ function setup(){
 
 function draw(){
 	background(100);
+
 	//setting the mouse sprite to the position of the mouse
 	mouseSprite.position.x = mouseX;
 	mouseSprite.position.y = mouseY;
 	//drawing all the sprites
-
 	drawSprites();
 
 	sunburstSprite.rotation += 0.4;
@@ -212,10 +235,16 @@ function draw(){
 	//showing overlay and displaying text
 	overlayDisplay();
 
+	for (var i = surfboard.length - 1; i >= 0; i--) {
+		if(surfboard[i].position.y <= 0){
+			surfboard[i].remove();
+			surfboard.splice(i, 1);
+		}
+	}
+
 	fill(0);
 }
 
 function mousePressed(){
 	mousePress();
 }
-

@@ -4,20 +4,21 @@ var mousePress = function(){
 		MONEY = shack.onClick(MONEY);
 
 		//surfbaords coming off
-		var surfboard = createSprite(mouseX, mouseY, 10, 10);
+		surfboard.push(createSprite(mouseX, mouseY, 10, 10));
+
 		try{
 			var randNum = Math.round(Math.random() * (surfboards.length-1));
-			surfboard.addImage(surfboards[randNum]);
-			surfboard.scale = surfboards[0].width/surfboards[randNum].width
+			surfboard[surfboard.length-1].addImage(surfboards[randNum]);
+			surfboard[surfboard.length-1].scale = surfboards[0].width/surfboards[randNum].width
 		}catch(err){
 
 		}	
-		surfboard.shapeColor = 0;
-		boop.setVolume(0.8);
+		surfboard[surfboard.length-1].shapeColor = 0;
+		boop.setVolume(0.8 * mute);
 		boop.play();
 
-		surfboard.velocity = createVector(random(-0.5, 0.5), random(-1.5, -1));
-		surfboard.velocity.mult(5);
+		surfboard[surfboard.length-1].velocity = createVector(random(-0.5, 0.5), random(-1.5, -1));
+		surfboard[surfboard.length-1].velocity.mult(5);
 
 
 		//make the shack "Bounce" on click
@@ -35,7 +36,7 @@ var mousePress = function(){
 				MONEY -= buildings[pressed].getCost(buyButtonMode);
 				for(var x = 0; x < buyButtonMode; x++){
 					buildings[pressed].buy();
-					toot.setVolume(0.6);
+					toot.setVolume(0.6 * mute);
 					toot.play();
 					buildingSprites[pressed].changeImage('1');
 					setTimeout(function(){
@@ -44,6 +45,26 @@ var mousePress = function(){
 
 				}
 			}
+		}
+	}
+
+	if(musicButton.overlap(mouseSprite)){
+		if(musicButton.getAnimationLabel() === 'cross') {
+			musicButton.changeImage('nocross');
+			music.setVolume(vol);
+		} else {
+			musicButton.changeImage('cross');
+			music.setVolume(0);
+		}
+	}
+
+	if(sfxButton.overlap(mouseSprite)){
+		if(sfxButton.getAnimationLabel() === 'cross') {
+			sfxButton.changeImage('nocross');
+			mute = 1;
+		} else {
+			sfxButton.changeImage('cross');
+			mute = 0;
 		}
 	}
 
@@ -106,4 +127,4 @@ var mousePress = function(){
 			}
 		}
 	}
-}
+};

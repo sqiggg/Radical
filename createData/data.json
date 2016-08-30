@@ -27,33 +27,33 @@
 			"BMPS": 470
 		},"6":{
 			"name": "Hippie Reserve",
-			"BMPS": 7000, 
-			"cost": 7000000, 
+			"BMPS": 700, 
+			"cost": 70000, 
 			"description": "Whoa dude radical workforce!"
 		},"7":{
 			"name": "Legal Weed",
-			"BMPS": 39000,
-			"cost": 100000000,
+			"BMPS": 3900,
+			"cost": 1000000,
 			"description": "Surfers need to have fun too!"
 		},"8":{
 			"name": "Pro-Surfer usage",
-			"BMPS": 220000,
-			"cost": 1650000000,
+			"BMPS": 2200,
+			"cost": 16500000,
 			"description": "If a pro uses it, it must be good...right?"
 		},"9": {
 			"name": "Hawaii Expansion",
-			"BMPS": 1300000,
-			"cost": 25500000000,
+			"BMPS": 13000,
+			"cost": 255000000,
 			"description": "Takes the brand to the motherland of surfing"
 		},"10":{
 			"name": "Aliens dude!",
-			"BMPS": 8000000, 
-			"cost": 375000000000, 
+			"BMPS": 80000, 
+			"cost": 3750000000, 
 			"description": "Introduces the shack to a new market"
 		},"11": {
 			"name": "Intergalactic sales",
-			"BMPS": 50000000, 
-			"cost": 5000000000000, 
+			"BMPS": 500000, 
+			"cost": 50000000000, 
 			"description": "The shack coming to a star near you!"
 		}
 	}
